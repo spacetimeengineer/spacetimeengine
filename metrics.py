@@ -445,3 +445,25 @@ def get_vaidya_metric():
 
     """
     return vaidya_metric
+
+def get_godel_metric():
+    """
+    Status
+    ======
+
+    Description
+    ===========
+    Returns Godel metric.
+
+    Examples
+    ========
+    >>> from sympy import *
+    >>> print(get_vaidya_metric())
+    >>> 
+
+    LaTeX representation
+    ====================
+    ds^{2}={\frac {1}{2\omega ^{2}}}\left[-(dt+e^{x}dy)^{2}+dx^{2}+{\tfrac {1}{2}}e^{2x}dy^{2}+dz^{2}\right],\qquad -\infty <t,x,y,z<\infty ,} {\displaystyle ds^{2}={\frac {1}{2\omega ^{2}}}\left[-(dt+e^{x}dy)^{2}+dx^{2}+{\tfrac {1}{2}}e^{2x}dy^{2}+dz^{2}\right],\qquad -\infty <t,x,y,z<\infty
+    """
+    return godel_metric
+
