@@ -9,7 +9,9 @@ Project Goals
     Ricci tensor, 
     Ricci scalar, 
     Einstien tensor,
-    Stress Tensor
+    Stress Tensor,
+    Geodesic equations,
+    Plotting velocities, orbits, geodesic paths.
     
 2.) Print the previous terms in a clean and intuitive predefined format which bypasses the limitations imposed by sympy.
 
@@ -28,8 +30,7 @@ Project Purpose
  3.) To provide concrete numeric calculations directly from the symbolic form of the einstien field equations.
  4.) Provide context by integrating latex representations of the functions.
 
-
-
 TODOs
 =====
+So much.. 
 
