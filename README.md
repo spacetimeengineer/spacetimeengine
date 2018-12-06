@@ -1,4 +1,4 @@
-# spacetime-toolkit
+# spacetime-toolkit-Unfinished Expect functionality around January
 A python toolkit for exploring the Einstein's field equations.
 
 Project Goals
