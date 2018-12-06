@@ -1,4 +1,4 @@
-# spacetime-toolkit-Unfinished Expect functionality around January
+# spacetime-toolkit
 A python toolkit for exploring the Einstein's field equations.
 
 Project Goals
@@ -34,3 +34,8 @@ TODOs
 =====
 So much.. 
 
+Timeline
+========
+Jan - Einstiens Field Equation + Geodesics
+Feb - Plotting trajectories
+Mar - Config file customizations.
