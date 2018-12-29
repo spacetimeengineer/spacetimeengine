@@ -2,13 +2,11 @@
 import json
 from sympy import *
 
-
-
 class Metric:
     
     def __init__(self, m, cs):
         self.metric = m
-        self.inverse_metric = m.inv()
+        self.inverse_metric = simplify(m.inv())
         self.coordinate_set = cs
         #self.infentesimal_displacement_four_vector
         self.x_velocity = None
@@ -16,25 +14,7 @@ class Metric:
         self.z_velocity = None
         self.tau_velocity = None
         
-        
     def line_element(self):
-        """
-        Description
-        ===========
-        Returns the metric line element.
-
-        Example
-        =======
-        minkowski_metric = Matrix([[ 1, 0, 0, 0 ], [ 0, -1, 0, 0 ], [ 0, 0, -1, 0 ], [ 0, 0, 0, -1 ]])
-        4d_euclidian_set = [ t, x, y, z ]
-        print( line_element(metric, coordinate_set) )
-
-        LaTeX representation
-        ====================
-        ds^2 = g_{ij}dx^\mu dx^\nu 
-        Where the covariant indices i and j are utilized as for-loop iteration variables.
-        """
-        
         line_element = 0
         one_forms = Matrix( [ [ 0 , 0 , 0 , 0 ], [ 0 , 0 , 0 , 0 ], [ 0 , 0 , 0 , 0 ], [ 0 , 0 , 0 , 0 ] ] )
         for i in range(len(self.coordinate_set)):
@@ -44,23 +24,32 @@ class Metric:
         return line_element
 
     def metric_tensor(self):
-        """
-        Description
-        ===========
-        Returns a list of all metric element equalities.
-        
-        Example
-        =======
-
-        LaTeX representation
-        ====================
-        """
         return self.metric
+    
+    def metric_coefficient(self, index_config, mu, nu):
+        if (index_config == "uu"):
+            return self.inverse_metric[mu,nu]
+        elif(index_config == "dd"):
+            return self.metric[mu,nu]
+        else:
+            print("Invalid index_config string.")
         
+    def list_metric_coefficients(self, index_config):
+        if (index_config == "uu"):
+            for mu in range(len(self.coordinate_set)):
+                for nu in range(len(self.coordinate_set)):
+                    pprint(Eq(Symbol('g^%s%s' % (mu, nu)), self.inverse_metric[mu,nu]))
+        elif(index_config == "dd"):
+            for mu in range(len(self.coordinate_set)):
+                for nu in range(len(self.coordinate_set)):
+                    print("")
+                    pprint(Eq(Symbol('g_%s%s' % (mu, nu)), self.metric[mu,nu]))
+        else:
+            print("Invalid index_config string.")
+    
     def inverse_metric_tensor(self):
         return self.inverse_metric
 
-    
     def connection_coefficient(self, index_config, i, k, l):
         connection = 0
         if index_config == "udd":
@@ -74,31 +63,64 @@ class Metric:
             print("Invalid index_config string.")
         return connection
     
+    def list_connection_coefficients(self, index_config):
+        if(index_config == "udd"):
+            for lam in range(len(self.coordinate_set)):
+                for mu in range(len(self.coordinate_set)):
+                    for nu in range(len(self.coordinate_set)):
+                        print("")
+                        pprint(Eq(Symbol('Gamma^%s_%s%s' % (lam, mu, nu)),self.connection_coefficient(index_config, lam, mu, nu )))
+        elif(index_config == "ddd"):
+            for lam in range(len(self.coordinate_set)):
+                for mu in range(len(self.coordinate_set)):
+                    for nu in range(len(self.coordinate_set)):
+                        print("")
+                        pprint(Eq(Symbol('Gamma_%s%s%s' % (lam, mu, nu)),self.connection_coefficient(index_config, lam, mu, nu )))
+        else:
+            print("Invalid index_config string.")
+    
     def riemann_coefficient(self, index_config, rho, sig, mu, nu):
+        riemann_coefficient = 0
         if index_config == "uddd":
             riemann_coefficient = diff(self.connection_coefficient("udd", rho, nu, sig), self.coordinate_set[mu]) - diff(self.connection_coefficient("udd", rho, mu, sig), self.coordinate_set[nu])    
             for lam in range(len(self.coordinate_set)):
-                #There is a problem here.
                 riemann_coefficient = riemann_coefficient + self.connection_coefficient("udd", rho, mu, lam)*self.connection_coefficient("udd", lam, nu, sig) - self.connection_coefficient("udd", rho, nu, lam)*self.connection_coefficient("udd", lam, mu, sig)
             riemann_coefficient = simplify(riemann_coefficient)
-            # Should remove this from function and place in a listing function.
-            #pprint(Eq(Symbol('R^%s_%s%s%s' % (rho, sig, mu, nu)),riemann_coefficient))
         elif index_config == "dddd":
-            print("")
+            riemann_coefficient = Rational('1/2')*(self.metric_coefficient("dd", rho, nu).diff(self.coordinate_set[sig]).diff(self.coordinate_set[mu]) + self.metric_coefficient("dd", sig, mu).diff(self.coordinate_set[rho]).diff(self.coordinate_set[nu])-self.metric_coefficient("dd", rho, mu).diff(self.coordinate_set[sig]).diff(self.coordinate_set[nu])-self.metric_coefficient("dd", sig, nu).diff(self.coordinate_set[rho]).diff(self.coordinate_set[mu]))
+            for n in range(len(self.coordinate_set)):
+                for p in range(len(self.coordinate_set)):
+                    riemann_coefficient = riemann_coefficient + self.metric_coefficient("dd", n, p)*(self.connection_coefficient("udd", n, sig, mu)*self.connection_coefficient("udd", p, rho, nu)-self.connection_coefficient("udd", n, sig, nu)*self.connection_coefficient("udd", p, rho, mu))
+            riemann_coefficient = simplify(riemann_coefficient)
         else:
             print("Invalid index_config string.")
         
         return riemann_coefficient
     
+    def list_riemann_coefficients(self, index_config):
+        if index_config == "uddd":
+            for i in range(len(self.coordinate_set)):
+                for j in range(len(self.coordinate_set)):
+                    for k in range(len(self.coordinate_set)):
+                        for l in range(len(self.coordinate_set)):
+                            print("")
+                            pprint(Eq(Symbol('R^%s_%s%s%s' % (i, j, k, l)), self.riemann_coefficient(index_config, i, j, k, l)))
+        elif index_config == "dddd":
+            for i in range(len(self.coordinate_set)):
+                for j in range(len(self.coordinate_set)):
+                    for k in range(len(self.coordinate_set)):
+                        for l in range(len(self.coordinate_set)):
+                            print("")
+                            pprint(Eq(Symbol('R_%s%s%s%s' % (i, j, k, l)), self.riemann_coefficient(index_config, i, j, k, l)))
+        else:
+            print("Invalid index_config string.")
+    
     def ricci_coefficient(self, index_config, mu, nu):
         if index_config == "dd":
             ricci_coefficient = 0
             for lam in range(len(self.coordinate_set)):
-                #There is a problem here.
                 ricci_coefficient = ricci_coefficient + self.riemann_coefficient("uddd", lam, mu, lam, nu)
             ricci_coefficient = simplify(ricci_coefficient)
-            # Should remove this from function and place in a listing function.
-            #pprint(Eq(Symbol('R^_%s%s' % (mu, nu)), ricci_coefficient))
         elif index_config == "uu":
             print("")
         elif index_config == "ud" or index_config == "du":
@@ -108,6 +130,12 @@ class Metric:
         
         return ricci_coefficient
 
+    def list_ricci_coefficients(self, index_config):
+        for mu in range(len(self.coordinate_set)):
+            for nu in range(len(self.coordinate_set)):
+                print("")
+                pprint(Eq(Symbol('R_%s%s' % (mu, nu)), self.ricci_coefficient(index_config, mu, nu)))
+    
     def ricci_scalar(self):
         ricci_scalar = 0
         for mu in range(len(self.coordinate_set)):
@@ -118,14 +146,11 @@ class Metric:
         return ricci_scalar
 
     def einstein_coefficient(self, index_config, mu, nu):
+        einstein_coefficient = 0
         ricci_scalar = self.ricci_scalar()
         if index_config == "dd":
-            for mu in range(len(self.coordinate_set)):
-                for nu in range(len(self.coordinate_set)):
-                    einstein_coefficient = self.ricci_coefficient("dd", mu, nu) - Rational('1/2') * ricci_scalar * self.metric[mu,nu]
-                    einstein_coefficient = simplify(einstein_coefficient)
-                    #Remove and place in listing function.
-                    pprint(Eq(Symbol('G_%s%s' % (mu, nu)), einstein_coefficient))
+                einstein_coefficient = self.ricci_coefficient("dd", mu, nu) - Rational('1/2') * ricci_scalar * self.metric[mu,nu]
+                einstein_coefficient = simplify(einstein_coefficient)
         elif index_config == "uu":
             print("")
         elif index_config == "ud" or index_config == "du":
@@ -135,15 +160,17 @@ class Metric:
         
         return einstein_coefficient
 
+    def list_einstein_coefficients(self, index_config):
+        for mu in range(len(self.coordinate_set)):
+            for nu in range(len(self.coordinate_set)):
+                print("")
+                pprint(Eq(Symbol('G_%s%s' % (mu, nu)), self.einstein_coefficient(index_config, mu, nu)))
+    
     def stress_energy_coefficient(self, index_config, mu, nu):
+        stress_energy_coefficient = 0
         c, G = symbols('c G')
         if index_config == "dd":
-            for mu in range(len(self.coordinate_set)):
-                for nu in range(len(self.coordinate_set)):
-                    stress_energy_coefficient = c**4/(8*pi*G)*self.einstein_coefficient("dd", mu, nu)
-                    stress_energy_coefficient = simplify(stress_energy_coefficient)
-                    #Remove and place in listing function.
-                    pprint(Eq(Symbol('T_%s%s' % (mu, nu)), stress_energy_coefficient))
+            stress_energy_coefficient = c**4/(8*pi*G)*self.einstein_coefficient("dd", mu, nu)
         elif index_config == "uu":
             print("")
         elif index_config == "ud" or index_config == "du":
@@ -151,11 +178,24 @@ class Metric:
         else:
             print("Invalid index_config string.")
         
-        return stress_energy_coefficient
-        
-    def proper_time_geodesics(self):
-        return ricci_tensor
+        return simplify(stress_energy_coefficient)
+
+    def list_stress_energy_coefficients(self, index_config):
+        for mu in range(len(self.coordinate_set)):
+            for nu in range(len(self.coordinate_set)):
+                print("")
+                pprint(Eq(Symbol('T_%s%s' % (mu, nu)), self.stress_energy_coefficient(index_config, mu, nu)))
     
+    def proper_time_geodesics(self, lam, mu, nu):
+        for lam in range(len(self.coordinate_set)):
+            acc = 0
+            for mu in range(len(self.coordinate_set)):
+                for nu in range(len(self.coordinate_set)):
+                    acc = acc + self.connection_coefficient("udd",lam,mu,nu)*diff(self.coordinate_set[mu],Symbol('tau'))*diff(self.coordinate_set[nu],Symbol('tau'))
+            expr = self.coordinate_set[lam].diff(Symbol('tau')).diff(Symbol('tau'))
+            pprint(Eq(expr,acc))
+            print("")
+
     def coordinate_time_geodesics(self):
         return ricci_tensor
     
@@ -164,78 +204,3 @@ class Metric:
     
     def coordinate_time_geodesic_deviation(self):   
         return ricci_tensor
-    
-    def get_coordinate_four_velocity(self):
-        """
-        Description
-        ===========
-        Example
-        =======
-        LaTeX representation
-        ====================
-        """
-        
-        """
-        Psuedocode
-        ==========
-        
-        Using the line element solve for each velocity component with respect to coordinate time.
-        
-        """
-        coordinate_four_veocity = Matrix([0, 0, 0, 0])
-        line_element = get_line_element(metric, infinitesimal_displacement_set)
-        pprint(line_element)
-        coordinate_four_veocity[0]=solve(line_element, infinitesimal_displacement_set[0])
-        coordinate_four_veocity[1]=solve(line_element, infinitesimal_displacement_set[1])
-        coordinate_four_veocity[2]=solve(line_element, infinitesimal_displacement_set[2])
-        #coordinate_four_veocity[3]=solve(line_element, infinitesimal_displacement_set[3])
-        print("")
-        print(coordinate_four_veocity[0])
-        print("")
-        print(coordinate_four_veocity[1])
-        print("")
-        print(coordinate_four_veocity[2])
-        #print("")
-        #print(coordinate_four_veocity[3])
-
-        return coordinate_four_veocity
-    
-    def get_proper_four_velocity(self):
-        """
-        Description
-        ===========
-        Example
-        =======
-        LaTeX representation
-        ====================
-        """
-        
-        """
-        Psuedocode
-        ==========
-        
-        Using the line element solve for each velocity component with respect to proper time.
-        
-        """
-        coordinate_four_veocity = Matrix([0, 0, 0, 0])
-        line_element = get_line_element(metric, infinitesimal_displacement_set)
-        pprint(line_element)
-        coordinate_four_veocity[0]=solve(line_element, infinitesimal_displacement_set[0])
-        coordinate_four_veocity[1]=solve(line_element, infinitesimal_displacement_set[1])
-        coordinate_four_veocity[2]=solve(line_element, infinitesimal_displacement_set[2])
-        #coordinate_four_veocity[3]=solve(line_element, infinitesimal_displacement_set[3])
-        print("")
-        print(coordinate_four_veocity[0])
-        print("")
-        print(coordinate_four_veocity[1])
-        print("")
-        print(coordinate_four_veocity[2])
-        #print("")
-        #print(coordinate_four_veocity[3])
-
-        return coordinate_four_veocity
-    
-    def get_connection():
-        return self.connection
-
-
