@@ -1,6 +1,14 @@
 # spacetime-toolkit
 A python toolkit for exploring the Einstein's field equations.
 
+How to use?
+===========
+
+
+
+
+
+
 Project Goals
 =============
 
