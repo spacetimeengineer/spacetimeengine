@@ -3,11 +3,16 @@ A python toolkit for exploring the Einstein's field equations.
 
 How to use?
 ===========
+Currently this project is in a state of development, however the core functionality appears stable and has passed each test. To demonstrate this software just run
 
+$ python example.py
 
+In the example you can see various spacetimes which are a primary argument.
 
+    coordinate_set = [ x0, x1, x2, x3 ]
+    mt = Metric(reissner_nordstrom_spacetime, coordinate_set)
 
-
+To change the metric just swap it out for another one or build your own. Sympy appears quite rhobust!
 
 Project Goals
 =============
