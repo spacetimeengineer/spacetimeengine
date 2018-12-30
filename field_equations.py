@@ -8,11 +8,6 @@ class Metric:
         self.metric = m
         self.inverse_metric = simplify(m.inv())
         self.coordinate_set = cs
-        #self.infentesimal_displacement_four_vector
-        self.x_velocity = None
-        self.y_velocity = None
-        self.z_velocity = None
-        self.tau_velocity = None
         
     def line_element(self):
         line_element = 0
@@ -166,11 +161,11 @@ class Metric:
                 print("")
                 pprint(Eq(Symbol('G_%s%s' % (mu, nu)), self.einstein_coefficient(index_config, mu, nu)))
     
-    def stress_energy_coefficient(self, index_config, mu, nu):
+    def stress_energy_coefficient(self, index_config, mu, nu, cosmological_constant):
         stress_energy_coefficient = 0
         c, G = symbols('c G')
         if index_config == "dd":
-            stress_energy_coefficient = c**4/(8*pi*G)*self.einstein_coefficient("dd", mu, nu)
+            stress_energy_coefficient = c**4/(8*pi*G)*self.einstein_coefficient("dd", mu, nu) + c**4/(8*pi*G) * cosmological_constant * self.metric[mu,nu]
         elif index_config == "uu":
             print("")
         elif index_config == "ud" or index_config == "du":
@@ -184,7 +179,7 @@ class Metric:
         for mu in range(len(self.coordinate_set)):
             for nu in range(len(self.coordinate_set)):
                 print("")
-                pprint(Eq(Symbol('T_%s%s' % (mu, nu)), self.stress_energy_coefficient(index_config, mu, nu)))
+                pprint(Eq(Symbol('T_%s%s' % (mu, nu)), self.stress_energy_coefficient(index_config, mu, nu, Symbol('Lambda'))))
     
     def proper_time_geodesics(self, lam, mu, nu):
         for lam in range(len(self.coordinate_set)):
