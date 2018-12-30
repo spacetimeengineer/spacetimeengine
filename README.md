@@ -7,7 +7,7 @@ Currently, for the
 
 Who is it for?
 ==============
-This library was written for researchers and students primarily however the goals of open source development community and the space industry continue to influence the direction of this project. Infact this project aims to tie the space industry and the open source community together.
+This library was written for researchers and students primarily however the goals of open source development community and the space industry continue to influence the direction of this project. 
 
 Status
 ======
