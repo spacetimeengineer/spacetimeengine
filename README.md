@@ -1,13 +1,27 @@
 # spacetime-toolkit
-A python toolkit for exploring the Einstein's field equations. This toolkit gives the user the ability to completely analyze any metric you feed to it.
+A python toolkit for exploring the Einstein's field equations. This library is built using sympy.
 
-- <img src="https://latex.codecogs.com/gif.latex?O_t=\text { Onset event at time bin } t " /> 
+What does it do?
+================
+
+
+Status
+======
+Currently this project is in a state of development but core functions are stable. Repo and code need cleaning.
+
 
 How to use?
 ===========
-Currently this project is in a state of development, however the core functionality appears stable and has passed each test. To demonstrate this software just run
+Currently this project is in a state of development, however the core functionality appears stable and has passed each test. To demonstrate this software just run example.py
 
-$ python example.py
+Prerequisites
+=============
+
+
+
+Running example.py
+==================
+Example.py is a good choice for someone new to the project becasue it
 
 In the example you can see various spacetimes which are a primary argument.
 
