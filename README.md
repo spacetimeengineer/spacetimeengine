@@ -1,5 +1,7 @@
 # spacetime-toolkit
-A python toolkit for exploring the Einstein's field equations.
+A python toolkit for exploring the Einstein's field equations. This toolkit gives the user the ability to completely analyze any metric you feed to it.
+
+$\zeta(s) = \sum_{n=1}^\infty \frac{1}{n^s}$
 
 How to use?
 ===========
