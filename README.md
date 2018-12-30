@@ -17,7 +17,7 @@ and a coordinate set to define the metric in terms of:
 
     coordinate_set = [ x0, x1, x2, x3 ]
     
-which in this case references the spherical coordinate system: [x0,x1,x2,x3]->[t,r,θ,φ]
+which in this case references the spherical coordinate system: [ x0, x1, x2, x3 ] --> [ t, r, θ, φ ]
 It list all coefficients associated with the metric, connection, riemann tensor, ricci tensor, einstien tensor and stress energy tensor.
 
 
