@@ -1,7 +1,7 @@
 # spacetime-toolkit
 A python toolkit for exploring the Einstein's field equations. This toolkit gives the user the ability to completely analyze any metric you feed to it.
 
-$\zeta(s) = \sum_{n=1}^\infty \frac{1}{n^s}$
+<img src="https://latex.codecogs.com/gif.latex?O_t=\text { Onset event at time bin } t " /> 
 
 How to use?
 ===========
