@@ -3,6 +3,7 @@ A Python toolkit built using Sympy (A symbolic mathematics library) for explorin
 
 What does it do?
 ================
+
 Currently, for a given metric solution of the form:
 
     schwarzschild_spacetime = Matrix([
@@ -11,6 +12,13 @@ Currently, for a given metric solution of the form:
                                          [ 0, 0, - x1**2, 0 ], 
                                          [ 0, 0, 0, - x1**2 * sin(x2)**2 ]
                                      ]) 
+
+and a coordinate set to define the metric in terms of:
+
+    coordinate_set = [ x0, x1, x2, x3 ]
+    
+It list all coefficients associated with the metric, connection, riemann tensor, ricci tensor, einstien tensor and stress energy tensor.
+
 
 Who is it for?
 ==============
