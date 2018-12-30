@@ -9,24 +9,6 @@ def main():
     
     a, b, c, d, s, k, t, x, y, z, x0, x1, x2, x3, dt, dx, dy, dz, dx0, dx1, dx2, dx3, vx, vy, vz, vtau, dtau, dX, r, th, ph, G, M, r, i, k, l, R, v, f, w  = symbols('a b c d s k t x y z x0 x1 x2 x3 dt dx dy dz dx0 dx1 dx2 dx3 vx vy vz vtau dtau dX, r th ph G M r i k l R v f w')
 
-    '''
-    Goal, map indecies to for loops to latex for intuition.
-
-    '''
-    tau = Symbol('tau')
-    
-    #These seem to be needed for the geodesic equation but soon I will remove that requirement.
-    #x0 = Function('x0')(tau)
-    #x1 = Function('x1')(tau)
-    #x2 = Function('x2')(tau)
-    #x3 = Function('x3')(tau)
-    
-
-    #psi = Symbol('psi')
-    #the = Symbol('theta')
-    #phi = Symbol('phi')
-
-    
     # The classic black hole solution. Uncharged and rotationally stationary.
     schwarzschild_spacetime = Matrix([
                                   [ ((1-2*G*M)/(x0*c**2)), 0, 0, 0 ], 
