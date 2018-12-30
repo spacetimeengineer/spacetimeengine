@@ -1,14 +1,16 @@
 # spacetime-toolkit
-A python toolkit for exploring the Einstein's field equations. This library is built using sympy.
+A Python toolkit built with Sympy (A symbolic math library) for exploring the Einstein's field equations. This library provides users with the tools to compute the tedius calculations involved in the Einstein field equations.
 
 What does it do?
 ================
 
+Who is it for?
+==============
+This library was written
 
 Status
 ======
 Currently this project is in a state of development but core functions are stable. Repo and code need cleaning.
-
 
 How to use?
 ===========
@@ -16,12 +18,14 @@ Currently this project is in a state of development, however the core functional
 
 Prerequisites
 =============
+1.) Python
+2.) Sympy
 
-
+(You can install sympy with pip)
 
 Running example.py
 ==================
-Example.py is a good choice for someone new to the project becasue it
+Example.py is a good choice for someone new to the project becasue it demonstrates the entire functionality suite. Depending on the metric you use for inpute the calculation time may vary exponentially.
 
 In the example you can see various spacetimes which are a primary argument.
 
