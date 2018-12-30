@@ -1,7 +1,7 @@
 # spacetime-toolkit
 A python toolkit for exploring the Einstein's field equations. This toolkit gives the user the ability to completely analyze any metric you feed to it.
 
-<img src="https://latex.codecogs.com/gif.latex?O_t=\text { Onset event at time bin } t " /> 
+- <img src="https://latex.codecogs.com/gif.latex?O_t=\text { Onset event at time bin } t " /> 
 
 How to use?
 ===========
