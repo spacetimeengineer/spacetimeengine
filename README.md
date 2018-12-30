@@ -3,7 +3,14 @@ A Python toolkit built using Sympy (A symbolic mathematics library) for explorin
 
 What does it do?
 ================
-Currently, for the 
+Currently, for a given metric solution of the form:
+
+    schwarzschild_spacetime = Matrix([
+                                         [ ((1 - 2 * G * M) / ( x0 * c**2 )), 0, 0, 0 ], 
+                                         [ 0, - ((1 - 2 * G * M) / ( x0 * c**2 ))**(-1), 0, 0 ], 
+                                         [ 0, 0, - x1**2, 0 ], 
+                                         [ 0, 0, 0, - x1**2 * sin(x2)**2 ]
+                                     ]) 
 
 Who is it for?
 ==============
