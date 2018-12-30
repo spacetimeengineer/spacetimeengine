@@ -1,8 +1,6 @@
 #!/usr/bin/env python
-import json
 from sympy import *
 from field_equations import Metric
-import listing
 
 
 def main():
