@@ -261,4 +261,10 @@ Currently this project is in a state of development but core functions are stabl
 Prerequisites
 =============
 1.) Python
-2.) Sympy (You can install sympy with pip)
+
+    $ sudo apt install python3-pip
+    
+2.) Sympy (Symbolic mathematics library written in python)
+
+    $ pip install sympy
+
