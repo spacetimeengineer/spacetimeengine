@@ -70,9 +70,3 @@ Project Goals
 5.) Provide visualization tools which can be configured to match any metric.
 
 6.) Provide a configuration file which allows the user to customize the output profile for a given metric and coordinate set.
-
-Timeline
-========
-Jan - Einstiens Field Equation + Geodesics
-Feb - Plotting trajectories
-Mar - Config file customizations.
