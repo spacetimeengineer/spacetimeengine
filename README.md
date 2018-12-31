@@ -29,10 +29,6 @@ Status
 ======
 Currently this project is in a state of development but core functions are stable. Repo and code need cleaning.
 
-How to use?
-===========
-Currently this project is in a state of development, however the core functionality appears stable and has passed each test. To demonstrate this software just run example.py
-
 Prerequisites
 =============
 1.) Python
