@@ -126,7 +126,7 @@ def main():
                                        [ 0, 0, -x1**2, 0 ], 
                                        [ 0, 0, 0, -x1**2 * sin(x2)**2 ]
                                    ])
-    
+    """
     # The classic warp drive solution. (This takes a long time to process!!!) (I suspect the compute time diverges. I think there is some recursive error)
     # Does not crash.
     xs = symbols('x_s')(x0)
@@ -139,11 +139,11 @@ def main():
                                    [ -2*vs*fs, 0, -1, 0 ], 
                                    [ -2*vs*fs, 0, 0, -1 ]
                                ])
-    
+    """
 
 
     coordinate_set = [ x0, x1, x2, x3 ]
-    spacetime = Metric(friedmann_lemaitre_robertson_walker_solution, coordinate_set)
+    spacetime = Metric(kerr_newman_spacetime, coordinate_set)
 
 
     print("")
