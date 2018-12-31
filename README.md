@@ -1,5 +1,5 @@
 # spacetime-toolkit
-A Python toolkit built using Sympy (A symbolic mathematics library) for exploring the Einstein field equations. This library is a free utility which enhances users with the tools for quickly working out the tedius calculations involved in the Einstein field equations.
+A Python toolkit built using Sympy (A symbolic mathematics library) for exploring the Einstein field equations. This library is a free utility which enhances users with the ability to quickly work out the tedius calculations involved associated with the Einstein field equations. For any input metric tensor, all the Connection, Riemann, Ricci, Einsteinn & Stress-Ennergy coefficients can be computed. Run "example.py" to see for yourself
 
 What does it do?
 ================
@@ -17,13 +17,13 @@ and a coordinate set to define the metric in terms of:
 
     >> coordinate_set = [ x0, x1, x2, x3 ]
     
-which in this case references the spherical coordinate system: [ x0, x1, x2, x3 ] --> [ t, r, θ, φ ] will list all coefficients associated with the metric, connection, Riemann tensor, Ricci tensor, Einstein tensor and stress-energy-momentum tensor.
+( which in this case references the spherical coordinate system: [ x0, x1, x2, x3 ] --> [ t, r, θ, φ ] ) will serve as input parameters for the Spacetime object;
 
 
     >> spacetime = SpaceTime(schwarzschild_spacetime, coordinate_set)
 
 
-There are many operations available for analyzing the input metric. For example to find the connection coefficients just run
+This object has functions list all coefficients associated with the metric, connection, Riemann tensor, Ricci tensor, Einstein tensor and stress-energy-momentum tensor. There are many operations available for analyzing the input metric. For example to find the connection coefficients just run
 
     >> spacetime.list_connection_coefficients("udd")
 
