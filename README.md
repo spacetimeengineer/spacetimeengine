@@ -4,9 +4,9 @@ A Python toolkit built using Sympy (A symbolic mathematics library) for explorin
 What does it do?
 ================
 
-Currently, for a given metric solution of the form:
+Currently, as seen in example.py, for a given metric solution of the form:
 
-    schwarzschild_spacetime = Matrix([
+    >> schwarzschild_spacetime = Matrix([
                                          [ ((1 - 2 * G * M) / ( x0 * c**2 )), 0, 0, 0 ], 
                                          [ 0, - ((1 - 2 * G * M) / ( x0 * c**2 ))**(-1), 0, 0 ], 
                                          [ 0, 0, - x1**2, 0 ], 
@@ -15,10 +15,19 @@ Currently, for a given metric solution of the form:
 
 and a coordinate set to define the metric in terms of:
 
-    coordinate_set = [ x0, x1, x2, x3 ]
+    >> coordinate_set = [ x0, x1, x2, x3 ]
     
-which in this case references the spherical coordinate system: [ x0, x1, x2, x3 ] --> [ t, r, θ, φ ]
-It list all coefficients associated with the metric, connection, riemann tensor, ricci tensor, einstien tensor and stress energy tensor.
+which in this case references the spherical coordinate system: [ x0, x1, x2, x3 ] --> [ t, r, θ, φ ] will list all coefficients associated with the metric, connection, Riemann tensor, Ricci tensor, Einstein tensor and stress-energy-momentum tensor.
+
+
+    >> spacetime = SpaceTime(schwarzschild_spacetime, coordinate_set)
+
+
+There are many operations available for analyzing the input metric. For example to find the connection coefficients just run
+
+    >> spacetime.list_connection_coefficients("udd")
+
+Will print out all connection coefficients with an up-down-down summation index configuration which makes reference to the Christoffel symbols of the second kind.
 
 
 Who is it for?
