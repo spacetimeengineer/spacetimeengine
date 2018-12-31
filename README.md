@@ -1,6 +1,11 @@
 # spacetime-toolkit
 A Python toolkit built using Sympy (A symbolic mathematics library) for exploring the Einstein field equations. This library is a free utility which enhances users with the tools for quickly working out the tedius formulas associated with solving the Einstein field equations. For any input metric tensor, any or all coefficients associated with the metric, connection, Riemann, Ricci, Einstein & stress-energy tensors can be computed. Run "example.py" to see for yourself
 
+
+Running example.py
+==================
+Example.py is a good choice for someone new to the project becasue it demonstrates the functionality suite. Depending on the metric you use for input, the compute time may vary exponentially. To change the metric just swap it out for another one or build your own. There are many metric examples to help you understand how to build input parameters if you are a researcher.
+
 What does it do?
 ================
 
@@ -257,7 +262,3 @@ Prerequisites
 =============
 1.) Python
 2.) Sympy (You can install sympy with pip)
-
-Running example.py
-==================
-Example.py is a good choice for someone new to the project becasue it demonstrates the entire functionality suite. Depending on the metric you use for inpute the calculation time may vary exponentially. To change the metric just swap it out for another one or build your own. There are many metric examples to help you understand how to input parameters.
