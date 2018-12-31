@@ -194,13 +194,11 @@ This object has functions which allow the user to get / (set soon ) all coeffici
 
 
 Will print out all connection coefficients with an up-down-down summation index configuration which makes reference to the Christoffel symbols of the second kind. Anyone familiar with tensor calculus and the Einstein summation conventions should understand what I am talking about. Another example:
-
+    
+    >> spacetime.list_ricci_coefficients("dd")
+    
     Ricci curvature tensor coefficients (dd)
     ========================================
-
-    >> spacetime.list_ricci_coefficients("dd")
-        
-    
 
     R₀₀ = 0
 
