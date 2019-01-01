@@ -11,11 +11,38 @@ Example.py is a good choice for someone new to the project becasue it demonstrat
 
 What does it do?
 ================
-Currently this library provides functions which works out the following formulas. It requires a metric tensor for input and computes the stress-energy tensor along with all related quantities required to compute it. Currently the metric cannot be solved for a stress tensor input but that feature is greatly desired. The reason for this is that the computations are mainly based of differentiation rather than integration. Any help or advice on this is greatly appreciated.
+Currently this library provides functions which works out the below formulas. It requires a metric tensor for input and computes the stress-energy tensor along with all related quantities required to compute it. Currently the metric cannot be solved for a stress tensor input but that feature is greatly desired. The reason for this is that the computations are mainly based of differentiation rather than integration. Any help or advice on this is greatly appreciated.
+
+As seen in example.py, for a given metric solution of the form:
+
+    >> schwarzschild_spacetime = Matrix([
+                                         [ ((1 - 2 * G * M) / ( x0 * c**2 )), 0, 0, 0 ], 
+                                         [ 0, - ((1 - 2 * G * M) / ( x0 * c**2 ))**(-1), 0, 0 ], 
+                                         [ 0, 0, - x1**2, 0 ], 
+                                         [ 0, 0, 0, - x1**2 * sin(x2)**2 ]
+                                     ]) 
+
+and a coordinate set to define the metric in terms of:
+
+    >> coordinate_set = [ x0, x1, x2, x3 ]
+    
+( which in this case references the spherical coordinate system: [ x0, x1, x2, x3 ] --> [ t, r, θ, φ ] ) will serve as input parameters for the Spacetime object;
+
+
+    >> spacetime = SpaceTime(schwarzschild_spacetime, coordinate_set)
+
 
 The Einstein field equations
 ============================
 ![equation](https://latex.codecogs.com/png.latex?%5Cinline%20%5Cdpi%7B100%7D%20%5Chuge%20G_%7B%5Cmu%20%5Cnu%20%7D&plus;%5CLambda%20g_%7B%5Cmu%20%5Cnu%20%7D%3D%7B%5Cfrac%20%7B8%5Cpi%20G%7D%7Bc%5E%7B4%7D%7D%7DT_%7B%5Cmu%20%5Cnu%20%7D)
+
+The EFE (Einstein field equations) equate spacetime curvature to mass-energy. The mass-energy is represented by the coefficents within the stress-energy-momentum tensor. The cosmological constant denoted by Lambda is treated as an input parameter.
+    
+    >> cosmological_constant = 0
+    >> mu = 0 # (dt)
+    >> nu = 1 # (dr)
+    >> index_config = "dd"
+    >> pprint(spacetime.stress_energy_coefficient(index_config, mu, nu, cosmological_constant))
 
 The Einstein tensor
 ===================
@@ -36,26 +63,6 @@ Connection coefficients
 ![equation](https://latex.codecogs.com/png.latex?%5Cinline%20%5Cdpi%7B100%7D%20%5Chuge%20%5CGamma%20%5E%7Bi%7D%7B%7D_%7Bkl%7D%3D%7B%5Ctfrac%20%7B1%7D%7B2%7D%7Dg%5E%7Bim%7D%5Cleft%28%7B%5Cfrac%20%7B%5Cpartial%20g_%7Bmk%7D%7D%7B%5Cpartial%20x%5E%7Bl%7D%7D%7D&plus;%7B%5Cfrac%20%7B%5Cpartial%20g_%7Bml%7D%7D%7B%5Cpartial%20x%5E%7Bk%7D%7D%7D-%7B%5Cfrac%20%7B%5Cpartial%20g_%7Bkl%7D%7D%7B%5Cpartial%20x%5E%7Bm%7D%7D%7D%5Cright%29)
 
 ![equation](https://latex.codecogs.com/png.latex?%5Cinline%20%5Cdpi%7B100%7D%20%5Chuge%20%5CGamma%20_%7Bcab%7D%3D%7B%5Ctfrac%20%7B1%7D%7B2%7D%7D%5Cleft%28%7B%5Cfrac%20%7B%5Cpartial%20g_%7Bca%7D%7D%7B%5Cpartial%20x%5E%7Bb%7D%7D%7D&plus;%7B%5Cfrac%20%7B%5Cpartial%20g_%7Bcb%7D%7D%7B%5Cpartial%20x%5E%7Ba%7D%7D%7D-%7B%5Cfrac%20%7B%5Cpartial%20g_%7Bab%7D%7D%7B%5Cpartial%20x%5E%7Bc%7D%7D%7D%5Cright%29)
-
-
-Currently, as seen in example.py, for a given metric solution of the form:
-
-    >> schwarzschild_spacetime = Matrix([
-                                         [ ((1 - 2 * G * M) / ( x0 * c**2 )), 0, 0, 0 ], 
-                                         [ 0, - ((1 - 2 * G * M) / ( x0 * c**2 ))**(-1), 0, 0 ], 
-                                         [ 0, 0, - x1**2, 0 ], 
-                                         [ 0, 0, 0, - x1**2 * sin(x2)**2 ]
-                                     ]) 
-
-and a coordinate set to define the metric in terms of:
-
-    >> coordinate_set = [ x0, x1, x2, x3 ]
-    
-( which in this case references the spherical coordinate system: [ x0, x1, x2, x3 ] --> [ t, r, θ, φ ] ) will serve as input parameters for the Spacetime object;
-
-
-    >> spacetime = SpaceTime(schwarzschild_spacetime, coordinate_set)
-
 
 This object has functions which allow the user to get / (set soon ) all coefficients associated with the metric, connection, Riemann tensor, Ricci tensor, Einstein tensor and stress-energy-momentum tensor. There are many operations available for analyzing the input metric. For example to find the connection coefficients just run
 
