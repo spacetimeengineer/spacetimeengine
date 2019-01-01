@@ -1,15 +1,16 @@
 spacetime-toolkit
 =================
-A Python toolkit built using Sympy (A symbolic mathematics library) for exploring the Einstein field equations. This library is a free utility which enhances users with the tools for quickly working out the tedius formulas associated with solving the Einstein field equations. For any input metric tensor, any or all coefficients associated with the metric, connection, Riemann, Ricci, Einstein & stress-energy tensors can be computed. Run "example.py" to see for yourself
+A Python toolkit built using Sympy (A symbolic mathematics library) for exploring the Einstein field equations. This library is a free utility which enhances users with the tools for quickly working out the tedius formulas associated with solving the Einstein field equations. For any input metric tensor, any or all coefficients associated with the metric, connection, Riemann, Ricci, Einstein & stress-energy tensors can be computed. Run "example.py" to see for yourself.
 
 
 Running example.py
 ==================
 Example.py is a good choice for someone new to the project becasue it demonstrates the functionality suite. Depending on the metric you use for input, the compute time may vary exponentially. To change the metric just swap it out for another one or build your own. There are many metric examples to help you understand how to build input parameters if you are a researcher.
 
+
 What does it do?
 ================
-This library provides functions which solve the following formulas. It requires a metric tensor as input and computes the stress-energy tensor and all related quantities from it. Currently the metric cannot be solved for a stress tensor input but that feature is greatly desired. Any help on that would be cool.
+Currently this library provides functions which works out the following formulas. It requires a metric tensor for input and computes the stress-energy tensor along with all related quantities required to compute it. Currently the metric cannot be solved for a stress tensor input but that feature is greatly desired. The reason for this is that the computations are mainly based of differentiation rather than integration. Any help or advice on this is greatly appreciated.
 
 The Einstein field equations
 
