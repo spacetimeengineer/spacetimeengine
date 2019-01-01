@@ -9,6 +9,7 @@ Example.py is a good choice for someone new to the project becasue it demonstrat
 
 What does it do?
 ================
+This library provides functions which reflect the following formulas: 
 
 ![equation](https://latex.codecogs.com/png.latex?%5Cinline%20%5Cdpi%7B100%7D%20%5Chuge%20G_%7B%5Cmu%20%5Cnu%20%7D&plus;%5CLambda%20g_%7B%5Cmu%20%5Cnu%20%7D%3D%7B%5Cfrac%20%7B8%5Cpi%20G%7D%7Bc%5E%7B4%7D%7D%7DT_%7B%5Cmu%20%5Cnu%20%7D)
 
