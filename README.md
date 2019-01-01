@@ -5,8 +5,9 @@ A Python toolkit built using Sympy (A symbolic mathematics library) for explorin
 
 Running example.py
 ==================
-Example.py is a good choice for someone new to the project becasue it demonstrates the functionality suite. Depending on the metric you use for input, the compute time may vary exponentially. To change the metric just swap it out for another one or build your own. There are many metric examples to help you understand how to build input parameters if you are a researcher.
+Example.py is a good choice for someone new to the project becasue it demonstrates the functionality suite. Depending on the metric you use for input, the compute time may vary exponentially. There are other metric solutions available for study! To change the metric just swap it out for another one or build your own. There are many metric examples to help you understand how to build input parameters if you are a researcher.
 
+    $ python example.py
 
 What does it do?
 ================
@@ -75,150 +76,7 @@ This object has functions which allow the user to get / (set soon ) all coeffici
                         2
            2⋅(2⋅G⋅M - 1) 
 
-    Γ⁰₁₂ = 0
-
-    Γ⁰₁₃ = 0
-
-    Γ⁰₂₀ = 0
-
-    Γ⁰₂₁ = 0
-
-    Γ⁰₂₂ = 0
-
-    Γ⁰₂₃ = 0
-
-    Γ⁰₃₀ = 0
-
-    Γ⁰₃₁ = 0
-
-    Γ⁰₃₂ = 0
-
-    Γ⁰₃₃ = 0
-
-    Γ¹₀₀ = 0
-
-            1  
-    Γ¹₀₁ = ────
-           2⋅x₀
-
-    Γ¹₀₂ = 0
-
-    Γ¹₀₃ = 0
-
-            1  
-    Γ¹₁₀ = ────
-           2⋅x₀
-
-    Γ¹₁₁ = 0
-
-    Γ¹₁₂ = 0
-
-    Γ¹₁₃ = 0
-
-    Γ¹₂₀ = 0
-
-    Γ¹₂₁ = 0
-
-           x₁⋅(2⋅G⋅M - 1)
-    Γ¹₂₂ = ──────────────
-                2        
-               c ⋅x₀     
-
-    Γ¹₂₃ = 0
-
-    Γ¹₃₀ = 0
-
-    Γ¹₃₁ = 0
-
-    Γ¹₃₂ = 0
-
-                             2    
-           x₁⋅(2⋅G⋅M - 1)⋅sin (x₂)
-    Γ¹₃₃ = ───────────────────────
-                     2            
-                    c ⋅x₀         
-
-    Γ²₀₀ = 0
-
-    Γ²₀₁ = 0
-
-    Γ²₀₂ = 0
-
-    Γ²₀₃ = 0
-
-    Γ²₁₀ = 0
-
-    Γ²₁₁ = 0
-
-           1 
-    Γ²₁₂ = ──
-           x₁
-
-    Γ²₁₃ = 0
-
-    Γ²₂₀ = 0
-
-           1 
-    Γ²₂₁ = ──
-           x₁
-
-    Γ²₂₂ = 0
-
-    Γ²₂₃ = 0
-
-    Γ²₃₀ = 0
-
-    Γ²₃₁ = 0
-
-    Γ²₃₂ = 0
-
-           -sin(2⋅x₂) 
-    Γ²₃₃ = ───────────
-                2     
-
-    Γ³₀₀ = 0
-
-    Γ³₀₁ = 0
-
-    Γ³₀₂ = 0
-
-    Γ³₀₃ = 0
-
-    Γ³₁₀ = 0
-
-    Γ³₁₁ = 0
-
-    Γ³₁₂ = 0
-
-           1 
-    Γ³₁₃ = ──
-           x₁
-
-    Γ³₂₀ = 0
-
-    Γ³₂₁ = 0
-
-    Γ³₂₂ = 0
-
-              1   
-    Γ³₂₃ = ───────
-           tan(x₂)
-
-    Γ³₃₀ = 0
-
-           1 
-    Γ³₃₁ = ──
-           x₁
-
-              1   
-    Γ³₃₂ = ───────
-           tan(x₂)
-
-    Γ³₃₃ = 0
-
-
-
-
+    ...
 
 Will print out all connection coefficients with an up-down-down summation index configuration which makes reference to the Christoffel symbols of the second kind. Anyone familiar with tensor calculus and the Einstein summation conventions should understand what I am talking about. Another example:
     
