@@ -10,12 +10,21 @@ def main():
     a, b, c, d, s, k, t, x, y, z, x0, x1, x2, x3, dt, dx, dy, dz, dx0, dx1, dx2, dx3, vx, vy, vz, vtau, dtau, dX, r, th, ph, G, M, r, i, k, l, R, v, f, w  = symbols('a b c d s k t x y z x0 x1 x2 x3 dt dx dy dz dx0 dx1 dx2 dx3 vx vy vz vtau dtau dX, r th ph G M r i k l R v f w')
 
     # The classic black hole solution. Uncharged and rotationally stationary.
-    schwarzschild_spacetime = Matrix([
-                                  [ ((1-2*G*M)/(x0*c**2)), 0, 0, 0 ], 
-                                  [ 0, - ((1-2*G*M)/(x0*c**2))**(-1), 0, 0 ], 
-                                  [ 0, 0, - x1**2, 0 ], 
-                                  [ 0, 0, 0, - x1**2*sin(x2)**2 ]
-                              ])
+    # PASSES!
+    schwarzschild_spacetime = Matrix([    
+                                          [ (1-(2*G*M)/(x1*c**2)), 0, 0, 0 ], 
+                                          [ 0, - (1-(2*G*M)/(x1*c**2))**(-1), 0, 0 ], 
+                                          [ 0, 0, - x1**2, 0 ], 
+                                          [ 0, 0, 0, - x1**2*sin(x2)**2 ]
+                                     ])
+    
+    # Flat spacetime expressed in hyperspherical coordinates.
+    # PASSES!
+    milne_spacetime = Matrix([
+                                  [ 1, 0, 0, 0 ], 
+                                  [ 0, -x0**2, 0, 0 ], 
+                                  [ 0, 0, -x0**2*sinh(x1)**2, 0 ],
+                                  [ 0, 0, 0, -x0**2*sinh(x1)**2*sin(x2)**2 ]
     
     # Friedmann Lemaitre Robertson Walker solution.
     a, k = symbols('a k')
@@ -68,13 +77,6 @@ def main():
                                   [ 0, 0, 0, -f ]
                               ])
     
-    # Flat spacetime expressed in hyperspherical coordinates.
-    milne_spacetime = Matrix([
-                                  [ 1, 0, 0, 0 ], 
-                                  [ 0, -x0**2, 0, 0 ], 
-                                  [ 0, 0, -x0**2*sinh(x1)**2, 0 ],
-                                  [ 0, 0, 0, -x0**2*sinh(x1)**2*sin(x2)**2 ]
-                             ])
     
     # Rotataing uncharged black hole.
     a, J, M, c, delt, sigm = symbols('a J M c Delta Sigma')
