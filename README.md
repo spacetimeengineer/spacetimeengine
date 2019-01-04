@@ -149,6 +149,10 @@ This library was written for researchers and students primarily however the goal
 Status
 ======
 Currently this project is in a state of development but core functions are stable. Repo and code need cleaning.
+1.) Some of the metric examples are incorrect I think. I have been running tests for days now.
+2.) Working of redundant calculations issue. Almost done.
+3.) Repo is poor, this will be fixed after redundant calculations are removed.
+
 
 Prerequisites
 =============
