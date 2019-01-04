@@ -6,6 +6,19 @@ What does it do?
 ================
 Currently this library provides functions which works out the below formulas. It requires a metric tensor for input and computes the stress-energy tensor along with all related quantities required to compute it. Currently the metric cannot be solved for a stress tensor input but that feature is greatly desired. The reason for this is that the computations are mainly based of differentiation rather than integration. Any help or advice on this is greatly appreciated.
 
+
+Installation
+============
+1.) Python
+
+    $ sudo apt install python3-pip
+    
+2.) Sympy (Symbolic mathematics library written in python)
+
+    $ pip install sympy
+
+
+
 Running example.py
 ==================
 Example.py is a good choice for someone new to the project becasue it demonstrates the functionality suite. Depending on the metric you use for input, the compute time may vary exponentially. There are other metric solutions available for study! To change the metric just swap it out for another one or build your own. There are many metric examples to help you understand how to build input parameters if you are a researcher.
@@ -158,15 +171,3 @@ Currently this project is in a state of development but core functions are stabl
 1.) Some of the metric examples are incorrect I think. I have been running tests for days now.
 2.) Working of redundant calculations issue. Almost done.
 3.) Repo is poor, this will be fixed after redundant calculations are removed.
-
-
-Prerequisites
-=============
-1.) Python
-
-    $ sudo apt install python3-pip
-    
-2.) Sympy (Symbolic mathematics library written in python)
-
-    $ pip install sympy
-
