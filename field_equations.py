@@ -2,7 +2,7 @@
 import json
 from sympy import *
 
-class Metric:
+class SpaceTime:
     
     def __init__(self, m, cs):
         self.metric = m
