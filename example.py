@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 from sympy import *
 from IPython.display import display
-from field_equations import SpaceTime
+from field_equations import Metric
 
 
 def main():
