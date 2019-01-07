@@ -34,12 +34,12 @@ The metric tensor serves as an input. There are example metric tensors provided 
 
 As seen in example.py, for a given metric solution of the form described above:
 
-    >> schwarzschild_spacetime = Matrix([
-                                         [ ((1 - 2 * G * M) / ( x0 * c**2 )), 0, 0, 0 ], 
-                                         [ 0, - ((1 - 2 * G * M) / ( x0 * c**2 ))**(-1), 0, 0 ], 
-                                         [ 0, 0, - x1**2, 0 ], 
-                                         [ 0, 0, 0, - x1**2 * sin(x2)**2 ]
-                                     ]) 
+    >> schwarzschild_spacetime = Matrix([    
+                                            [ (1-(2*G*M)/(x1*c**2)), 0, 0, 0 ], 
+                                            [ 0, - (1-(2*G*M)/(x1*c**2))**(-1), 0, 0 ], 
+                                            [ 0, 0, - x1**2, 0 ], 
+                                            [ 0, 0, 0, - x1**2*sin(x2)**2 ]
+                                        ])
 
 and a coordinate set to define the metric in terms of:
 
