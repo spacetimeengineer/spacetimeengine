@@ -1,6 +1,6 @@
 status(unstable)
 ================
-There are significant upgrades which will be rolled out later this week. I have been testing and optimizing and thinking about how I should move forward with this repo. Currently some of these solutions take weeks to solve. I feel bad about giving an unstable repo to the public but I needed some initial feedback based on the direction I was taking.
+There are significant upgrades which will be rolled out later this week. I have been testing and optimizing and thinking about how I should move forward with this repo. Currently some of these solutions take weeks to solve. My apologies, I feel bad about giving an unstable repo to the public but I needed some initial feedback.
 
 New Features
 ============
@@ -18,13 +18,13 @@ Dev direction after rollout:
 
 1.) Implement Frame class.
 
-*Currently there exists only a SpaceTime class which treats a spacetime like an object and the properties of which (such as the stress-energy coefficients) are object properties. I figured this made sense and I suppose I actually like this particular model (I always assumed I would use functional programming to do this sort of thiong). The next class I intend to build will be a Frame class which desribes the properties of a given inertial or accellerated frame and they can be applied to a Spacetime object. In these frame objects one will be able to compare the time dialation / length contraction / redshift / orbits / null geodesics / ect for two or more frames.  
+*Currently there exists only a SpaceTime class which treats a spacetime like an object and the properties of which (such as the stress-energy coefficients) are object properties. I figured this made sense and I suppose I actually like this particular model. The next class I intend to build will be a Frame class which desribes the properties of a given inertial or accellerated frame and they can be applied to a Spacetime object. With these frame objects one will be able to compare the time dialation / length contraction / redshift / orbits / null geodesics / ect for two or more frames.  
 
 2.) Reconnect with community.
 
 Other ideas
 ===========
-As @laszlodaniel pointed out, this software runs well on the RPi easily and should eventually be made to run on a cluster of a configurable number of RPi cores. I find this interesting.
+As @laszlodaniel pointed out, this software runs good on the RPi and should eventually be made to run on a cluster of a RPi cores. I find this to be a good approach.
 
 spacetime-toolkit (beta)
 ========================
