@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 from sympy import *
-from IPython.display import display
-from field_equations import Metric
+#from IPython.display import display
+from spacetime import SpaceTime
 
 
 def main():
@@ -73,6 +73,7 @@ def main():
                                        ])
     
     #PASSES
+    # I have studied this solution extensivly. Very interesting. Describes how a hypersphere radius is equivilent to cosmic time.
     hypersphere_metric = Matrix([
                                     [ 1, 0, 0, 0 ],
                                     [ 0, -x0**2, 0, 0 ],
@@ -179,60 +180,113 @@ def main():
     
     
     """
+
     
+    """
+    # Rotataing charged black hole.
+    G, M, c, Q, k = symbols('G M c Q k')
+    rs = 2 * G * M / ( c**2 )
+    rq = Q**2 * G * k / c**4
+    kerr_newman_spacetime = Matrix([
+                                       [ (1 + rs / x1 + rq**2 / x0**2), 0, 0, 0 ], 
+                                       [ 0, -1 * (1 + rs / x1 + rq**2 / x0**2)**(-1), 0, 0 ], 
+                                       [ 0, 0, -x1**2, 0 ], 
+                                       [ 0, 0, 0, -x1**2 * sin(x2)**2 ]
+                                   ])
+    
+    # The classic warp drive solution. (This takes a long time to process!!!) (I suspect the compute time diverges. I think there is some recursive error)
+    # Does not crash.
+    xs = symbols('x_s')(x0)
+    vs = xs.diff(x0)
+    rs = sqrt((x1-xs)**2 + x2**2 + x3**2)
+    fs = tanh(s * (rs + R)) - tanh(s * (rs - R)) / (2 * tanh( s * R ))
+    alcubierre_spacetime = Matrix([
+                                      [ (vs**2 * fs**2 - 1), -2*vs*fs, -2*vs*fs, -2*vs*fs ], 
+                                      [ -2*vs*fs, -1, 0, 0 ], 
+                                      [ -2*vs*fs, 0, -1, 0 ], 
+                                      [ -2*vs*fs, 0, 0, -1 ]
+                                  ])
+    """
     coordinate_set = [ x0, x1, x2, x3 ]
     spacetime = SpaceTime(schwarzschild_spacetime, coordinate_set)
 
+    #kerr_spacetime = Spacetime(.kerr_metric)
     
+    #observer_1 = Frame(x,coordinate_set)
+    #observer_2 = Frame(initial_position,initial_velocity,coordinate_set)
+    #spacetime.set_metric_coefficient("dd",0,0,23)
+    #spacetime.set_metric_coefficient("uu",0,0,23)
+    
+    #spacetime.set_connection_coefficient("udd",0,0,0,23)
+    #spacetime.set_connection_coefficient("ddd",0,0,23)
+    
+    #spacetime.set_riemann_coefficient("uddd",0,0,23)
+    #spacetime.set_riemann_coefficient("dddd",0,0,23)
+    
+    #spacetime.set_ricci_coefficient("dd",0,0,23)
+    #spacetime.set_ricci_coefficient("uu",0,0,23)
+    
+    #spacetime.set_einstein_coefficient("dd",0,0,23)
+    #spacetime.set_einstein_coefficient("dd",0,0,23)
+    
+    #spacetime.set_stress_energy_coefficient("dd",0,0,23)
+    #spacetime.set_stress_energy_coefficient("dd",0,0,23)
+    
+    #pprint(spacetime.get_connection_coefficient("udd",0,1,1))
+    #pprint(spacetime.get_connection_coefficient("udd",0,2,2))
+    #pprint(spacetime.get_connection_coefficient("udd",0,3,3))
     
     print("")
     print("")
     print("Metric tensor coefficients (dd)")
     print("================================")
-    spacetime.list_metric_coefficients("dd")
+    spacetime.print_all_metric_coefficients("dd")
     
     print("")
     print("")
     print("Connection coefficients (udd)")
     print("=============================")
-    spacetime.list_connection_coefficients("udd")
+    spacetime.print_all_connection_coefficients("udd")
     
-    print("")
-    print("")
-    print("Connection coefficients (ddd)")
-    print("=============================")
-    spacetime.list_connection_coefficients("ddd")
+    #print("")
+    #print("")
+    #print("Connection coefficients (ddd)")
+    #print("=============================")
+    #spacetime.print_all_connection_coefficients("ddd")
     
     print("")
     print("")
     print("Riemann curvature tensor coefficients (uddd)")
     print("============================================")
-    spacetime.list_riemann_coefficients("uddd")
-    
-    print("")
-    print("")
-    print("Einstein curvature tensor coefficients (dddd)")
-    print("=============================================")
-    spacetime.list_riemann_coefficients("dddd")
+    spacetime.print_all_riemann_coefficients("uddd")
+   
     
     print("")
     print("")
     print("Ricci curvature tensor coefficients (dd)")
     print("========================================")
-    spacetime.list_ricci_coefficients("dd")
+    spacetime.print_all_ricci_coefficients("dd")
     
     print("")
     print("")
-    print("Einstein tensor coefficients (dd)")
-    print("=================================")
-    spacetime.list_einstein_coefficients("dd")
+    print("Ricci curvature scalar")
+    print("======================")
+    spacetime.print_ricci_scalar()
+
+    
+    print("")
+    print("")
+    print("Einstein curvature tensor coefficients (dddd)")
+    print("=============================================")
+    spacetime.print_all_einstein_coefficients("dd")
+    
     
     print("")
     print("")
     print("Stress-energy-momentum tensor coefficients (dd)")
     print("===============================================")
-    spacetime.list_stress_energy_coefficients("dd")
-    
+    spacetime.print_all_stress_energy_coefficients("dd")
+    """
     print("")
     print("")
     print("General geodesic equations parameterized by propter time.")
@@ -242,13 +296,7 @@ def main():
     # Print out general geodesic equations.
     # Solve for accelleration, velocity adn position vectors.
     # Plot all vectors with respect to all relevent parameters.
+    """
     
 if __name__ == "__main__":
     main()
-
-
-
-
-
-
-
