@@ -2,38 +2,13 @@ status(unstable)
 ================
 There are significant upgrades which will be rolled out later this week. I have been testing and optimizing and thinking about how I should move forward with this repo. Currently some of these solutions take weeks to solve. My apologies, I feel bad about giving an unstable repo to the public but I needed some initial feedback.
 
-New Features
-============
-1.) getters/setters for all objects (stress/metric/connection) 
-*These are utilitiy functions which I employ for optimization purposes and can be easily misused if called for some separate purpose; I reccomend that only advanced researchers use these because I cant think of any good reason for someone to do it.
-
-2.) No redundant calculations.
-
-3.) Better comments; LaTeX representation of code and concepts.
-
-4.) Repo cleaning to fully reflect the project.
-
-Dev direction after rollout:
-============================
-
-1.) Implement Frame class.
-
-*Currently there exists only a SpaceTime class which treats a spacetime like an object and the properties of which (such as the stress-energy coefficients) are object properties. I figured this made sense and I suppose I actually like this particular model. The next class I intend to build will be a Frame class which desribes the properties of a given inertial or accellerated frame and they can be applied to a Spacetime object. With these frame objects one will be able to compare the time dialation / length contraction / redshift / orbits / null geodesics / ect for two or more frames.  
-
-2.) Reconnect with community.
-
-Other ideas
-===========
-As @laszlodaniel pointed out, this software runs good on the RPi and should eventually be made to run on a cluster of a RPi cores. I find this to be a good approach.
-
 spacetime-toolkit (beta)
 ========================
-A Python toolkit built using Sympy (A symbolic mathematics library) for exploring the Einstein field equations. This library is a free utility which enhances users with the tools for quickly working out the tedius formulas associated with solving the Einstein field equations. For any input metric tensor, any or all coefficients associated with the metric, connection, Riemann, Ricci, Einstein & stress-energy tensors can be computed. Run "example.py" to see for yourself.
+A Python toolkit built using Sympy (A symbolic mathematics library) for exploring the Einstein field equations. This library is a free utility which enhances users with the tools for working out the coefficients for a given solution (metric tensor) to the Einstein field equations.
 
 What does it do?
 ================
-Currently this library provides functions which works out the below formulas. It requires a metric tensor for input and computes the stress-energy tensor along with all related quantities required to compute it. Currently the metric cannot be solved for a stress tensor input but that feature is greatly desired. The reason for this is that the computations are mainly based of differentiation rather than integration. Any help or advice on this is greatly appreciated.
-
+Currently this library provides functionality that works out the Riemannian coefficients represented by the below formulas for a given metric and coordinate set.
 
 Installation
 ============
