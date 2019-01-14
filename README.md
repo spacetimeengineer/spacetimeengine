@@ -176,9 +176,3 @@ Who is it for?
 ==============
 This library was written for researchers and students primarily however the goals of open source development community and the space industry will continue to influence the direction of this project. I am interested in a more general purpose library. I think Sympy tools are powerful becasue allows the the open source community rather than pure acedemia to run the narrative.
 
-Status
-======
-Currently this project is in a state of development but core functions are stable. Repo and code need cleaning.
-1.) Some of the metric examples are incorrect I think. I have been running tests for days now.
-2.) Working of redundant calculations issue. Almost done.
-3.) Repo is poor, this will be fixed after redundant calculations are removed.
