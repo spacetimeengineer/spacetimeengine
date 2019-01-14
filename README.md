@@ -12,14 +12,21 @@ Currently this library provides functionality that works out the Riemannian coef
 
 Installation
 ============
-1.) Python
+1.) Install Python
 
     $ sudo apt install python3-pip
     
-2.) Sympy (Symbolic mathematics library written in python)
+2.) Install Sympy (Symbolic mathematics library written in python)
 
     $ pip install sympy
+    
+3.) Clone repository
 
+    $ git clone https://github.com/spacetimeengineer/spacetime-toolkit
+
+4.) Enter directory
+
+    $ cd spacetime-toolkit
 
 
 Running example.py
