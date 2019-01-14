@@ -55,10 +55,11 @@ and a coordinate set to define the metric in terms of:
 
 Stress-Energy-Momentum Tensor
 =============================
+The Einstein field equations describe the equivilence of space-time curvature and mass-energy. The mass-energy is represented by the coefficents within the stress-energy-momentum tensor denoted by T_{\mu\nu}. The cosmological constant denoted by Lambda is treated as an input parameter and represents the dark energy thought to be responsble for the accellerated expansion of the cosmos.
+
 ![equation](https://latex.codecogs.com/png.latex?%5Cdpi%7B100%7D%20%5Chuge%20T_%7B%5Cmu%20%5Cnu%20%7D%3D%7B%5Cfrac%20%7Bc%5E%7B4%7D%7D%7B8%5Cpi%20G%7D%7D%5Cleft%20%28%20G_%7B%5Cmu%20%5Cnu%20%7D&plus;%5CLambda%20g_%7B%5Cmu%20%5Cnu%20%7D%20%5Cright%20%29)
 
-The EFE (Einstein field equations) equate spacetime curvature to mass-energy. The mass-energy is represented by the coefficents within the stress-energy-momentum tensor. The cosmological constant denoted by Lambda is treated as an input parameter.
-    
+
     >> cosmological_constant = 0
     >> mu = 0 # (dt)
     >> nu = 1 # (dr)
