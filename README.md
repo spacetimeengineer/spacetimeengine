@@ -34,8 +34,11 @@ Example.py is a good choice for someone new to the project becasue it demonstrat
 Using the toolkit
 =================
 
-First import the SpaceTime class.
 
+
+First, import Sympy and the SpaceTime class.
+    
+    >> from sympy import *
     >> from spacetime import SpaceTime
     
 Next, define the mathematical symbols required for expressing a given solution. In this example we will be using the Schwarzschild vacuum solution.
@@ -64,10 +67,10 @@ Generally any metric solution to the Einstein field equations will be packaged i
 The spacetime-toolkit employs the Sympy 'Matrix' object for packaging the metric tensor and it serves as one of two input parameters for constructing a 'SpaceTime' object.
 
     >> schwarzschild_spacetime = Matrix([    
-                                            [ (1-(2*G*M)/(x1*c**2)), 0, 0, 0 ], 
-                                            [ 0, - (1-(2*G*M)/(x1*c**2))**(-1), 0, 0 ], 
-                                            [ 0, 0, - x1**2, 0 ], 
-                                            [ 0, 0, 0, - x1**2*sin(x2)**2 ]
+                                            [ (1-(2*G*M)/(r*c**2)), 0, 0, 0 ], 
+                                            [ 0, - (1-(2*G*M)/(r*c**2))**(-1), 0, 0 ], 
+                                            [ 0, 0, - r**2, 0 ], 
+                                            [ 0, 0, 0, - r**2*sin(th)**2 ]
                                         ])
                                         
 To construct a 'SpaceTime' object just execute the below command and consider the solution given since high complexity solutions can take exponentially longer to process.
