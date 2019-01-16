@@ -35,14 +35,35 @@ Example.py is a good choice for someone new to the project becasue it demonstrat
 
     $ python example.py
 
+Using the toolkit
+=================
+
+Import the SpaceTime class
+
+    >> from spacetime import SpaceTime
+    
+Define the symbols required a given solution. ( In this example we will be using the Schwarzschild solution. )
+    
+    >>     G = Symbol('G')
+    >>     M = Symbol('M')
+    >>     c = Symbol('c')
+    >>     t = Symbol('t')
+    >>     r = Symbol('r')
+    >>     th = Symbol('theta')
+    >>     ph = Symbol('phi')
+    >>     x0, x1, x2, x3, G, M, c = symbols(' x0 x1 x2 x3 G M c ')
+
+Define a coordinate set which the metric will  
+
+    >> spherical_coordinate_set = [ t, r, th, ph ]
+    
+
 Metric Tensor
 =============
 
 The metric tensor serves as an input. There are example metric tensors provided of the form:
 
 ![equation](https://latex.codecogs.com/png.latex?%5Cdpi%7B100%7D%20%5Chuge%20%5C%3A%5C%3A%20g_%7B%5Cmu%5Cnu%7D%3D%5Cleft%20%5B%20%5Cbegin%7Barray%7D%7Bccccc%7D%20g_%7B00%7D%20%26%20g_%7B01%7D%20%26%20g_%7B02%7D%20%26%20g_%7B03%7D%5C%5C%20g_%7B10%7D%20%26%20g_%7B11%7D%20%26%20g_%7B12%7D%20%26%20g_%7B13%7D%5C%5C%20g_%7B20%7D%20%26%20g_%7B21%7D%20%26%20g_%7B22%7D%20%26%20g_%7B23%7D%5C%5C%20g_%7B30%7D%20%26%20g_%7B31%7D%20%26%20g_%7B32%7D%20%26%20g_%7B33%7D%20%5Cend%7Barray%7D%20%5Cright%20%5D)
-
-As seen in example.py, for a given metric solution of the form described above:
 
     >> schwarzschild_spacetime = Matrix([    
                                             [ (1-(2*G*M)/(x1*c**2)), 0, 0, 0 ], 
