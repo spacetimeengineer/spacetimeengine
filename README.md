@@ -1,7 +1,3 @@
-status(unstable)
-================
-There are significant upgrades which will be rolled out later this week. I have been testing and optimizing and thinking about how I should move forward with this repo. Currently some of these solutions take weeks to solve. My apologies, I feel bad about giving an unstable repo to the public but I needed some initial feedback.
-
 spacetime-toolkit (beta)
 ========================
 A Python toolkit built using Sympy (A symbolic mathematics library) for exploring the Einstein field equations. This library is a free utility which enhances users with the tools for working out the various coefficients associated for a given solution to the Einstein field equations:
