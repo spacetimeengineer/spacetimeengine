@@ -38,7 +38,7 @@ First import the SpaceTime class.
 
     >> from spacetime import SpaceTime
     
-Next, define the symbols required a given solution. ( In this example we will be using the Schwarzschild solution. )
+Next, define the mathematical symbols required for expressing a given solution. In this example we will be using the Schwarzschild vacuum solution.
     
     >>     G = Symbol('G')
     >>     M = Symbol('M')
@@ -70,7 +70,7 @@ The spacetime-toolkit employs the Sympy 'Matrix' object for packaging the metric
                                             [ 0, 0, 0, - x1**2*sin(x2)**2 ]
                                         ])
                                         
-To construct a 'SpaceTime' object just execute the below command and consider the solution you use because depending on the complexity required to represent it the hang time may vary.
+To construct a 'SpaceTime' object just execute the below command and consider the solution given since high complexity solutions can take exponentially longer to process.
 
     >> spacetime = SpaceTime(schwarzschild_spacetime, coordinate_set)
 
@@ -78,7 +78,7 @@ After a few moments (if you are using the Schwarzschild solution) you will be ab
 
 Stress-Energy-Momentum Tensor
 =============================
-The Einstein field equations describe the equivilence of space-time curvature and mass-energy. The mass-energy is represented by the coefficents within the stress-energy-momentum tensor denoted by T_{\mu\nu}. The cosmological constant denoted by Lambda is treated as an input parameter and represents the dark energy thought to be responsble for the accellerated expansion of the cosmos.
+The Einstein field equations describe the equivilence of space-time curvature and mass-energy. The mass-energy is represented by the coefficents encompassed within the stress-energy-momentum tensor denoted by T_{\mu\nu}. The cosmological constant denoted by Lambda is treated as an input parameter and represents the dark energy thought to be responsble for the accellerated expansion of the cosmos.
 
 ![equation](https://latex.codecogs.com/png.latex?%5Cdpi%7B100%7D%20%5Chuge%20T_%7B%5Cmu%20%5Cnu%20%7D%3D%7B%5Cfrac%20%7Bc%5E%7B4%7D%7D%7B8%5Cpi%20G%7D%7D%5Cleft%20%28%20G_%7B%5Cmu%20%5Cnu%20%7D&plus;%5CLambda%20g_%7B%5Cmu%20%5Cnu%20%7D%20%5Cright%20%29)
 
