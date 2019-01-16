@@ -94,6 +94,8 @@ The Einstein field equations describe the equivilence of space-time curvature an
 
 [The Einstein Tensor](https://en.wikipedia.org/wiki/Einstein_tensor)
 =====================
+The Einstein tensor denoted by $G_{\my\nu}$ desribes the curvature of spacetime and allows the Einstein field equations to be written in concise form.
+
 ![equation](https://latex.codecogs.com/png.latex?%5Cinline%20%5Cdpi%7B100%7D%20%5Chuge%20G_%7B%5Cmu%20%5Cnu%20%7D%3DR_%7B%5Cmu%20%5Cnu%20%7D-%7B%5Ctfrac%20%7B1%7D%7B2%7D%7DRg_%7B%5Cmu%20%5Cnu%20%7D)
 
 [Ricci Tensor](https://en.wikipedia.org/wiki/Ricci_curvature)
