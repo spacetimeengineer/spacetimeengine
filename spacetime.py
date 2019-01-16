@@ -272,11 +272,11 @@ class SpaceTime:
                                            ])
         # Declares stress-energy tensor class object.
         self.stress_energy_coefficients = Matrix([
-                                             [ 0, 0, 0, 0 ], 
-                                             [ 0, 0, 0, 0 ], 
-                                             [ 0, 0, 0, 0 ], 
-                                             [ 0, 0, 0, 0 ]
-                                         ])
+                                                     [ 0, 0, 0, 0 ], 
+                                                     [ 0, 0, 0, 0 ], 
+                                                     [ 0, 0, 0, 0 ], 
+                                                     [ 0, 0, 0, 0 ]
+                                                 ])
         # Declares cosmological constant class object.
         self.cosmological_constant = 0
         
@@ -642,18 +642,18 @@ class SpaceTime:
         if (index_config=="uu"):
             for mu in range(len(self.coordinate_set)):
                 for nu in range(len(self.coordinate_set)):
-                    self.set_einstein_coefficient(index_config, mu, nu, self.compute_ricci_coefficient(index_config, mu, nu))
+                    self.set_einstein_coefficient(index_config, mu, nu, self.compute_einstein_coefficient(index_config, mu, nu))
         elif (index_config == "dd"):
             for mu in range(len(self.coordinate_set)):
                 for nu in range(len(self.coordinate_set)):
-                    self.set_einstein_coefficient(index_config, mu, nu, self.compute_ricci_coefficient(index_config, mu, nu))
+                    self.set_einstein_coefficient(index_config, mu, nu, self.compute_einstein_coefficient(index_config, mu, nu))
     
     # Computes a single Einstein tensor coefficient.
     def compute_einstein_coefficient(self, index_config, mu, nu):
         einstein_coefficient = 0
         if index_config == "dd":
-                einstein_coefficient = self.get_ricci_coefficient("dd", mu, nu) - Rational('1/2') * self.get_ricci_scalar() * self.metric_coefficients[mu,nu]
-                einstein_coefficient = simplify(einstein_coefficient)
+            einstein_coefficient = self.get_ricci_coefficient("dd", mu, nu) - Rational('1/2') * self.get_ricci_scalar() * self.metric_coefficients[mu,nu]
+            einstein_coefficient = simplify(einstein_coefficient)
         elif index_config == "uu":
             print("")
         elif index_config == "ud" or index_config == "du":
