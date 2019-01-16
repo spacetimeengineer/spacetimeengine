@@ -76,7 +76,7 @@ To construct a 'SpaceTime' object just execute the below command and consider th
 
 After a few moments (if you are using the Schwarzschild solution) you will be able to call various coefficients which associate with the given spacetime.
 
-Stress-Energy-Momentum Tensor
+[Stress-Energy-Momentum Tensor](https://en.wikipedia.org/wiki/Stress%E2%80%93energy_tensor)
 =============================
 The Einstein field equations describe the equivilence of space-time curvature and mass-energy. The mass-energy is represented by the coefficents encompassed within the stress-energy-momentum tensor denoted by T_{\mu\nu}. The cosmological constant denoted by Lambda is treated as an input parameter and represents the dark energy thought to be responsble for the accellerated expansion of the cosmos.
 
