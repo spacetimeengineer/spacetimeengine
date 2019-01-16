@@ -36,27 +36,24 @@ Example.py is a good choice for someone new to the project becasue it demonstrat
 Using the toolkit
 =================
 
-
-
 First, import Sympy and the SpaceTime class.
     
-    >> from sympy import *
-    >> from spacetime import SpaceTime
+    >>> from sympy import *
+    >>> from spacetime import SpaceTime
     
 Next, define the mathematical symbols required for expressing a given solution. In this example we will be using the Schwarzschild vacuum solution.
     
-    >>     G = Symbol('G')
-    >>     M = Symbol('M')
-    >>     c = Symbol('c')
-    >>     t = Symbol('t')
-    >>     r = Symbol('r')
-    >>     th = Symbol('theta')
-    >>     ph = Symbol('phi')
-    >>     x0, x1, x2, x3, G, M, c = symbols(' x0 x1 x2 x3 G M c ')
+    >>>     G = Symbol('G')
+    >>>     M = Symbol('M')
+    >>>     c = Symbol('c')
+    >>>     t = Symbol('t')
+    >>>     r = Symbol('r')
+    >>>     th = Symbol('theta')
+    >>>     ph = Symbol('phi')
 
 Next, define a coordinate set which the metric will define in terms of. This will serve as one of two input parameters for the SpaceTime object.
 
-    >> spherical_coordinate_set = [ t, r, th, ph ]
+    >>> spherical_coordinate_set = [ t, r, th, ph ]
     
 
 [Metric Tensor](https://en.wikipedia.org/wiki/Metric_tensor)
@@ -68,7 +65,7 @@ Generally any metric solution to the Einstein field equations will be packaged i
 
 The spacetime-toolkit employs the Sympy 'Matrix' object for packaging the metric tensor and it serves as one of two input parameters for constructing a 'SpaceTime' object.
 
-    >> schwarzschild_spacetime = Matrix([    
+    >>> schwarzschild_spacetime = Matrix([    
                                             [ (1-(2*G*M)/(r*c**2)), 0, 0, 0 ], 
                                             [ 0, - (1-(2*G*M)/(r*c**2))**(-1), 0, 0 ], 
                                             [ 0, 0, - r**2, 0 ], 
@@ -77,7 +74,7 @@ The spacetime-toolkit employs the Sympy 'Matrix' object for packaging the metric
                                         
 To construct a 'SpaceTime' object just execute the below command and consider the solution given since high complexity solutions can take exponentially longer to process.
 
-    >> spacetime = SpaceTime(schwarzschild_spacetime, spherical_coordinate_set)
+    >>> spacetime = SpaceTime(schwarzschild_spacetime, spherical_coordinate_set)
 
 After a few moments (if you are using the Schwarzschild solution) you will be able to call various coefficients which associate with the given spacetime.
 
@@ -88,11 +85,15 @@ The Einstein field equations describe the equivilence of space-time curvature an
 ![equation](https://latex.codecogs.com/png.latex?%5Cdpi%7B100%7D%20%5Chuge%20T_%7B%5Cmu%20%5Cnu%20%7D%3D%7B%5Cfrac%20%7Bc%5E%7B4%7D%7D%7B8%5Cpi%20G%7D%7D%5Cleft%20%28%20G_%7B%5Cmu%20%5Cnu%20%7D&plus;%5CLambda%20g_%7B%5Cmu%20%5Cnu%20%7D%20%5Cright%20%29)
 
 
-    >> cosmological_constant = 0
-    >> mu = 0 # (dt)
-    >> nu = 1 # (dr)
-    >> index_config = "dd"
-    >> pprint(spacetime.stress_energy_coefficient(index_config, mu, nu, cosmological_constant))
+    >>> cosmological_constant = 0
+    >>> mu = 0 # (dt)
+    >>> nu = 1 # (dr)
+    >>> index_config = "dd"
+    >>> pprint(spacetime.get_stress_energy_coefficient(index_config, mu, nu, cosmological_constant))
+    
+    0
+
+Since the Schwarzschild solution is a vacuum solution, any stress energy coefficient will yield a zero.
 
 [The Einstein Tensor](https://en.wikipedia.org/wiki/Einstein_tensor)
 =====================
@@ -121,7 +122,7 @@ The connection coefficients or 'Christoffel symbol' are an array of numbers whic
 
 This object has functions which allow the user to get / (set soon ) all coefficients associated with the metric, connection, Riemann tensor, Ricci tensor, Einstein tensor and stress-energy-momentum tensor. There are many operations available for analyzing the input metric. For example to find the connection coefficients just run
 
-    >> spacetime.list_connection_coefficients("udd")
+    >>> spacetime.list_connection_coefficients("udd")
     
     
     Connection coefficients (udd)
@@ -148,7 +149,7 @@ This object has functions which allow the user to get / (set soon ) all coeffici
 
 Will print out all connection coefficients with an up-down-down summation index configuration which makes reference to the Christoffel symbols of the second kind. Anyone familiar with tensor calculus and the Einstein summation conventions should understand what I am talking about. Another example:
     
-    >> spacetime.list_ricci_coefficients("dd")
+    >>> spacetime.list_ricci_coefficients("dd")
     
     Ricci curvature tensor coefficients (dd)
     ========================================
@@ -171,32 +172,7 @@ Will print out all connection coefficients with an up-down-down summation index 
 
     R₁₂ = 0
 
-    R₁₃ = 0
-
-    R₂₀ = 0
-
-    R₂₁ = 0
-
-                   2       
-          2⋅G⋅M + c ⋅x₀ - 1
-    R₂₂ = ─────────────────
-                 2         
-                c ⋅x₀      
-
-    R₂₃ = 0
-
-    R₃₀ = 0
-
-    R₃₁ = 0
-
-    R₃₂ = 0
-
-          ⎛         2       ⎞    2    
-          ⎝2⋅G⋅M + c ⋅x₀ - 1⎠⋅sin (x₂)
-    R₃₃ = ────────────────────────────
-                      2               
-                     c ⋅x₀            
-
+    ...
 
 Who is it for?
 ==============
