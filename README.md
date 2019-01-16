@@ -4,11 +4,7 @@ There are significant upgrades which will be rolled out later this week. I have 
 
 spacetime-toolkit (beta)
 ========================
-A Python toolkit built using Sympy (A symbolic mathematics library) for exploring the Einstein field equations. This library is a free utility which enhances users with the tools for working out the coefficients for a given solution (metric tensor) to the Einstein field equations.
-
-What does it do?
-================
-Currently this library provides functionality that works out the Riemannian coefficients represented by the below formulas for a given metric and coordinate set.
+A Python toolkit built using Sympy (A symbolic mathematics library) for exploring the Einstein field equations. This library is a free utility which enhances users with the tools for working out the various coefficients which associate with a given solution to the Einstein field equations.
 
 Installation
 ============
@@ -38,11 +34,11 @@ Example.py is a good choice for someone new to the project becasue it demonstrat
 Using the toolkit
 =================
 
-Import the SpaceTime class.
+First import the SpaceTime class.
 
     >> from spacetime import SpaceTime
     
-Define the symbols required a given solution. ( In this example we will be using the Schwarzschild solution. )
+Next, define the symbols required a given solution. ( In this example we will be using the Schwarzschild solution. )
     
     >>     G = Symbol('G')
     >>     M = Symbol('M')
@@ -53,7 +49,7 @@ Define the symbols required a given solution. ( In this example we will be using
     >>     ph = Symbol('phi')
     >>     x0, x1, x2, x3, G, M, c = symbols(' x0 x1 x2 x3 G M c ')
 
-Define a coordinate set which the metric will define in terms of. This will serve as one of two input parameters for the SpaceTime object.
+Next, define a coordinate set which the metric will define in terms of. This will serve as one of two input parameters for the SpaceTime object.
 
     >> spherical_coordinate_set = [ t, r, th, ph ]
     
@@ -74,9 +70,11 @@ The spacetime-toolkit employs the Sympy 'Matrix' object for packaging the metric
                                             [ 0, 0, 0, - x1**2*sin(x2)**2 ]
                                         ])
                                         
-Construct the 'SpaceTime' object.
+To construct a 'SpaceTime' object just execute the below command and consider the solution you use because depending on the complexity required to represent it the hang time may vary.
 
     >> spacetime = SpaceTime(schwarzschild_spacetime, coordinate_set)
+
+After a few moments (if you are using the Schwarzschild solution) you will be able to call various coefficients which associate with the given spacetime.
 
 Stress-Energy-Momentum Tensor
 =============================
