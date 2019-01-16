@@ -38,7 +38,7 @@ Example.py is a good choice for someone new to the project becasue it demonstrat
 Using the toolkit
 =================
 
-Import the SpaceTime class
+Import the SpaceTime class.
 
     >> from spacetime import SpaceTime
     
@@ -53,7 +53,7 @@ Define the symbols required a given solution. ( In this example we will be using
     >>     ph = Symbol('phi')
     >>     x0, x1, x2, x3, G, M, c = symbols(' x0 x1 x2 x3 G M c ')
 
-Define a coordinate set which the metric will  
+Define a coordinate set which the metric will define in terms of. This will serve as one of two input parameters for the SpaceTime object.
 
     >> spherical_coordinate_set = [ t, r, th, ph ]
     
@@ -61,9 +61,11 @@ Define a coordinate set which the metric will
 Metric Tensor
 =============
 
-The metric tensor serves as an input. There are example metric tensors provided of the form:
+Generally any metric solution to the Einstein field equations will be packaged into a geometric object known as the metric tensor. The metric tensor is often represented in matrix form and the spacetime-toolkit prefers this representation.
 
 ![equation](https://latex.codecogs.com/png.latex?%5Cdpi%7B100%7D%20%5Chuge%20%5C%3A%5C%3A%20g_%7B%5Cmu%5Cnu%7D%3D%5Cleft%20%5B%20%5Cbegin%7Barray%7D%7Bccccc%7D%20g_%7B00%7D%20%26%20g_%7B01%7D%20%26%20g_%7B02%7D%20%26%20g_%7B03%7D%5C%5C%20g_%7B10%7D%20%26%20g_%7B11%7D%20%26%20g_%7B12%7D%20%26%20g_%7B13%7D%5C%5C%20g_%7B20%7D%20%26%20g_%7B21%7D%20%26%20g_%7B22%7D%20%26%20g_%7B23%7D%5C%5C%20g_%7B30%7D%20%26%20g_%7B31%7D%20%26%20g_%7B32%7D%20%26%20g_%7B33%7D%20%5Cend%7Barray%7D%20%5Cright%20%5D)
+
+The spacetime-toolkit employs the Sympy 'Matrix' object for packaging the metric tensor and it serves as one of two input parameters for constructing a 'SpaceTime' object.
 
     >> schwarzschild_spacetime = Matrix([    
                                             [ (1-(2*G*M)/(x1*c**2)), 0, 0, 0 ], 
@@ -71,13 +73,8 @@ The metric tensor serves as an input. There are example metric tensors provided 
                                             [ 0, 0, - x1**2, 0 ], 
                                             [ 0, 0, 0, - x1**2*sin(x2)**2 ]
                                         ])
-
-and a coordinate set to define the metric in terms of:
-
-    >> coordinate_set = [ x0, x1, x2, x3 ]
-    
-( which in this case references the spherical coordinate system: [ x0, x1, x2, x3 ] --> [ t, r, θ, φ ] ) will serve as input parameters for the Spacetime object;
-
+                                        
+Construct the 'SpaceTime' object.
 
     >> spacetime = SpaceTime(schwarzschild_spacetime, coordinate_set)
 
