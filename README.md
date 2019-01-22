@@ -22,6 +22,9 @@ Installation
 
     $ cd spacetime-toolkit
 
+Suggested Use
+=============
+If you are a student or researcher and find yourself reading a publication based in General Relativity which provides metric values then this utility can be used for working out the curvature coefficients that associate with the metric. This can be helpful as you read through the publication since you will be able to cross reference the information provided by the toolkit and the publication for richer analysis (This is why I developed it originally).
 
 Running example.py
 ==================
