@@ -1,4 +1,4 @@
-spacetime-toolkit (beta)
+spacetime-engine (beta)
 ========================
 A Python toolkit built using Sympy (A symbolic mathematics library) for exploring the Einstein field equations. This library is a free utility which enhances users with the tools for working out the various coefficients associated for a given solution to the Einstein field equations:
 
