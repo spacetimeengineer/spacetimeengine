@@ -16,11 +16,11 @@ Installation
     
 3.) Clone repository
 
-    $ git clone https://github.com/spacetimeengineer/spacetime-toolkit
+    $ git clone https://github.com/spacetimeengineer/spacetime-engine
 
 4.) Enter directory
 
-    $ cd spacetime-toolkit
+    $ cd spacetime-engine
 
 Suggested Use
 =============
