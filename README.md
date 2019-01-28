@@ -32,8 +32,8 @@ Example.py is a good choice for someone new to the project becasue it demonstrat
 
     $ python example.py
 
-Using the toolkit
-=================
+Using the spacetime-engine
+==========================
 
 First, import Sympy and the SpaceTime class.
     
