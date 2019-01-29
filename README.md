@@ -115,7 +115,7 @@ The Einstein tensor denoted by $G_{\my\nu}$ desribes the curvature of spacetime 
     >>> mu = 0 # (dt)
     >>> nu = 1 # (dr)
     >>> index_config = "dd"
-    >>> pprint(spacetime.get_ricci_coefficient(index_config, 3, 2))
+    >>> spacetime.print_ricci_coefficient(index_config, 3, 2)
     
     R₃₂ = 0
 
