@@ -110,6 +110,8 @@ The Einstein tensor denoted by $G_{\my\nu}$ desribes the curvature of spacetime 
 
 [Ricci Tensor](https://en.wikipedia.org/wiki/Ricci_curvature)
 ===============
+In differential geometry, the Ricci curvature tensor represents the amount by which the volume of a narrow conical piece of a small geodesic ball in a curved Riemannian manifold deviates from that of the standard ball in Euclidean space. As such, it provides one way of measuring the degree to which the geometry determined by a given Riemannian metric might differ from that of ordinary Euclidean n-space.
+
 ![equation](https://latex.codecogs.com/png.latex?%5Cinline%20%5Cdpi%7B100%7D%20%5Chuge%20R_%7Bij%7D%20%3D%20%7BR%5Ek%7D_%7Bikj%7D)
 
     >>> mu = 0 # (dt)
