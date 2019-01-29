@@ -88,7 +88,7 @@ The Einstein field equations describe the equivilence of space-time curvature an
     >>> mu = 0 # (dt)
     >>> nu = 1 # (dr)
     >>> index_config = "dd"
-    >>> pprint(spacetime.get_stress_energy_coefficient(index_config, mu, nu, cosmological_constant))
+    >>> spacetime.print_stress_energy_coefficient(index_config, mu, nu, cosmological_constant)
     
     0
 
@@ -103,7 +103,7 @@ The Einstein tensor denoted by $G_{\my\nu}$ desribes the curvature of spacetime 
     >>> mu = 0 # (dt)
     >>> nu = 1 # (dr)
     >>> index_config = "dd"
-    >>> pprint(spacetime.get_reimann_coefficient(index_config, 0, 1))
+    >>> spacetime.print_einstein_coefficient(index_config, mu, nu)
     
     G₀₁ = 0
 
@@ -126,7 +126,7 @@ The Einstein tensor denoted by $G_{\my\nu}$ desribes the curvature of spacetime 
 
 
     >>> index_config = "uddd"
-    >>> pprint(spacetime.get_reimann_coefficient(index_config, 3, 2, 2, 3))
+    >>> spacetime.print_reimann_coefficient(index_config, 3, 2, 2, 3)
     
             -2⋅G⋅M 
     R³₂₂₃ = ───────
@@ -149,7 +149,7 @@ The connection coefficients or 'Christoffel symbol' are an array of numbers whic
 ![equation](https://latex.codecogs.com/png.latex?%5Cinline%20%5Cdpi%7B100%7D%20%5Chuge%20%5CGamma%20%5E%7Bi%7D%7B%7D_%7Bkl%7D%3D%7B%5Ctfrac%20%7B1%7D%7B2%7D%7Dg%5E%7Bim%7D%5Cleft%28%7B%5Cfrac%20%7B%5Cpartial%20g_%7Bmk%7D%7D%7B%5Cpartial%20x%5E%7Bl%7D%7D%7D&plus;%7B%5Cfrac%20%7B%5Cpartial%20g_%7Bml%7D%7D%7B%5Cpartial%20x%5E%7Bk%7D%7D%7D-%7B%5Cfrac%20%7B%5Cpartial%20g_%7Bkl%7D%7D%7B%5Cpartial%20x%5E%7Bm%7D%7D%7D%5Cright%29)
 
     >>> index_config = "udd"
-    >>> pprint(spacetime.get_connection_coefficient(index_config, 1, 3, 3))
+    >>> spacetime.print_connection_coefficient(index_config, 1, 3, 3)
 
            ⎛         2   ⎞    2    
            ⎝2⋅G⋅M - c ⋅x₁⎠⋅sin (x₂)
