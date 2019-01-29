@@ -160,3 +160,12 @@ The connection coefficients or 'Christoffel symbol' are an array of numbers whic
 [Weyl Tensor](https://en.wikipedia.org/wiki/Weyl_tensor)
 =============
 ![equation](https://latex.codecogs.com/png.latex?%5Cdpi%7B100%7D%20%5Chuge%20%7B%5Cdisplaystyle%20C_%7Bik%5Cell%20m%7D%3DR_%7Bik%5Cell%20m%7D&plus;%7B%5Cfrac%20%7B1%7D%7Bn-2%7D%7D%5Cleft%28R_%7Bim%7Dg_%7Bk%5Cell%20%7D-R_%7Bi%5Cell%20%7Dg_%7Bkm%7D&plus;R_%7Bk%5Cell%20%7Dg_%7Bim%7D-R_%7Bkm%7Dg_%7Bi%5Cell%20%7D%5Cright%29&plus;%7B%5Cfrac%20%7B1%7D%7B%28n-1%29%28n-2%29%7D%7DR%5Cleft%28g_%7Bi%5Cell%20%7Dg_%7Bkm%7D-g_%7Bim%7Dg_%7Bk%5Cell%20%7D%5Cright%29%2C%7D)
+
+    >>> index_config = "dddd"
+    >>> spacetime.print_weyl_coefficient(index_config, 3, 2, 2, 3)
+
+                       2   
+            2⋅G⋅M⋅r⋅sin (θ)
+    C₃₂₂₃ = ───────────────
+                    2      
+                   c      
