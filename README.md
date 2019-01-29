@@ -123,7 +123,9 @@ In differential geometry, the Ricci curvature tensor represents the amount by wh
 
 
 [Riemann Tensor](https://en.wikipedia.org/wiki/Riemann_curvature_tensor)
-========================
+================
+In the mathematical field of differential geometry, the Riemann curvature tensor is the most common method used to express the curvature of Riemannian manifolds. It assigns a tensor to each point of a Riemannian manifold (i.e., it is a tensor field), that measures the extent to which the metric tensor is not locally isometric to that of Euclidean space.
+
 ![equation](https://latex.codecogs.com/png.latex?%5Cinline%20%5Cdpi%7B100%7D%20%5Chuge%20R%5E%5Crho%7B%7D_%7B%5Csigma%5Cmu%5Cnu%7D%20%3D%20%5Cpartial_%5Cmu%5CGamma%5E%5Crho%7B%7D_%7B%5Cnu%5Csigma%7D%20-%20%5Cpartial_%5Cnu%5CGamma%5E%5Crho%7B%7D_%7B%5Cmu%5Csigma%7D%20&plus;%20%5CGamma%5E%5Crho%7B%7D_%7B%5Cmu%5Clambda%7D%5CGamma%5E%5Clambda%7B%7D_%7B%5Cnu%5Csigma%7D%20-%20%5CGamma%5E%5Crho%7B%7D_%7B%5Cnu%5Clambda%7D%5CGamma%5E%5Clambda%7B%7D_%7B%5Cmu%5Csigma%7D)
 
 
