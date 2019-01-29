@@ -174,6 +174,9 @@ The connection coefficients or 'Christoffel symbol' are an array of numbers whic
 
 [Weyl Tensor](https://en.wikipedia.org/wiki/Weyl_tensor)
 =============
+
+In differential geometry, the Weyl curvature tensor, named after Hermann Weyl, is a measure of the curvature of spacetime or, more generally, a pseudo-Riemannian manifold. Like the Riemann curvature tensor, the Weyl tensor expresses the tidal force that a body feels when moving along a geodesic. The Weyl tensor differs from the Riemann curvature tensor in that it does not convey information on how the volume of the body changes, but rather only how the shape of the body is distorted by the tidal force.
+
 ![equation](https://latex.codecogs.com/png.latex?%5Cdpi%7B100%7D%20%5Chuge%20%7B%5Cdisplaystyle%20C_%7Bik%5Cell%20m%7D%3DR_%7Bik%5Cell%20m%7D&plus;%7B%5Cfrac%20%7B1%7D%7Bn-2%7D%7D%5Cleft%28R_%7Bim%7Dg_%7Bk%5Cell%20%7D-R_%7Bi%5Cell%20%7Dg_%7Bkm%7D&plus;R_%7Bk%5Cell%20%7Dg_%7Bim%7D-R_%7Bkm%7Dg_%7Bi%5Cell%20%7D%5Cright%29&plus;%7B%5Cfrac%20%7B1%7D%7B%28n-1%29%28n-2%29%7D%7DR%5Cleft%28g_%7Bi%5Cell%20%7Dg_%7Bkm%7D-g_%7Bim%7Dg_%7Bk%5Cell%20%7D%5Cright%29%2C%7D)
 
     >>> index_config = "dddd"
