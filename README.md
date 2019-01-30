@@ -1,4 +1,4 @@
-![alt text](https://github.com/spacetimeengineer)
+![alt text](https://github.com/spacetimeengineer/spacetime-engine/blob/master/logo.png)
 
 spacetime-engine (beta)
 ========================
