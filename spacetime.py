@@ -2,13 +2,25 @@
 from sympy import *
 
 class SpaceTime:
-    def __init__(self, metric_parameter, coordinate_set_parameter):
-        # Initializes metric tensor class object.
-        self.metric_tensor_dd = metric_parameter
-        # Initializes inverse metric tensor class object.
-        self.metric_tensor_uu = simplify(metric_parameter.inv())
+    def __init__(self, solution, suppress_printing = False):
+            
         # Initializes coordinate set class object.
-        self.coordinate_set = coordinate_set_parameter
+        self.coordinate_set = solution[1]
+        self.dimension_count = len(self.coordinate_set)
+        self.dimensions = self.dimensions = range(len(self.coordinate_set))
+        self.suppress_printing = suppress_printing
+        
+        # Sets the metric tensor and its inverse.
+        self.metric_index_config = solution[2]
+        if (self.metric_index_config == "uu"):
+            self.metric_tensor_uu = solution[0]
+            self.metric_tensor_dd = simplify(solution[0].inv())
+        elif(self.metric_index_config == "dd"):
+            self.metric_tensor_dd = solution[0]
+            self.metric_tensor_uu = simplify(solution[0].inv())
+        else:
+            print("Invalid index_config string.")
+        
         # Declares ( gravitational field ) connection class object.
         self.christoffel_symbols_udd = Matrix([
                                                  [
@@ -689,11 +701,15 @@ class SpaceTime:
 
         # TODO
         # finish all of these functions.
+        self.set_all_metric_coefficients("dd")
+        self.set_all_metric_coefficients("uu")
         self.set_all_connection_coefficients("udd")
         self.set_all_connection_coefficients("ddd")
         self.set_all_riemann_coefficients("uddd")
         self.set_all_riemann_coefficients("dddd")
         self.set_all_ricci_coefficients("dd")
+        self.set_all_weyl_coefficients("dddd")
+        #self.set_all_weyl_coefficients("uddd")
         #self.set_all_ricci_coefficients("uu")
         #self.set_all_ricci_coefficients("ud")
         self.set_ricci_scalar()
@@ -703,7 +719,8 @@ class SpaceTime:
         self.set_all_stress_energy_coefficients("dd")
         #self.set_all_stress_energy_coefficients("uu")
         #self.set_all_stress_energy_coefficients("ud")
-        self.set_all_weyl_coefficients("dddd")
+        self.set_cosmological_constant(solution[3])
+        
         
     
     """
@@ -728,7 +745,30 @@ class SpaceTime:
             self.metric_tensor_dd[mu,nu] = expression
         else:
             print("Invalid index_config string.")
-    
+            
+            
+    def set_all_metric_coefficients(self, index_config):
+        if (index_config == "uu"):
+            if(self.suppress_printing == False):
+                print("")
+                print("")
+                print("Metric tensor coefficients (uu)")
+                print("===============================")
+                for mu in self.dimensions:
+                    for nu in self.dimensions:
+                        self.print_metric_coefficient(index_config, mu, nu)
+        elif(index_config == "dd"):
+            if(self.suppress_printing == False):
+                print("")
+                print("")
+                print("Metric tensor coefficients (dd)")
+                print("===============================")
+                for mu in self.dimensions:
+                    for nu in self.dimensions:
+                        self.print_metric_coefficient(index_config, mu, nu)
+        else:
+            print("Invalid index_config string.")
+
     # Prints a single metric tensor coefficient.
     def print_metric_coefficient(self, index_config, mu, nu):
         if (index_config == "uu"):
@@ -743,12 +783,12 @@ class SpaceTime:
     # Prints all metric tensor coefficients.
     def print_all_metric_coefficients(self, index_config):
         if (index_config == "uu"):
-            for mu in range(len(self.coordinate_set)):
-                for nu in range(len(self.coordinate_set)):
+            for mu in self.dimensions:
+                for nu in self.dimensions:
                     self.print_metric_coefficient(index_config, mu, nu)
         elif(index_config == "dd"):
-            for mu in range(len(self.coordinate_set)):
-                for nu in range(len(self.coordinate_set)):
+            for mu in self.dimensions:
+                for nu in self.dimensions:
                     self.print_metric_coefficient(index_config, mu, nu)
         else:
             print("Invalid index_config string.")
@@ -779,15 +819,29 @@ class SpaceTime:
     # Sets all connection coefficient values for reuse. Allows for the removal of redundant calculations.
     def set_all_connection_coefficients(self, index_config):
         if(index_config == "udd"):
-            for i in range(len(self.coordinate_set)):
-                for k in range(len(self.coordinate_set)):
-                    for l in range(len(self.coordinate_set)):
+            if(self.suppress_printing == False):
+                print("")
+                print("")
+                print("Connection coefficients (udd)")
+                print("=============================")
+            for i in self.dimensions:
+                for k in self.dimensions:
+                    for l in self.dimensions:
                         self.set_connection_coefficient(index_config, i, k, l, self.compute_connection_coefficient(index_config, i, k, l))
+                        if(self.suppress_printing == False):
+                            self.print_connection_coefficient(index_config, i, k, l )
         elif(index_config == "ddd"):
-            for i in range(len(self.coordinate_set)):
-                for k in range(len(self.coordinate_set)):
-                    for l in range(len(self.coordinate_set)):
+            if(self.suppress_printing == False):
+                print("")
+                print("")
+                print("Connection coefficients (ddd)")
+                print("=============================")
+            for i in self.dimensions:
+                for k in self.dimensions:
+                    for l in self.dimensions:
                         self.set_connection_coefficient(index_config, i, k, l, self.compute_connection_coefficient(index_config, i, k, l))
+                        if(self.suppress_printing == False):
+                            self.print_connection_coefficient(index_config, i, k, l )
         else:
             print("Invalid index_config string.")
 
@@ -795,7 +849,7 @@ class SpaceTime:
     def compute_connection_coefficient(self, index_config, i, k, l):
         connection = 0
         if index_config == "udd":
-            for m in range(len(self.coordinate_set)):
+            for m in self.dimensions:
                 connection = connection+Rational('1/2')*self.metric_tensor_uu[m,i]*(diff(self.metric_tensor_dd[k,m], self.coordinate_set[l])+diff(self.metric_tensor_dd[l,m], self.coordinate_set[k])-diff(self.metric_tensor_dd[k,l], self.coordinate_set[m]))
             return connection
         elif index_config == "ddd":
@@ -820,15 +874,15 @@ class SpaceTime:
     # Prints all connection coefficients.
     def print_all_connection_coefficients(self, index_config):
         if(index_config == "udd"):
-            for lam in range(len(self.coordinate_set)):
-                for mu in range(len(self.coordinate_set)):
-                    for nu in range(len(self.coordinate_set)):
+            for lam in self.dimensions:
+                for mu in self.dimensions:
+                    for nu in self.dimensions:
                         print("")
                         self.print_connection_coefficient(index_config, lam, mu, nu )
         elif(index_config == "ddd"):
-            for lam in range(len(self.coordinate_set)):
-                for mu in range(len(self.coordinate_set)):
-                    for nu in range(len(self.coordinate_set)):
+            for lam in self.dimensions:
+                for mu in self.dimensions:
+                    for nu in self.dimensions:
                         print("")
                         self.print_connection_coefficient(index_config, lam, mu, nu )
         else:
@@ -866,19 +920,33 @@ class SpaceTime:
     # Sets all Riemann coefficients values for reuse. Allows for the removal of redundant calculations.
     def set_all_riemann_coefficients(self, index_config):
         if index_config == "uddd":
-            for rho in range(len(self.coordinate_set)):
-                for sig in range(len(self.coordinate_set)):
-                    for mu in range(len(self.coordinate_set)):
-                        for nu in range(len(self.coordinate_set)):
+            if(self.suppress_printing == False):
+                print("")
+                print("")
+                print("Riemann curvature tensor coefficients (uddd)")
+                print("============================================")
+            for rho in self.dimensions:
+                for sig in self.dimensions:
+                    for mu in self.dimensions:
+                        for nu in self.dimensions:
                             self.set_riemann_coefficient(index_config, rho, sig, mu, nu, self.compute_riemann_coefficient(index_config, rho, sig, mu, nu))
+                            if(self.suppress_printing == False):
+                                self.print_riemann_coefficient(index_config, rho, sig, mu, nu)
         elif index_config == "dddd":
-            for rho in range(len(self.coordinate_set)):
-                for sig in range(len(self.coordinate_set)):
-                    for mu in range(len(self.coordinate_set)):
-                        for nu in range(len(self.coordinate_set)):
+            if(self.suppress_printing == False):
+                print("")
+                print("")
+                print("Riemann curvature tensor coefficients (dddd)")
+                print("============================================")
+            for rho in self.dimensions:
+                for sig in self.dimensions:
+                    for mu in self.dimensions:
+                        for nu in self.dimensions:
                             # TODO
                             # MUST TEST
                             self.set_riemann_coefficient(index_config, rho, sig, mu, nu, self.compute_riemann_coefficient(index_config, rho, sig, mu, nu))
+                            if(self.suppress_printing == False):
+                                self.print_riemann_coefficient(index_config, rho, sig, mu, nu)
         else:
             print("Invalid index_config string.")
     
@@ -887,14 +955,14 @@ class SpaceTime:
         riemann_coefficient = 0
         if index_config == "uddd":
             riemann_coefficient = diff(self.get_connection_coefficient("udd", rho, nu, sig), self.coordinate_set[mu]) - diff(self.get_connection_coefficient("udd", rho, mu, sig), self.coordinate_set[nu])    
-            for lam in range(len(self.coordinate_set)):
+            for lam in self.dimensions:
                 riemann_coefficient = riemann_coefficient + self.get_connection_coefficient("udd", rho, mu, lam)*self.get_connection_coefficient("udd", lam, nu, sig) - self.get_connection_coefficient("udd", rho, nu, lam)*self.get_connection_coefficient("udd", lam, mu, sig)
             riemann_coefficient = simplify(riemann_coefficient)
             return riemann_coefficient
         elif index_config == "dddd":
             riemann_coefficient = Rational('1/2')*(self.get_metric_coefficient("dd", rho, nu).diff(self.coordinate_set[sig]).diff(self.coordinate_set[mu]) + self.get_metric_coefficient("dd", sig, mu).diff(self.coordinate_set[rho]).diff(self.coordinate_set[nu])-self.get_metric_coefficient("dd", rho, mu).diff(self.coordinate_set[sig]).diff(self.coordinate_set[nu])-self.get_metric_coefficient("dd", sig, nu).diff(self.coordinate_set[rho]).diff(self.coordinate_set[mu]))
-            for n in range(len(self.coordinate_set)):
-                for p in range(len(self.coordinate_set)):
+            for n in self.dimensions:
+                for p in self.dimensions:
                     riemann_coefficient = riemann_coefficient + self.get_metric_coefficient("dd", n, p)*(self.get_connection_coefficient("udd", n, sig, mu)*self.get_connection_coefficient("udd", p, rho, nu)-self.get_connection_coefficient("udd", n, sig, nu)*self.get_connection_coefficient("udd", p, rho, mu))
             riemann_coefficient = simplify(riemann_coefficient)
             return riemann_coefficient
@@ -916,16 +984,16 @@ class SpaceTime:
     # Prints all connection coefficients.
     def print_all_riemann_coefficients(self, index_config):
         if index_config == "uddd":
-            for rho in range(len(self.coordinate_set)):
-                for sig in range(len(self.coordinate_set)):
-                    for mu in range(len(self.coordinate_set)):
-                        for nu in range(len(self.coordinate_set)):
+            for rho in self.dimensions:
+                for sig in self.dimensions:
+                    for mu in self.dimensions:
+                        for nu in self.dimensions:
                             self.print_riemann_coefficient(index_config, rho, sig, mu, nu)
         elif index_config == "dddd":
-            for rho in range(len(self.coordinate_set)):
-                for sig in range(len(self.coordinate_set)):
-                    for mu in range(len(self.coordinate_set)):
-                        for nu in range(len(self.coordinate_set)):
+            for rho in self.dimensions:
+                for sig in self.dimensions:
+                    for mu in self.dimensions:
+                        for nu in self.dimensions:
                             self.print_riemann_coefficient(index_config, rho, sig, mu, nu)
         else:
             print("Invalid index_config string.")
@@ -970,27 +1038,48 @@ class SpaceTime:
     
     def set_all_weyl_coefficients(self, index_config):
         if index_config == "uddd":
-            for rho in range(len(self.coordinate_set)):
-                for sig in range(len(self.coordinate_set)):
-                    for mu in range(len(self.coordinate_set)):
-                        for nu in range(len(self.coordinate_set)):
-                            self.set_weyl_coefficient(index_config, rho, sig, mu, nu, self.compute_weyl_coefficient(index_config, rho, sig, mu, nu))
+            if(self.suppress_printing == False):
+                print("")
+                print("")
+                print("Weyl curvature tensor coefficients (uddd)")
+                print("=========================================")
+            for i in self.dimensions:
+                for k in self.dimensions:
+                    for l in self.dimensions:
+                        for m in self.dimensions:
+                            self.set_weyl_coefficient(index_config, i, k, l, m, self.compute_weyl_coefficient(index_config, i, k, l, m))
+                            if(self.suppress_printing == False):
+                                self.print_weyl_coefficient(index_config, i, k, l, m)
         elif index_config == "dduu":
-            for rho in range(len(self.coordinate_set)):
-                for sig in range(len(self.coordinate_set)):
-                    for mu in range(len(self.coordinate_set)):
-                        for nu in range(len(self.coordinate_set)):
+            if(self.suppress_printing == False):
+                print("")
+                print("")
+                print("Weyl curvature tensor coefficients (dduu)")
+                print("=========================================")
+            for i in self.dimensions:
+                for k in self.dimensions:
+                    for l in self.dimensions:
+                        for m in self.dimensions:
                             # TODO
                             # MUST TEST
-                            self.set_weyl_coefficient(index_config, rho, sig, mu, nu, self.compute_weyl_coefficient(index_config, rho, sig, mu, nu))
+                            self.set_weyl_coefficient(index_config, i, k, l, m, self.compute_weyl_coefficient(index_config, i, k, l, m))
+                            if(self.suppress_printing == False):
+                                self.print_weyl_coefficient(index_config, i, k, l, m)
         elif index_config == "dddd":
-            for rho in range(len(self.coordinate_set)):
-                for sig in range(len(self.coordinate_set)):
-                    for mu in range(len(self.coordinate_set)):
-                        for nu in range(len(self.coordinate_set)):
+            if(self.suppress_printing == False):
+                print("")
+                print("")
+                print("Weyl curvature tensor coefficients (dddd)")
+                print("=========================================")
+            for i in self.dimensions:
+                for k in self.dimensions:
+                    for l in self.dimensions:
+                        for m in self.dimensions:
                             # TODO
                             # MUST TEST
-                            self.set_weyl_coefficient(index_config, rho, sig, mu, nu, self.compute_weyl_coefficient(index_config, rho, sig, mu, nu))
+                            self.set_weyl_coefficient(index_config, i, k, l, m, self.compute_weyl_coefficient(index_config, i, k, l, m))
+                            if(self.suppress_printing == False):
+                                self.print_weyl_coefficient(index_config, i, k, l, m)
         else:
             print("Invalid index_config string.")
     
@@ -1032,24 +1121,24 @@ class SpaceTime:
     
     def print_all_weyl_coefficients(self, index_config):
         if index_config == "uddd":
-            for i in range(len(self.coordinate_set)):
-                for k in range(len(self.coordinate_set)):
-                    for l in range(len(self.coordinate_set)):
-                        for m in range(len(self.coordinate_set)):
+            for i in self.dimensions:
+                for k in self.dimensions:
+                    for l in self.dimensions:
+                        for m in self.dimensions:
                             self.print_weyl_coefficient(index_config, i, k, l, m)
         elif index_config == "dduu":
-            for i in range(len(self.coordinate_set)):
-                for k in range(len(self.coordinate_set)):
-                    for l in range(len(self.coordinate_set)):
-                        for m in range(len(self.coordinate_set)):
+            for i in self.dimensions:
+                for k in self.dimensions:
+                    for l in self.dimensions:
+                        for m in self.dimensions:
                             # TODO
                             # MUST TEST
                             self.print_weyl_coefficient(index_config, i, k, l, m)
         elif index_config == "dddd":
-            for i in range(len(self.coordinate_set)):
-                for k in range(len(self.coordinate_set)):
-                    for l in range(len(self.coordinate_set)):
-                        for m in range(len(self.coordinate_set)):
+            for i in self.dimensions:
+                for k in self.dimensions:
+                    for l in self.dimensions:
+                        for m in self.dimensions:
                             # TODO
                             # MUST TEST
                             self.print_weyl_coefficient(index_config, i, k, l, m)
@@ -1080,19 +1169,33 @@ class SpaceTime:
     # Sets all Ricci coefficient values for reuse. Allows for the removal of redundant calculations.
     def set_all_ricci_coefficients(self, index_config):
         if(index_config == "uu"):
-            for mu in range(len(self.coordinate_set)):
-                for nu in range(len(self.coordinate_set)):
+            if(self.suppress_printing == False):
+                print("")
+                print("")
+                print("Ricci curvature tensor coefficients (uu)")
+                print("========================================")
+            for mu in self.dimensions:
+                for nu in self.dimensions:
                     self.set_ricci_coefficient(index_config, mu, nu, self.compute_ricci_coefficient(index_config, mu, nu))
+                    if(self.suppress_printing == False):
+                        self.print_ricci_coefficient(index_config, mu, nu)
         elif(index_config == "dd"):
-            for mu in range(len(self.coordinate_set)):
-                for nu in range(len(self.coordinate_set)):
+            if(self.suppress_printing == False):
+                print("")
+                print("")
+                print("Ricci curvature tensor coefficients (dd)")
+                print("========================================")
+            for mu in self.dimensions:
+                for nu in self.dimensions:
                     self.set_ricci_coefficient(index_config, mu, nu, self.compute_ricci_coefficient(index_config, mu, nu))
+                    if(self.suppress_printing == False):
+                        self.print_ricci_coefficient(index_config, mu, nu)
     
     # Computes a single Ricci tensor coefficient.
     def compute_ricci_coefficient(self, index_config, mu, nu):
         ricci_coefficient = 0
         if index_config == "dd":
-            for lam in range(len(self.coordinate_set)):
+            for lam in self.dimensions:
                 ricci_coefficient = ricci_coefficient + self.get_riemann_coefficient("uddd", lam, mu, lam, nu)
             ricci_coefficient = simplify(ricci_coefficient)
         elif index_config == "uu":
@@ -1116,8 +1219,8 @@ class SpaceTime:
     
     # Prints all Ricci coefficients.
     def print_all_ricci_coefficients(self, index_config):
-        for mu in range(len(self.coordinate_set)):
-            for nu in range(len(self.coordinate_set)):
+        for mu in self.dimensions:
+            for nu in self.dimensions:
                 self.print_ricci_coefficient(index_config, mu, nu)
     
     """
@@ -1132,12 +1235,18 @@ class SpaceTime:
     # Sets Ricci scalar from class object.
     def set_ricci_scalar(self):
         self.ricci_scalar = self.compute_ricci_scalar()
+        if(self.suppress_printing == False):
+            print("")
+            print("")
+            print("Ricci curvature scalar")
+            print("======================")
+            self.print_ricci_scalar()
     
     # Computes Ricci scalar.
     def compute_ricci_scalar(self):
         ricci_scalar = 0
-        for mu in range(len(self.coordinate_set)):
-            for nu in range(len(self.coordinate_set)):
+        for mu in self.dimensions:
+            for nu in self.dimensions:
                 ricci_scalar = ricci_scalar + self.metric_tensor_uu[mu, nu] * self.get_ricci_coefficient("dd", mu, nu)
         ricci_scalar = simplify(ricci_scalar)
         return ricci_scalar
@@ -1177,13 +1286,27 @@ class SpaceTime:
     # Sets all Einstein coefficient values for reuse. Allows for the removal of redundant calculations.
     def set_all_einstein_coefficients(self, index_config):
         if (index_config=="uu"):
-            for mu in range(len(self.coordinate_set)):
-                for nu in range(len(self.coordinate_set)):
+            if(self.suppress_printing == False):
+                print("")
+                print("")
+                print("Einstein curvature tensor coefficients (uu)")
+                print("===========================================")
+            for mu in self.dimensions:
+                for nu in self.dimensions:
                     self.set_einstein_coefficient(index_config, mu, nu, self.compute_einstein_coefficient(index_config, mu, nu))
+                    if(self.suppress_printing == False):
+                        self.print_einstein_coefficient(index_config, mu, nu)
         elif (index_config == "dd"):
-            for mu in range(len(self.coordinate_set)):
-                for nu in range(len(self.coordinate_set)):
+            if(self.suppress_printing == False):
+                print("")
+                print("")
+                print("Einstein curvature tensor coefficients (dd)")
+                print("===========================================")
+            for mu in self.dimensions:
+                for nu in self.dimensions:
                     self.set_einstein_coefficient(index_config, mu, nu, self.compute_einstein_coefficient(index_config, mu, nu))
+                    if(self.suppress_printing == False):
+                        self.print_einstein_coefficient(index_config, mu, nu)
         else:
             print("Invalid index_config string.") 
                     
@@ -1220,8 +1343,8 @@ class SpaceTime:
     
     # Prints all Ricci coefficients.
     def print_all_einstein_coefficients(self, index_config):
-        for mu in range(len(self.coordinate_set)):
-            for nu in range(len(self.coordinate_set)):
+        for mu in self.dimensions:
+            for nu in self.dimensions:
                 self.print_einstein_coefficient(index_config, mu, nu)
     
     
@@ -1255,13 +1378,27 @@ class SpaceTime:
     # Sets all stress-energy coefficient values for reuse. Allows for the removal of redundant calculations.
     def set_all_stress_energy_coefficients(self, index_config):
         if (index_config=="uu"):
-            for mu in range(len(self.coordinate_set)):
-                for nu in range(len(self.coordinate_set)):
+            if(self.suppress_printing == False):
+                print("")
+                print("")
+                print("Stress-energy-momentum tensor coefficients (uu)")
+                print("===============================================")
+            for mu in self.dimensions:
+                for nu in self.dimensions:
                     self.set_stress_energy_coefficient(index_config, mu, nu, self.compute_stress_energy_coefficient(index_config, mu, nu))
+                    if(self.suppress_printing == False):
+                        self.print_stress_energy_coefficient(index_config, mu, nu)
         elif (index_config == "dd"):
-            for mu in range(len(self.coordinate_set)):
-                for nu in range(len(self.coordinate_set)):
+            if(self.suppress_printing == False):
+                print("")
+                print("")
+                print("Stress-energy-momentum tensor coefficients (dd)")
+                print("===============================================")
+            for mu in self.dimensions:
+                for nu in self.dimensions:
                     self.set_stress_energy_coefficient(index_config, mu, nu, self.compute_stress_energy_coefficient(index_config, mu, nu))   
+                    if(self.suppress_printing == False):
+                        self.print_stress_energy_coefficient(index_config, mu, nu)
         else:
             print("Invalid index_config string.")
     
@@ -1292,6 +1429,28 @@ class SpaceTime:
     
     # Prints all stress-energy coefficients.
     def print_all_stress_energy_coefficients(self, index_config):
-        for mu in range(len(self.coordinate_set)):
-            for nu in range(len(self.coordinate_set)):
+        for mu in self.dimensions:
+            for nu in self.dimensions:
                 self.print_stress_energy_coefficient(index_config, mu, nu)
+                
+    """
+    Cosmological constant functions
+    ===============================
+    """
+    def get_cosmological_constant(self):
+        return self.cosmological_constant  
+    
+    # Sets cosmological constant from class object.
+    def set_cosmological_constant(self, expression):
+        self.cosmological_constant = expression
+        if(self.suppress_printing == False):
+            print("")
+            print("")
+            print("Cosmological constant")
+            print("=====================")
+            self.print_cosmological_constant()
+            
+    # Prints cosmological constant.
+    def print_cosmological_constant(self):
+        print("")
+        pprint(Eq(Symbol('Lambda'), self.get_cosmological_constant()))
