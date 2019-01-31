@@ -3,7 +3,7 @@ from sympy import *
 
 class Solution:
     
-    def minkowski(self, coordinates):
+    def minkowski(self):
         """
         Description
         ===========
@@ -16,29 +16,84 @@ class Solution:
         ====================
         """
         
-        # Friedmann Lemaitre Robertson Walker solution.
-        # PASSES!
-        minkowski_metric = Matrix([
-                                      [ 1, 0, 0, 0 ], 
-                                      [ 0, -1, 0, 0 ], 
-                                      [ 0, 0, -1, 0 ], 
-                                      [ 0, 0, 0, -1 ]
-                                  ])
+        # Index configuration for the metric
+        index_config = "dd"
+        # Physical constants.
+        c = symbols('c')
+        # Assigns meaning to the coordinates.
+        #x0, x1, x2, x3 = symbols('t x y z')
+        x0, x1, x2, x3 = symbols('t r theta phi')
+        # Reference to the coordiante system.
+        coordinate_set = [x0, x1, x2, x3]
+        # Cosmological constant.
+        cosmological_constant = 0
+        # Metric solution.
         
-        if (coordinates == "spherical"):
-            pass
-        elif (coordinates == "euclidan"):
-            minkowski_metric = Matrix([
-                                          [ 1, 0, 0, 0 ], 
-                                          [ 0, -1, 0, 0 ], 
-                                          [ 0, 0, -1, 0 ], 
-                                          [ 0, 0, 0, -1 ]
-                                      ])
-        else:
-            pass
-            
+        """
+        metric = Matrix([
+                              [ c**2, 0, 0, 0 ], 
+                              [ 0, -1, 0, 0 ], 
+                              [ 0, 0, -1, 0 ], 
+                              [ 0, 0, 0, -1 ]
+                          ])
+        """
+
+        """
+        metric = Matrix([
+                              [ 1, 0, 0, 0 ], 
+                              [ 0, -1, 0, 0 ], 
+                              [ 0, 0, -1, 0 ], 
+                              [ 0, 0, 0, -1 ]
+                          ])
+        """
         
-        return minkowski_metric
+        metric = Matrix([
+                              [ 1, 0, 0, 0 ], 
+                              [ 0, -1, 0, 0 ], 
+                              [ 0, 0, -x1**2, 0 ], 
+                              [ 0, 0, 0, -x1**2*sin(x2)**2 ]
+                          ])
+                    
+        # An array detailing the solution.
+        solution_array = [ metric, coordinate_set, index_config, cosmological_constant ]
+        return solution_array
+    
+    def weak_field_approximation(self):
+        """
+        Description
+        ===========
+        Returns the Friedmann Lemaitre Robertson Walker metric which describes the spacetime for an expanding universe.
+        Examples
+        ========
+        >>> print(Solution().minkowski())
+        >>> 
+        LaTeX representation
+        ====================
+        """
+        
+        # Index configuration for the metric
+        index_config = "dd"
+        # Assigns meaning to the coordinates.
+        x0, x1, x2, x3 = symbols('t r theta phi')
+        # Physical constants.
+        Ph = symbols('Phi')(x1)
+        c = symbols('c')
+        # Reference to the coordiante system.
+        coordinate_set = [x0, x1, x2, x3]
+        # Cosmological constant.
+        cosmological_constant = 0
+        # Metric solution.
+        metric = Matrix([
+                              [ (1+2*Ph/c**2)*c**2, 0, 0, 0 ], 
+                              [ 0, -1/(1+2*Ph/c**2), 0, 0 ], 
+                              [ 0, 0, -x1**2, 0 ], 
+                              [ 0, 0, 0, -x1**2*sin(x2)**2 ]
+                          ])
+                    
+        # An array detailing the solution.
+        solution_array = [ metric, coordinate_set, index_config, cosmological_constant ]
+        return solution_array
+    
     
     def schwarzschild(self):    
         """
@@ -52,13 +107,28 @@ class Solution:
         LaTeX representation
         ====================
         """
-        schwarzschild_metric = Matrix([    
-                                              [ (1-(2*G*M)/(x1*c**2)), 0, 0, 0 ], 
-                                              [ 0, - (1-(2*G*M)/(x1*c**2))**(-1), 0, 0 ], 
-                                              [ 0, 0, - x1**2, 0 ], 
-                                              [ 0, 0, 0, - x1**2*sin(x2)**2 ]
-                                         ])
-        return schwarzschild_metric
+        
+        # Index configuration for the metric
+        index_config = "dd"
+        # Physical constants.
+        G, M, c = symbols('G M c')
+        # Assigns meaning to the coordinates.
+        x0, x1, x2, x3 = symbols('t r theta phi')
+        # Reference to the coordiante system.
+        coordinate_set = [x0, x1, x2, x3]
+        # Cosmological constant.
+        cosmological_constant = 0
+        # Metric solution.
+        metric = Matrix([    
+                            [ (1-(2*G*M)/(x1*c**2)), 0, 0, 0 ], 
+                            [ 0, - (1-(2*G*M)/(x1*c**2))**(-1), 0, 0 ], 
+                            [ 0, 0, - x1**2, 0 ], 
+                            [ 0, 0, 0, - x1**2*sin(x2)**2 ]
+                        ])
+        
+        # An array detailing the solution.
+        solution_array = [ metric, coordinate_set, index_config, cosmological_constant ]
+        return solution_array
     
     def friedmann_lemaitre_robertson_walker(self):
         """
@@ -73,18 +143,27 @@ class Solution:
         ====================
         """
         
-        # Friedmann Lemaitre Robertson Walker solution.
+        # Index configuration for the metric
+        index_config = "dd"
+        # Required symbols and constants.
         a, k = symbols('a k')
-        # PASSES!
-        x0, x1, x2, x3 = symbols('x0 x1 x2 x3')
-        coordinate_set = [ x0, x1, x2, x3 ]
-        friedmann_lemaitre_robertson_walker_metric = Matrix([
-                                                                  [ 1, 0, 0, 0 ], 
-                                                                  [ 0, - a**2*(1-k*x1**2)**(-1), 0, 0 ], 
-                                                                  [ 0, 0, - a**2*x1**2, 0 ], 
-                                                                  [ 0, 0, 0, - a**2*x1**2*sin(x2)**2 ]
-                                                              ])
-        return friedmann_lemaitre_robertson_walker_metric
+        # Assigns meaning to the coordinates.
+        x0, x1, x2, x3 = symbols('t r theta phi')
+        # Reference to the coordiante system.
+        coordinate_set = [x0, x1, x2, x3]
+        # Cosmological constant.
+        cosmological_constant = 0
+        # Metric solution.
+        metric = Matrix([
+                            [ 1, 0, 0, 0 ], 
+                            [ 0, - a**2*(1-k*x1**2)**(-1), 0, 0 ], 
+                            [ 0, 0, - a**2*x1**2, 0 ], 
+                            [ 0, 0, 0, - a**2*x1**2*sin(x2)**2 ]
+                        ])
+        
+        # An array detailing the solution.
+        solution_array = [ metric, coordinate_set, index_config, cosmological_constant ]
+        return solution_array
 
     # Most famous wormhole solution.
     def einstein_rosen_bridge(self):
@@ -99,14 +178,28 @@ class Solution:
         LaTeX representation
         ====================
         """
+        
+        # Index configuration for the metric
+        index_config = "dd"
+        # Required symbols and constants.
         m = symbols('m')
-        einstein_rosen_bridge_metric = Matrix([
-                                           [ (x1-2*m) / x1, 0, 0, 0 ], 
-                                           [ 0, - 4 * x1 / ( 2 * x1 - 4 * m ), 0, 0 ], 
-                                           [ 0, 0, - x1**2, 0 ], 
-                                           [ 0, 0, 0, - x1**2 * sin(x2)**2 ]
-                                       ])
-        return einstein_rosen_bridge_metric
+        # Assigns meaning to the coordinates.
+        x0, x1, x2, x3 = symbols('t r theta phi')
+        # Reference to the coordiante system.
+        coordinate_set = [x0, x1, x2, x3]
+        # Cosmological constant.
+        cosmological_constant = 0
+        # Metric solution.
+        metric = Matrix([
+                            [ (x1-2*m) / x1, 0, 0, 0 ], 
+                            [ 0, - 4 * x1 / ( 2 * x1 - 4 * m ), 0, 0 ], 
+                            [ 0, 0, - x1**2, 0 ], 
+                            [ 0, 0, 0, - x1**2 * sin(x2)**2 ]
+                        ])
+        
+        # An array detailing the solution.
+        solution_array = [ metric, coordinate_set, index_config, cosmological_constant ]
+        return solution_array
     
     def taub_nut(self):
         """
@@ -145,15 +238,27 @@ class Solution:
         ====================
         """
         
-        milne_metric = Matrix([
+        # Index configuration for the metric
+        index_config = "dd"
+        # Required symbols and constants.
+        c = symbols('c')
+        # Assigns meaning to the coordinates.
+        x0, x1, x2, x3 = symbols('t r theta phi')
+        # Reference to the coordiante system.
+        coordinate_set = [x0, x1, x2, x3]
+        # Cosmological constant.
+        cosmological_constant = 0
+        # Metric solution.
+        metric = Matrix([
                                   [ 1, 0, 0, 0 ], 
                                   [ 0, -x0**2, 0, 0 ], 
                                   [ 0, 0, -x0**2*sinh(x1)**2, 0 ],
                                   [ 0, 0, 0, -x0**2*sinh(x1)**2*sin(x2)**2 ]
                              ])
         
-        
-        return milne_metric
+        # An array detailing the solution.
+        solution_array = [ metric, coordinate_set, index_config, cosmological_constant ]
+        return solution_array
 
     def kerr(self):
         """
@@ -522,3 +627,82 @@ class Solution:
                                   ])
         
         return godel_metric
+    
+    def gem(self):    
+        """
+        Description
+        ===========
+        Returns the classic black hole solution. Uncharged and rotationally stationary.
+        Examples
+        ========
+        >>> print(Solution().schwarzschild())
+        >>> 
+        LaTeX representation
+        ====================
+        """
+        x0, x1, x2, x3 = symbols('x0 x1 x2 x3')
+        c = symbols('c')
+        Ph = symbols('Phi')(x0)
+        ax = symbols('ax')(x1)
+        ay = symbols('ay')(x2)
+        az = symbols('az')(x3)
+        
+        minkowski_metric = Matrix([
+                                      [ 1, 0, 0, 0 ], 
+                                      [ 0, -1, 0, 0 ], 
+                                      [ 0, 0, -1, 0 ], 
+                                      [ 0, 0, 0, -1 ]
+                                  ])
+        
+        h_tilde_tensor = Matrix([
+                                    [ 4*Ph / c**2, - ax/c**2, - ax/c**2, - az/c**2 ], 
+                                    [ - ax/c**2, 0, 0, 0 ], 
+                                    [ - ay/c**2, 0, 0, 0 ], 
+                                    [ - az/c**2, 0, 0, 0 ]
+                                ])
+        h_tilde_scalar = 0
+        gravitomagnetic_metric = minkowski_metric + h_tilde_tensor + Rational('1/2') * minkowski_metric * h_tilde_scalar
+        
+        
+        return gravitomagnetic_metric
+    
+    
+    def alt_gem(self):    
+        """
+        Description
+        ===========
+        Returns the classic black hole solution. Uncharged and rotationally stationary.
+        Examples
+        ========
+        >>> print(Solution().schwarzschild())
+        >>> 
+        LaTeX representation
+        ====================
+        """
+        x0, x1, x2, x3 = symbols('x0 x1 x2 x3')
+        c = symbols('c')
+        Ph = symbols('Phi')(x0)
+        ax = symbols('ax')(x1)
+        ay = symbols('ay')(x2)
+        az = symbols('az')(x3)
+        
+        
+        
+        minkowski_metric = Matrix([
+                                      [ 1, 0, 0, 0 ], 
+                                      [ 0, -1, 0, 0 ], 
+                                      [ 0, 0, -1, 0 ], 
+                                      [ 0, 0, 0, -1 ]
+                                  ])
+        
+        h_tilde_tensor = Matrix([
+                                    [ 2*Ph / c**2, - ax/c**2, - ax/c**2, - az/c**2 ], 
+                                    [ - ax/c**2, Ph / c**2, 0, 0 ], 
+                                    [ - ay/c**2, 0, Ph / c**2, 0 ], 
+                                    [ - az/c**2, 0, 0, Ph / c**2 ]
+                                ])
+        h_tilde_scalar = 0
+        gravitomagnetic_metric = minkowski_metric + h_tilde_tensor + Rational('1/2') * minkowski_metric * h_tilde_scalar
+        
+        
+        return gravitomagnetic_metric
