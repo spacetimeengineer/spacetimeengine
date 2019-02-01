@@ -898,22 +898,22 @@ class SpaceTime:
         # TODO
         # MUST TEST
         if(index_config == "uddd"):
-            return self.riemann_tensor_uddd[rho*16/len(self.coordinate_set)+sig][mu][nu]
+            return self.riemann_tensor_uddd[int(rho*16/self.dimension_count+sig)][mu][nu]
         # TODO
         # MUST TEST
         elif(index_config == "dddd"):
-            return self.riemann_tensor_dddd[rho*16/len(self.coordinate_set)+sig][mu][nu]
+            return self.riemann_tensor_dddd[int(rho*16/self.dimension_count+sig)][mu][nu]
         else:
             print("Invalid index_config string.")  
     
     # Sets a single Riemann coefficient equal to a given expression.
     def set_riemann_coefficient(self, index_config, rho, sig, mu, nu, expression):
         if(index_config == "uddd"):
-            self.riemann_tensor_uddd[rho*16/len(self.coordinate_set)+sig][mu][nu] = expression
+            self.riemann_tensor_uddd[int(rho*16/self.dimension_count+sig)][mu][nu] = expression
         elif(index_config == "dddd"):
             # TODO
             # MUST TEST
-            self.riemann_tensor_dddd[rho*16/len(self.coordinate_set)+sig][mu][nu] = expression
+            self.riemann_tensor_dddd[int(rho*16/self.dimension_count+sig)][mu][nu] = expression
         else:
             print("Invalid index_config string.")        
     
@@ -1008,15 +1008,15 @@ class SpaceTime:
         if(index_config == "uddd"):
             # TODO
             # MUST TEST
-            return self.weyl_tensor_uddd[i*16/len(self.coordinate_set)+k][l][m]
+            return self.weyl_tensor_uddd[int(i*16/self.dimension_count+k)][l][m]
         elif(index_config == "dduu"):
             # TODO
             # MUST TEST
-            return self.weyl_tensor_dduu[i*16/len(self.coordinate_set)+k][l][m]
+            return self.weyl_tensor_dduu[int(i*16/self.dimension_count+k)][l][m]
         elif(index_config == "dddd"):
             # TODO
             # MUST TEST
-            return self.weyl_tensor_dddd[i*16/len(self.coordinate_set)+k][l][m]
+            return self.weyl_tensor_dddd[int(i*16/self.dimension_count+k)][l][m]
         else:
             print("Invalid index_config string.") 
     
@@ -1024,15 +1024,15 @@ class SpaceTime:
         if(index_config == "uddd"):
             # TODO
             # MUST TEST
-            self.weyl_tensor_uddd[i*16/len(self.coordinate_set)+k][l][m] = expression
+            self.weyl_tensor_uddd[int(i*16/self.dimension_count+k)][l][m] = expression
         elif(index_config == "dduu"):
             # TODO
             # MUST TEST
-            self.weyl_tensor_dduu[i*16/len(self.coordinate_set)+k][l][m] = expression
+            self.weyl_tensor_dduu[int(i*16/self.dimension_count+k)][l][m] = expression
         elif(index_config == "dddd"):
             # TODO
             # MUST TEST
-            self.weyl_tensor_dddd[i*16/len(self.coordinate_set)+k][l][m] = expression
+            self.weyl_tensor_dddd[int(i*16/self.dimension_count+k)][l][m] = expression
         else:
             print("Invalid index_config string.") 
     
