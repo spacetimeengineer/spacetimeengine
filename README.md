@@ -34,26 +34,20 @@ Example.py is a good choice for someone new to the project becasue it demonstrat
 
 Using the spacetime-engine
 ==========================
+(Currently, refer to solutions.py to see how to construct a solution and use example.py to run it. Changes are currently being made. )
 
-First, import Sympy and the SpaceTime class.
-    
-    >>> from sympy import *
-    >>> from spacetime import SpaceTime
-    
-Next, define the mathematical symbols required for expressing a given solution. In this example we will be using the Schwarzschild vacuum solution.
-    
-    >>>     G = Symbol('G')
-    >>>     M = Symbol('M')
-    >>>     c = Symbol('c')
-    >>>     t = Symbol('t')
-    >>>     r = Symbol('r')
-    >>>     th = Symbol('theta')
-    >>>     ph = Symbol('phi')
+Documentation needed here for constructing a solution.
 
-Next, define a coordinate set which the metric will define in terms of. This will serve as one of two input parameters for the SpaceTime object.
+Constructing a solution
+=======================
+The following needs to be configured to build a solution. Check out the examples in solutions.py.
 
-    >>> spherical_coordinate_set = [ t, r, th, ph ]
-    
+Symbols
+Coordinate Set
+Index Configuration: 
+Metric Tensor
+Cosmological Constant
+
 
 [Metric Tensor](https://en.wikipedia.org/wiki/Metric_tensor)
 ===============
@@ -64,16 +58,16 @@ Generally any metric solution to the Einstein field equations will be packaged i
 
 The spacetime-toolkit employs the Sympy 'Matrix' object for packaging the metric tensor and it serves as one of two input parameters for constructing a 'SpaceTime' object.
 
-    >>> schwarzschild_spacetime = Matrix([    
-                                            [ (1-(2*G*M)/(r*c**2)), 0, 0, 0 ], 
-                                            [ 0, - (1-(2*G*M)/(r*c**2))**(-1), 0, 0 ], 
-                                            [ 0, 0, - r**2, 0 ], 
-                                            [ 0, 0, 0, - r**2*sin(th)**2 ]
-                                        ])
+    >>> metric = Matrix([    
+                            [ (1-(2*G*M)/(r*c**2)), 0, 0, 0 ], 
+                            [ 0, - (1-(2*G*M)/(r*c**2))**(-1), 0, 0 ], 
+                            [ 0, 0, - r**2, 0 ], 
+                            [ 0, 0, 0, - r**2*sin(th)**2 ]
+                        ])
                                         
 To construct a 'SpaceTime' object just execute the below command and consider the solution given since high complexity solutions can take exponentially longer to process.
 
-    >>> spacetime = SpaceTime(schwarzschild_spacetime, spherical_coordinate_set)
+    >>> spacetime = SpaceTime(Solution().schwarzschild())
 
 After a few moments (if you are using the Schwarzschild solution) you will be able to call various coefficients which associate with the given spacetime.
 
