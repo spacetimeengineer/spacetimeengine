@@ -82,9 +82,14 @@ class Test(unittest.TestCase):
         c = black_hole.get_riemann_coefficient("dddd", 0, 3, 1, 2)
 
         self.assertEqual(a + b + c, 0)
-    
 
-        #def test_energy_conservation(self):
-        #    return True
+    def test_riemann_skew_symmetry(self):
+        black_hole = SpaceTime(Solution().schwarzschild(), True)
+        a = black_hole.get_riemann_coefficient("dddd", 0, 1, 2, 3)
+        b = black_hole.get_riemann_coefficient("dddd", 1, 0, 2, 3)
+        c = black_hole.get_riemann_coefficient("dddd", 0, 1, 3, 2)
+
+        self.assertEqual(a, -1*b)
+        self.assertEqual(a, -1*c)
 
 unittest.main()
