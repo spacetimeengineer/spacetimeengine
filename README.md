@@ -33,21 +33,44 @@ Example.py is a good choice for someone new to the project becasue it demonstrat
 
     $ python example.py
 
-Using the spacetime-engine
-==========================
-(Currently, refer to solutions.py to see how to construct a solution and use example.py to run it. Changes are currently being made. )
-
-Documentation needed here for constructing a solution.
-
 Constructing a solution
 =======================
-The following needs to be configured to build a solution. Check out the examples in solutions.py.
+Currently, metric solutions are packaged in the following way:
 
-Symbols
-Coordinate Set
-Index Configuration: 
-Metric Tensor
-Cosmological Constant
+    def schwarzschild(self):    
+        """
+        Description
+        ===========
+        Returns the classic black hole solution. Uncharged and rotationally stationary.
+        Examples
+        ========
+        >>> print(Solution().schwarzschild())
+        >>> 
+        LaTeX representation
+        ====================
+        """
+        
+        # Index configuration for the metric
+        index_config = "dd"
+        # Physical constants.
+        G, M, c = symbols('G M c')
+        # Assigns meaning to the coordinates.
+        x0, x1, x2, x3 = symbols('t r theta phi')
+        # Reference to the coordiante system.
+        coordinate_set = [x0, x1, x2, x3]
+        # Cosmological constant.
+        cosmological_constant = 0
+        # Metric solution.
+        metric = Matrix([    
+                            [ (1-(2*G*M)/(x1*c**2)), 0, 0, 0 ], 
+                            [ 0, - (1-(2*G*M)/(x1*c**2))**(-1), 0, 0 ], 
+                            [ 0, 0, - x1**2, 0 ], 
+                            [ 0, 0, 0, - x1**2*sin(x2)**2 ]
+                        ])
+        
+        # An array detailing the solution.
+        solution_array = [ metric, coordinate_set, index_config, cosmological_constant ]
+        return solution_array
 
 
 [Metric Tensor](https://en.wikipedia.org/wiki/Metric_tensor)
