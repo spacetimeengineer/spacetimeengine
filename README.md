@@ -209,3 +209,14 @@ In differential geometry, the Weyl curvature tensor, named after Hermann Weyl, i
     C₃₂₂₃ = ───────────────
                     2      
                    c      
+
+[Geodesics parametrized by proper time](https://en.wikipedia.org/wiki/Geodesics_in_general_relativity#Mathematical_expression)
+=======================================
+
+
+[Geodesics parametrized by coordinate time](https://en.wikipedia.org/wiki/Geodesics_in_general_relativity#Equivalent_mathematical_expression_using_coordinate_time_as_parameter)
+===========================================
+
+
+[Geodesic deviation equation](https://en.wikipedia.org/wiki/Geodesic_deviation#Mathematical_definition)
+=============================
