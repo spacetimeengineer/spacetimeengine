@@ -2,12 +2,17 @@
 from sympy import *
 
 class SpaceTime:
+
+    # Run at object creation.
     def __init__(self, solution, suppress_printing = False):
             
         # Initializes coordinate set class object.
         self.coordinate_set = solution[1]
+        # Integer amount of dimensions associated with metric solution.
         self.dimension_count = len(self.coordinate_set)
-        self.dimensions = self.dimensions = range(len(self.coordinate_set))
+        # Simple array for counting through tensor indices.
+        self.dimensions = range(len(self.coordinate_set))
+        # Upon a SpaceTime object creation, the user may choose to print the terms as they are computed.
         self.suppress_printing = suppress_printing
         
         # Sets the metric tensor and its inverse.
@@ -48,7 +53,7 @@ class SpaceTime:
                                                      [ 0, 0, 0, 0 ]
                                                  ]
                                              ])
-        
+        # Declares the Christoffel symbols of the first kind class object.
         self.christoffel_symbols_ddd = Matrix([
                                                  [
                                                      [ 0, 0, 0, 0 ], 
@@ -183,7 +188,7 @@ class SpaceTime:
                                                     ]
                                                ]    
                                            ])  
-        
+        # Declares Riemann curvature tensor "dddd" type class object.
         self.riemann_tensor_dddd = Matrix([    
                                                    [    
                                                         [
@@ -292,7 +297,7 @@ class SpaceTime:
                                                ])  
 
         
-        
+        # Declares Weyl curvature tensor "dddd" type class object.
         self.weyl_tensor_dddd = Matrix([    
                                                    [    
                                                         [
@@ -400,7 +405,7 @@ class SpaceTime:
                                                    ]    
                                                ])
         
-        
+        # Declares Riemann curvature tensor "uddd" type class object.
         self.weyl_tensor_uddd = Matrix([    
                                                    [    
                                                         [
@@ -508,7 +513,7 @@ class SpaceTime:
                                                    ]    
                                                ])  
         
-
+        # Declares Riemann curvature tensor "dduu" type class object.        
         self.weyl_tensor_dduu = Matrix([    
                                                    [    
                                                         [
@@ -702,14 +707,16 @@ class SpaceTime:
         # TODO
         # finish all of these functions.
         self.set_all_metric_coefficients("dd")
-        self.set_all_metric_coefficients("uu")
+        #self.set_all_metric_coefficients("uu")
         self.set_all_connection_coefficients("udd")
-        self.set_all_connection_coefficients("ddd")
+        #self.set_all_connection_coefficients("ddd")
         self.set_all_riemann_coefficients("uddd")
-        self.set_all_riemann_coefficients("dddd")
+        #self.set_all_riemann_coefficients("dddd")
         self.set_all_ricci_coefficients("dd")
-        self.set_all_weyl_coefficients("dddd")
+        #self.set_all_weyl_coefficients("dddd")
         #self.set_all_weyl_coefficients("uddd")
+        #self.set_all_schouten_coefficients("dddd")
+        #self.set_all_cotton_coefficients("ddd")
         #self.set_all_ricci_coefficients("uu")
         #self.set_all_ricci_coefficients("ud")
         self.set_ricci_scalar()
@@ -719,17 +726,43 @@ class SpaceTime:
         self.set_all_stress_energy_coefficients("dd")
         #self.set_all_stress_energy_coefficients("uu")
         #self.set_all_stress_energy_coefficients("ud")
-        self.set_cosmological_constant(solution[3])
+        #self.set_cosmological_constant(solution[3])
+        #self.set_all_proper_time_geodesics()
+        #self.set_all_coordinate_time_geodesics()
+        #self.set_all_geodesic_deviations()
         
-        
-    
     """
     Metric coefficient functions
     ============================
     """
     
-    # Gets a single metric coefficients from class object.
     def get_metric_coefficient(self, index_config, mu, nu):
+        """
+        Description
+        ===========
+        Gets a single metric coefficient from class object for a given index configuration and index value pair.
+
+        Example
+        =======
+        >> newtonian = SpaceTime(Solution().weak_field_approximation(), True)
+        >> print(newtonian.get_metric_coefficient("uu",1,1))
+        >>
+
+        LaTeX representation
+        ====================
+        g_{ij}
+        g^{ij}
+
+        URL Reference
+        =============
+        https://en.wikipedia.org/wiki/Metric_tensor
+
+        TODOs
+        =====
+        - Link example with test.
+        - Need higher quality tests.
+        """
+
         if (index_config == "uu"):
             return self.metric_tensor_uu[mu, nu]
         elif(index_config == "dd"):
@@ -737,8 +770,33 @@ class SpaceTime:
         else:
             print("Invalid index_config string.")
     
-    # Sets a single metric coefficient equal to a given expression.
     def set_metric_coefficient(self, index_config, mu, nu, expression):
+        """
+        Description
+        ===========
+        Sets a single metric coefficient equal to a given expression.
+        WARNING: This function is used for memory managment purposes and is not reccomended. for regular use since it can easily create contradictions within a solution easily. This may have more uses in the future.
+        
+        Example
+        =======
+        >> newtonian = SpaceTime(Solution().weak_field_approximation(), True)
+        >> print(newtonian.set_metric_coefficient("uu",1,1),0)
+
+        LaTeX representation
+        ====================
+        g_{23} = # set_metric_coefficient("dd",2,3,0)
+        g^{03} = # set_metric_coefficient("uu",0,3,0)
+
+        URL Reference
+        =============
+        https://en.wikipedia.org/wiki/Metric_tensor
+
+        TODOs
+        =====
+        - Link example with test.
+        - Need higher quality tests.
+        """
+
         if (index_config == "uu"):
             self.metric_tensor_uu[mu,nu] = expression
         elif(index_config == "dd"):
@@ -748,6 +806,32 @@ class SpaceTime:
             
             
     def set_all_metric_coefficients(self, index_config):
+        """
+        Description
+        ===========
+        Sets all metric coefficients for a given index configuration. It retrieves these values from the solution input.
+        * Effectively this function only is needed when the user specifies a print on object creation.
+
+        Example
+        =======
+        >> newtonian = SpaceTime(Solution().weak_field_approximation(), True)
+        >> newtonian.set_all_metric_coefficients("uu") # Redundant becasue function is called at creation of SpaceTime object.
+
+        LaTeX representation
+        ====================
+        g_{ij}
+        g^{ij}
+
+        URL Reference
+        =============
+        https://en.wikipedia.org/wiki/Metric_tensor
+
+        TODOs
+        =====
+        - Link example with test.
+        - Need higher quality tests.
+        """
+
         if (index_config == "uu"):
             if(self.suppress_printing == False):
                 print("")
@@ -769,8 +853,32 @@ class SpaceTime:
         else:
             print("Invalid index_config string.")
 
-    # Prints a single metric tensor coefficient.
     def print_metric_coefficient(self, index_config, mu, nu):
+        """
+        Description
+        ===========
+        Prints a single metric tensor coefficient.
+
+        Example
+        =======
+        >> newtonian = SpaceTime(Solution().weak_field_approximation(), True)
+        >> newtonian.print_metric_coefficient("uu",3,1) 
+        0
+        LaTeX representation
+        ====================
+        g_{ij}
+        g^{ij}
+
+        URL Reference
+        =============
+        https://en.wikipedia.org/wiki/Metric_tensor
+
+        TODOs
+        =====
+        - Link example with test.
+        - Need higher quality tests.
+        """
+
         if (index_config == "uu"):
             print("")
             pprint(Eq(Symbol('g^%s%s' % (mu, nu)), self.get_metric_coefficient(index_config, mu, nu)))
@@ -780,8 +888,32 @@ class SpaceTime:
         else:
             print("Invalid index_config string.")
             
-    # Prints all metric tensor coefficients.
     def print_all_metric_coefficients(self, index_config):
+        """
+        Description
+        ===========
+        Prints all metric tensor coefficients.
+
+        Example
+        =======
+        >> newtonian = SpaceTime(Solution().weak_field_approximation(), True)
+        >> newtonian.print_all_metric_coefficients("uu")
+        ...
+        LaTeX representation
+        ====================
+        g_{ij}
+        g^{ij}
+
+        URL Reference
+        =============
+        https://en.wikipedia.org/wiki/Metric_tensor
+
+        TODOs
+        =====
+        - Link example with test.
+        - Need higher quality tests.
+        """
+
         if (index_config == "uu"):
             for mu in self.dimensions:
                 for nu in self.dimensions:
@@ -798,8 +930,33 @@ class SpaceTime:
     ================================
     """       
     
-    # Gets a single connection coefficients from class object.
     def get_connection_coefficient(self, index_config, i, k, l):
+        """
+        Description
+        ===========
+        Gets a single connection coefficients from class object.
+
+        Example
+        =======
+        >> newtonian = SpaceTime(Solution().weak_field_approximation(), True)
+        >> print(newtonian.get_connection_coefficient("udd",1,1,1))
+        2*G*M*(G*M/(c**2*r) - 1/2)/(c**2*r**2*(-2*G*M/(c**2*r) + 1)**2)
+
+        LaTeX representation
+        ====================
+        \Gamma^{i}_{kl}
+        \Gamma_{ikl}
+
+        URL Reference
+        =============
+        https://en.wikipedia.org/wiki/Christoffel_symbols
+
+        TODOs
+        =====
+        - Link example with test.
+        - Need higher quality tests.
+        """
+
         if(index_config == "udd"):
             return self.christoffel_symbols_udd[i,k][l]
         elif(index_config == "ddd"):
@@ -807,8 +964,33 @@ class SpaceTime:
         else:
             print("Invalid index_config string.")     
         
-    # Sets a single connection coefficient equal to a given expression.
     def set_connection_coefficient(self, index_config, i, k, l, expression):
+        """
+        Description
+        ===========
+        Sets a single connection coefficient equal to a given expression.
+        WARNING: This function is used for memory managment purposes and is not reccomended for regular use since it can easily create contradictions within a solution easily. This may have more uses in the future.
+
+        Example
+        =======
+        >> newtonian = SpaceTime(Solution().weak_field_approximation(), True)
+        >> newtonian.set_connection_coefficient("ud",1,1,1,0)
+        
+        LaTeX representation
+        ====================
+        \Gamma^{i}_{kl},
+        \Gamma_{ikl}
+
+        URL Reference
+        =============
+        https://en.wikipedia.org/wiki/Christoffel_symbols
+
+        TODOs
+        =====
+        - Link example with test.
+        - Need higher quality tests.
+        """
+
         if(index_config == "udd"):
             self.christoffel_symbols_udd[i,k][l] = expression
         elif(index_config == "ddd"):
@@ -816,8 +998,33 @@ class SpaceTime:
         else:
             print("Invalid index_config string.")        
     
-    # Sets all connection coefficient values for reuse. Allows for the removal of redundant calculations.
     def set_all_connection_coefficients(self, index_config):
+        """
+        Description
+        ===========
+        Sets all connection coefficient values for reuse. Allows for the removal of redundant calculations.
+        WARNING: Redundant since this is called at creation of SpaceTime object.
+
+        Example
+        =======
+        >> newtonian = SpaceTime(Solution().weak_field_approximation(), True)
+        >> newtonian.set_all_connection_coefficients("udd")
+        
+        LaTeX representation
+        ====================
+        \Gamma^{i}_{kl}
+        \Gamma_{ikl}
+
+        URL Reference
+        =============
+        https://en.wikipedia.org/wiki/Christoffel_symbols
+
+        TODOs
+        =====
+        - Link example with test.
+        - Need higher quality tests.
+        """
+
         if(index_config == "udd"):
             if(self.suppress_printing == False):
                 print("")
@@ -845,8 +1052,32 @@ class SpaceTime:
         else:
             print("Invalid index_config string.")
 
-    # Computes a single connection coefficient.
     def compute_connection_coefficient(self, index_config, i, k, l):
+        """
+        Description
+        ===========
+        Computes a single connection coefficient.
+
+        Example
+        =======
+        >> newtonian = SpaceTime(Solution().weak_field_approximation(), True)
+        >> newtonian.compute_connection_coefficients("udd",0,0,0)
+        
+        LaTeX representation
+        ====================
+        \Gamma^{i}_{kl}
+        \Gamma_{ikl}
+
+        URL Reference
+        =============
+        https://en.wikipedia.org/wiki/Christoffel_symbols
+
+        TODOs
+        =====
+        - Link example with test.
+        - Need higher quality tests.
+        """
+
         connection = 0
         if index_config == "udd":
             for m in self.dimensions:
@@ -858,8 +1089,34 @@ class SpaceTime:
         else:
             print("Invalid index_config string.")
     
-    # Prints a single connection coefficient.
     def print_connection_coefficient(self, index_config, i, j, k ):
+        """
+        Description
+        ===========
+        Prints a single connection coefficient.
+
+        Example
+        =======
+        >> newtonian = SpaceTime(Solution().weak_field_approximation(), True)
+        >> newtonian.print_connection_coefficient("udd",0,0,0)
+        
+        Γ⁰₀₀ = 0
+
+        LaTeX representation
+        ====================
+        \Gamma^{i}_{kl}
+        \Gamma_{ikl}
+
+        URL Reference
+        =============
+        https://en.wikipedia.org/wiki/Christoffel_symbols
+
+        TODOs
+        =====
+        - Link example with test.
+        - Need higher quality tests.
+        """
+
         if(index_config == "udd"):
             print("")
             pprint(Eq(Symbol('Gamma^%s_%s%s' % (i, j, k)),self.get_connection_coefficient(index_config, i, j, k )))
@@ -873,6 +1130,39 @@ class SpaceTime:
     
     # Prints all connection coefficients.
     def print_all_connection_coefficients(self, index_config):
+        """
+        Description
+        ===========
+        Prints all connection coefficients for a given index configuration.
+
+        Example
+        =======
+        >> newtonian = SpaceTime(Solution().weak_field_approximation(), True)
+        >> newtonian.print_all_connection_coefficients("udd")
+        
+        Γ⁰₀₀ = 0
+
+        ...
+        ...
+        ...
+
+        Γ³₃₃ = 0
+
+        LaTeX representation
+        ====================
+        \Gamma^{i}_{kl}
+        \Gamma_{ikl}
+
+        URL Reference
+        =============
+        https://en.wikipedia.org/wiki/Christoffel_symbols
+
+        TODOs
+        =====
+        - Link example with test.
+        - Need higher quality tests.
+        """
+
         if(index_config == "udd"):
             for lam in self.dimensions:
                 for mu in self.dimensions:
@@ -893,21 +1183,71 @@ class SpaceTime:
     =============================
     """      
     
-    # Gets a single Riemann coefficients from class object.
     def get_riemann_coefficient(self, index_config, rho, sig, mu, nu):
-        # TODO
-        # MUST TEST
+        """
+        Description
+        ===========
+        Gets a single Riemann coefficients from class object.
+
+        Example
+        =======
+        >> newtonian = SpaceTime(Solution().weak_field_approximation(), True)
+        >> pprint(newtonian.get_riemann_coefficient("uddd",0,1,2,3))
+        0
+
+        LaTeX representation
+        ====================
+        R^{i}_{jkl} -> (i,j,k,l) = (rho,sig,mu,nu)
+        R_{ijkl} -> (i,j,k,l) = (rho,sig,mu,nu)
+
+        URL Reference
+        =============
+        https://en.wikipedia.org/wiki/List_of_formulas_in_Riemannian_geometry#Riemann_curvature_tensor
+        https://en.wikipedia.org/wiki/Riemann_curvature_tensor
+
+        TODOs
+        =====
+        - Link example with test.
+        - Need higher quality tests.
+        - Needs functionality for other index configurations.
+        """
+
         if(index_config == "uddd"):
             return self.riemann_tensor_uddd[int(rho*16/self.dimension_count+sig)][mu][nu]
-        # TODO
-        # MUST TEST
         elif(index_config == "dddd"):
             return self.riemann_tensor_dddd[int(rho*16/self.dimension_count+sig)][mu][nu]
         else:
             print("Invalid index_config string.")  
     
-    # Sets a single Riemann coefficient equal to a given expression.
     def set_riemann_coefficient(self, index_config, rho, sig, mu, nu, expression):
+        """
+        Description
+        ===========
+        Sets a single Riemann coefficient equal to a given expression.
+        WARNING: This function is used for memory managment purposes and is not reccomended for interactive use.
+
+        Example
+        =======
+        >> newtonian = SpaceTime(Solution().weak_field_approximation(), True)
+        >> pprint(newtonian.set_riemann_coefficient("uddd",0,1,2,3),0)
+        
+        LaTeX representation
+        ====================
+        R^{i}_{jkl} -> (i,j,k,l) = (rho,sig,mu,nu)
+        R_{ijkl} -> (i,j,k,l) = (rho,sig,mu,nu)
+
+        URL Reference
+        =============
+        https://en.wikipedia.org/wiki/List_of_formulas_in_Riemannian_geometry#Riemann_curvature_tensor
+        https://en.wikipedia.org/wiki/Riemann_curvature_tensor
+
+        TODOs
+        =====
+        - Link example with test.
+        - Need higher quality tests.
+        - Needs functionality for other index configurations.
+        """
+
         if(index_config == "uddd"):
             self.riemann_tensor_uddd[int(rho*16/self.dimension_count+sig)][mu][nu] = expression
         elif(index_config == "dddd"):
@@ -917,8 +1257,35 @@ class SpaceTime:
         else:
             print("Invalid index_config string.")        
     
-    # Sets all Riemann coefficients values for reuse. Allows for the removal of redundant calculations.
     def set_all_riemann_coefficients(self, index_config):
+        """
+        Description
+        ===========
+        Sets all Riemann coefficients values for reuse. Allows for the removal of redundant calculations.
+        WARNING: Redundant becasue function is already called at creation of SpaceTime object.
+
+        Example
+        =======
+        >> newtonian = SpaceTime(Solution().weak_field_approximation(), True)
+        >> pprint(newtonian.set_all_riemann_coefficients("uddd")
+        
+        LaTeX representation
+        ====================
+        R^{i}_{jkl} -> (i,j,k,l) = (rho,sig,mu,nu)
+        R_{ijkl} -> (i,j,k,l) = (rho,sig,mu,nu)
+
+        URL Reference
+        =============
+        https://en.wikipedia.org/wiki/List_of_formulas_in_Riemannian_geometry#Riemann_curvature_tensor
+        https://en.wikipedia.org/wiki/Riemann_curvature_tensor
+
+        TODOs
+        =====
+        - Link example with test.
+        - Need higher quality tests.
+        - Needs functionality for other index configurations.
+        """
+
         if index_config == "uddd":
             if(self.suppress_printing == False):
                 print("")
@@ -950,8 +1317,35 @@ class SpaceTime:
         else:
             print("Invalid index_config string.")
     
-    # Computes a single Riemann tensor coefficient.
     def compute_riemann_coefficient(self, index_config, rho, sig, mu, nu):
+        """
+        Description
+        ===========
+        Computes a single Riemann tensor coefficient.
+
+        Example
+        =======
+        >> newtonian = SpaceTime(Solution().weak_field_approximation(), True)
+        >> print(newtonian.compute_riemann_coefficient("uddd",0,2,2,0))
+        G*M/(c**2*r)
+
+        LaTeX representation
+        ====================
+        R^{i}_{jkl} -> (i,j,k,l) = (rho,sig,mu,nu)
+        R_{ijkl} -> (i,j,k,l) = (rho,sig,mu,nu)
+
+        URL Reference
+        =============
+        https://en.wikipedia.org/wiki/List_of_formulas_in_Riemannian_geometry#Riemann_curvature_tensor
+        https://en.wikipedia.org/wiki/Riemann_curvature_tensor
+
+        TODOs
+        =====
+        - Link example with test.
+        - Need higher quality tests.
+        - Needs functionality for other index configurations.
+        """
+
         riemann_coefficient = 0
         if index_config == "uddd":
             riemann_coefficient = diff(self.get_connection_coefficient("udd", rho, nu, sig), self.coordinate_set[mu]) - diff(self.get_connection_coefficient("udd", rho, mu, sig), self.coordinate_set[nu])    
@@ -969,9 +1363,39 @@ class SpaceTime:
         else:
             print("Invalid index_config string.")
         
-
-    # Prints a single Riemann coefficient.
     def print_riemann_coefficient(self, index_config, rho, sig, mu, nu):
+        """
+        Description
+        ===========
+        Prints a single Riemann coefficient.
+
+        Example
+        =======
+        >> newtonian = SpaceTime(Solution().weak_field_approximation(), True)
+        >> newtonian.print_riemann_coefficient("uddd",0,2,2,0)
+
+                G⋅M
+        R⁰₂₂₀ = ────
+                2
+                c ⋅r
+
+        LaTeX representation
+        ====================
+        R^{i}_{jkl} -> (i,j,k,l) = (rho,sig,mu,nu)
+        R_{ijkl} -> (i,j,k,l) = (rho,sig,mu,nu)
+
+        URL Reference
+        =============
+        https://en.wikipedia.org/wiki/List_of_formulas_in_Riemannian_geometry#Riemann_curvature_tensor
+        https://en.wikipedia.org/wiki/Riemann_curvature_tensor
+
+        TODOs
+        =====
+        - Link example with test.
+        - Need higher quality tests.
+        - Needs functionality for other index configurations.
+        """
+
         if index_config == "uddd":
             print("")
             pprint(Eq(Symbol('R^%s_%s%s%s' % (rho, sig, mu, nu)), self.get_riemann_coefficient(index_config, rho, sig, mu, nu)))
@@ -981,8 +1405,42 @@ class SpaceTime:
         else:
             print("Invalid index_config string.")
             
-    # Prints all connection coefficients.
     def print_all_riemann_coefficients(self, index_config):
+        """
+        Description
+        ===========
+        Prints all connection coefficients.
+
+        Example
+        =======
+        >> newtonian = SpaceTime(Solution().weak_field_approximation(), True)
+        >> newtonian.print_all_riemann_coefficients("uddd")
+
+        R⁰₀₀₀ = 0
+
+        R⁰₀₀₁ = 0
+
+        R⁰₀₀₂ = 0
+
+        ...
+
+        LaTeX representation
+        ====================
+        R^{i}_{jkl} -> (i,j,k,l) = (rho,sig,mu,nu)
+        R_{ijkl} -> (i,j,k,l) = (rho,sig,mu,nu)
+
+        URL Reference
+        =============
+        https://en.wikipedia.org/wiki/List_of_formulas_in_Riemannian_geometry#Riemann_curvature_tensor
+        https://en.wikipedia.org/wiki/Riemann_curvature_tensor
+
+        TODOs
+        =====
+        - Link example with test.
+        - Need higher quality tests.
+        - Needs functionality for other index configurations.
+        """
+        
         if index_config == "uddd":
             for rho in self.dimensions:
                 for sig in self.dimensions:
@@ -1005,6 +1463,32 @@ class SpaceTime:
     """ 
     
     def get_weyl_coefficient(self, index_config, i, k, l, m):
+        """
+        Description
+        ===========
+        Gets a single Weyl coefficients from class object.
+
+        Example
+        =======
+        >> newtonian = SpaceTime(Solution().weak_field_approximation(), True)
+        >> pprint(newtonian.get_weyl_coefficient("dddd",0,1,2,3))
+        0
+
+        LaTeX Representation
+        ====================
+        C_{iklm}
+
+        URL Reference
+        =============
+        https://en.wikipedia.org/wiki/Weyl_tensor
+
+        TODOs
+        =====
+        - Link example with test.
+        - Need higher quality tests.
+        - Needs functionality for other index configurations.
+        """
+
         if(index_config == "uddd"):
             # TODO
             # MUST TEST
@@ -1021,6 +1505,31 @@ class SpaceTime:
             print("Invalid index_config string.") 
     
     def set_weyl_coefficient(self, index_config, i, k, l, m, expression):
+        """
+        Description
+        ===========
+        Sets a single Weyl coefficient from class object equal to the value of a given expression.
+
+        Example
+        =======
+        >> newtonian = SpaceTime(Solution().weak_field_approximation(), True)
+        >> pprint(newtonian.set_weyl_coefficient("dddd",0,1,2,3,0))
+
+        LaTeX Representation
+        ====================
+        C_{iklm}
+
+        URL Reference
+        =============
+        https://en.wikipedia.org/wiki/Weyl_tensor
+
+        TODOs
+        =====
+        - Link example with test.
+        - Need higher quality tests.
+        - Needs functionality for other index configurations.
+        """
+
         if(index_config == "uddd"):
             # TODO
             # MUST TEST
@@ -1037,6 +1546,31 @@ class SpaceTime:
             print("Invalid index_config string.") 
     
     def set_all_weyl_coefficients(self, index_config):
+        """
+        Description
+        ===========
+        Sets and computes all Weyl coefficients.
+
+        Example
+        =======
+        >> newtonian = SpaceTime(Solution().weak_field_approximation(), True)
+        >> pprint(newtonian.set_all_weyl_coefficients("dddd"))
+
+        LaTeX Representation
+        ====================
+        C_{iklm}
+
+        URL Reference
+        =============
+        https://en.wikipedia.org/wiki/Weyl_tensor
+
+        TODOs
+        =====
+        - Link example with test.
+        - Need higher quality tests.
+        - Needs functionality for other index configurations.
+        """
+
         if index_config == "uddd":
             if(self.suppress_printing == False):
                 print("")
@@ -1084,6 +1618,32 @@ class SpaceTime:
             print("Invalid index_config string.")
     
     def compute_weyl_coefficient(self, index_config, i, k, l, m):
+        """
+        Description
+        ===========
+        Sets and computes all Weyl coefficients.
+
+        Example
+        =======
+        >> newtonian = SpaceTime(Solution().weak_field_approximation(), True)
+        >> pprint(newtonian.compute_weyl_coefficient("dddd",0,1,2,3))
+        0
+        
+        LaTeX Representation
+        ====================
+        C_{iklm}
+
+        URL Reference
+        =============
+        https://en.wikipedia.org/wiki/Weyl_tensor
+
+        TODOs
+        =====
+        - Link example with test.
+        - Need higher quality tests.
+        - Needs functionality for other index configurations.
+        """
+
         n = len(self.coordinate_set)
         weyl_coefficient = 0
         if(index_config == "uddd"):
@@ -1101,6 +1661,32 @@ class SpaceTime:
             print("Invalid index_config string.") 
     
     def print_weyl_coefficient(self, index_config, i, k, l, m):
+        """
+        Description
+        ===========
+        Prints a single Weyl coefficient.
+
+        Example
+        =======
+        >> newtonian = SpaceTime(Solution().weak_field_approximation(), True)
+        >> pprint(newtonian.compute_weyl_coefficient("dddd",0,0,0,0))
+        0
+        
+        LaTeX Representation
+        ====================
+        C_{iklm}
+
+        URL Reference
+        =============
+        https://en.wikipedia.org/wiki/Weyl_tensor
+
+        TODOs
+        =====
+        - Link example with test.
+        - Need higher quality tests.
+        - Needs functionality for other index configurations.
+        """
+
         if(index_config == "uddd"):
             # TODO
             # MUST TEST
@@ -1120,6 +1706,43 @@ class SpaceTime:
             print("Invalid index_config string.") 
     
     def print_all_weyl_coefficients(self, index_config):
+        """
+        Description
+        ===========
+        Prints all Weyl coefficients.
+
+        Example
+        =======
+        >> newtonian = SpaceTime(Solution().weak_field_approximation(), True)
+        >> pprint(newtonian.print_all_weyl_coefficients("dddd"))
+
+        C₀₀₀₀ = 0
+
+        C₀₀₀₁ = 0
+
+        C₀₀₀₂ = 0
+
+        ...
+        
+        C₃₃₃₂ = 0
+
+        C₃₃₃₃ = 0
+
+        LaTeX Representation
+        ====================
+        C_{iklm}
+
+        URL Reference
+        =============
+        https://en.wikipedia.org/wiki/Weyl_tensor
+
+        TODOs
+        =====
+        - Link example with test.
+        - Need higher quality tests.
+        - Needs functionality for other index configurations.
+        """
+
         if index_config == "uddd":
             for i in self.dimensions:
                 for k in self.dimensions:
@@ -1148,8 +1771,34 @@ class SpaceTime:
     =============================
     """      
     
-    # Gets a single Ricci coefficient from class object.
     def get_ricci_coefficient(self, index_config, mu, nu):
+        """
+        Description
+        ===========
+        Gets a single Ricci coefficient from class object.
+
+        Example
+        =======
+        >> newtonian = SpaceTime(Solution().weak_field_approximation(), True)
+        >> pprint(newtonian.get_ricci_coefficient("dd",0,0))
+        0
+        
+        LaTeX Representation
+        ====================
+        R_{m,n}
+        R^{m,n}
+
+        URL Reference
+        =============
+        https://en.wikipedia.org/wiki/Ricci_curvature
+
+        TODOs
+        =====
+        - Link example with test.
+        - Need higher quality tests.
+        - Needs functionality for other index configurations.
+        """
+
         if (index_config == "uu"):
             return self.ricci_tensor_uu[mu,nu]
         elif(index_config == "dd"):
@@ -1157,8 +1806,33 @@ class SpaceTime:
         else:
             print("Invalid index_config string.")
     
-    # Sets a single Ricci coefficient from class object.
     def set_ricci_coefficient(self, index_config, mu, nu, expression):
+        """
+        Description
+        ===========
+        Sets a single Ricci coefficient from class object.
+
+        Example
+        =======
+        >> newtonian = SpaceTime(Solution().weak_field_approximation(), True)
+        >> newtonian.set_ricci_coefficient("dd",0,0,0)
+        
+        LaTeX Representation
+        ====================
+        R_{m,n}
+        R^{m,n}
+
+        URL Reference
+        =============
+        https://en.wikipedia.org/wiki/Ricci_curvature
+
+        TODOs
+        =====
+        - Link example with test.
+        - Need higher quality tests.
+        - Needs functionality for other index configurations.
+        """
+
         if (index_config == "uu"):
             self.ricci_tensor_uu[mu,nu] = expression
         elif(index_config == "dd"):
@@ -1168,6 +1842,32 @@ class SpaceTime:
     
     # Sets all Ricci coefficient values for reuse. Allows for the removal of redundant calculations.
     def set_all_ricci_coefficients(self, index_config):
+        """
+        Description
+        ===========
+        Computes and sets all Ricci tensor class object coefficients. Runs at object creation.
+
+        Example
+        =======
+        >> newtonian = SpaceTime(Solution().weak_field_approximation(), True)
+        >> newtonian.set_all_ricci_coefficients("dd")
+        
+        LaTeX Representation
+        ====================
+        R_{m,n}
+        R^{m,n}
+
+        URL Reference
+        =============
+        https://en.wikipedia.org/wiki/Ricci_curvature
+
+        TODOs
+        =====
+        - Link example with test.
+        - Need higher quality tests.
+        - Needs functionality for other index configurations.
+        """
+
         if(index_config == "uu"):
             if(self.suppress_printing == False):
                 print("")
@@ -1191,8 +1891,34 @@ class SpaceTime:
                     if(self.suppress_printing == False):
                         self.print_ricci_coefficient(index_config, mu, nu)
     
-    # Computes a single Ricci tensor coefficient.
     def compute_ricci_coefficient(self, index_config, mu, nu):
+        """
+        Description
+        ===========
+        Computes a single Ricci tensor coefficient.
+
+        Example
+        =======
+        >> newtonian = SpaceTime(Solution().weak_field_approximation(), True)
+        >> print(newtonian.compute_ricci_coefficient("dd",0,0))
+        0
+        
+        LaTeX Representation
+        ====================
+        R_{m,n}
+        R^{m,n}
+
+        URL Reference
+        =============
+        https://en.wikipedia.org/wiki/Ricci_curvature
+
+        TODOs
+        =====
+        - Link example with test.
+        - Need higher quality tests.
+        - Needs functionality for other index configurations.
+        """
+
         ricci_coefficient = 0
         if index_config == "dd":
             for lam in self.dimensions:
@@ -1204,10 +1930,38 @@ class SpaceTime:
             print("")
         else:
             print("Invalid index_config string.")
+
         return ricci_coefficient
     
-    # Prints a single Ricci coefficient.
     def print_ricci_coefficient(self, index_config, mu, nu):
+        """
+        Description
+        ===========
+        Prints a single Ricci coefficient.
+
+        Example
+        =======
+        >> newtonian = SpaceTime(Solution().weak_field_approximation(), True)
+        >> newtonian.print_ricci_coefficient("dd",0,0)
+
+        R₀₀ = 0
+        
+        LaTeX Representation
+        ====================
+        R_{m,n}
+        R^{m,n}
+
+        URL Reference
+        =============
+        https://en.wikipedia.org/wiki/Ricci_curvature
+
+        TODOs
+        =====
+        - Link example with test.
+        - Need higher quality tests.
+        - Needs functionality for other index configurations.
+        """
+
         if (index_config == "uu"):
             print("")
             pprint(Eq(Symbol('R^%s%s' % (mu, nu)), self.get_ricci_coefficient(index_config, mu, nu)))
@@ -1219,6 +1973,37 @@ class SpaceTime:
     
     # Prints all Ricci coefficients.
     def print_all_ricci_coefficients(self, index_config):
+        """
+        Description
+        ===========
+        Prints a single Weyl coefficient.
+
+        Example
+        =======
+        >> newtonian = SpaceTime(Solution().weak_field_approximation(), True)
+        >> pprint(newtonian.print_all_ricci_coefficients("dd"))
+
+        R₀₀ = 0
+
+        R₀₁ = 0
+
+        R₀₂ = 0
+        
+        LaTeX Representation
+        ====================
+        R_{m,n}
+        R^{m,n}
+
+        URL Reference
+        =============
+        https://en.wikipedia.org/wiki/Ricci_curvature
+
+        TODOs
+        =====
+        - Link example with test.
+        - Need higher quality tests.
+        - Needs functionality for other index configurations.
+        """
         for mu in self.dimensions:
             for nu in self.dimensions:
                 self.print_ricci_coefficient(index_config, mu, nu)
@@ -1228,12 +2013,61 @@ class SpaceTime:
     ======================
     """
     
-    # Gets Ricci scalar from class object.
     def get_ricci_scalar(self):
+        """
+        Description
+        ===========
+        Gets the Ricci scalar class object.
+
+        Example
+        =======
+        >> newtonian = SpaceTime(Solution().weak_field_approximation(), True)
+        >> pprint(newtonian.get_ricci_scalar())
+        0
+
+        LaTeX Representation
+        ====================
+        R = g^{mn} R_{mn} 
+
+        URL Reference
+        =============
+        https://en.wikipedia.org/wiki/Ricci_curvature
+
+        TODOs
+        =====
+        - Link example with test.
+        - Need higher quality tests.
+        - Needs functionality for other index configurations.
+        """
+
         return self.ricci_scalar  
     
-    # Sets Ricci scalar from class object.
     def set_ricci_scalar(self):
+        """
+        Description
+        ===========
+        # Sets Ricci scalar from class object.
+
+        Example
+        =======
+        >> newtonian = SpaceTime(Solution().weak_field_approximation(), True)
+        >> pprint(newtonian.set_ricci_scalar())
+
+        LaTeX Representation
+        ====================
+        R = g^{mn} R_{mn} 
+
+        URL Reference
+        =============
+        https://en.wikipedia.org/wiki/Ricci_curvature
+
+        TODOs
+        =====
+        - Link example with test.
+        - Need higher quality tests.
+        - Needs functionality for other index configurations.
+        """
+
         self.ricci_scalar = self.compute_ricci_scalar()
         if(self.suppress_printing == False):
             print("")
@@ -1242,8 +2076,32 @@ class SpaceTime:
             print("======================")
             self.print_ricci_scalar()
     
-    # Computes Ricci scalar.
     def compute_ricci_scalar(self):
+        """
+        Description
+        ===========
+        # Computes the Ricci scalar.
+
+        Example
+        =======
+        >> newtonian = SpaceTime(Solution().weak_field_approximation(), True)
+        >> pprint(newtonian.compute_ricci_scalar())
+
+        LaTeX Representation
+        ====================
+        R = g^{mn} R_{mn} 
+
+        URL Reference
+        =============
+        https://en.wikipedia.org/wiki/Ricci_curvature
+
+        TODOs
+        =====
+        - Link example with test.
+        - Need higher quality tests.
+        - Needs functionality for other index configurations.
+        """
+
         ricci_scalar = 0
         for mu in self.dimensions:
             for nu in self.dimensions:
@@ -1251,8 +2109,34 @@ class SpaceTime:
         ricci_scalar = simplify(ricci_scalar)
         return ricci_scalar
     
-    # Prints Ricci scalar.
     def print_ricci_scalar(self):
+        """
+        Description
+        ===========
+        # Prints Ricci scalar.
+
+        Example
+        =======
+        >> newtonian = SpaceTime(Solution().weak_field_approximation(), True)
+        >> pprint(newtonian.print_ricci_scalar())
+
+        R = 0
+
+        LaTeX Representation
+        ====================
+        R = g^{mn} R_{mn} 
+
+        URL Reference
+        =============
+        https://en.wikipedia.org/wiki/Ricci_curvature
+
+        TODOs
+        =====
+        - Link example with test.
+        - Need higher quality tests.
+        - Needs functionality for other index configurations.
+        """
+
         print("")
         pprint(Eq(Symbol('R'), self.get_ricci_scalar()))
     
@@ -1261,8 +2145,33 @@ class SpaceTime:
     =========================
     """
     
-    # Gets a single Einstein coefficient from class object.
     def get_einstein_coefficient(self, index_config, mu, nu):
+        """
+        Description
+        ===========
+        Gets a single Einstein coefficient from class object.
+
+        Example
+        =======
+        >> newtonian = SpaceTime(Solution().weak_field_approximation(), True)
+        >> pprint(newtonian.get_einstein_coefficient("dd",0,0))
+        0
+        
+        LaTeX Representation
+        ====================
+        G = R_{mn} - R/2 g_{mn} 
+
+        URL Reference
+        =============
+        https://en.wikipedia.org/wiki/Einstein_tensor
+
+        TODOs
+        =====
+        - Link example with test.
+        - Need higher quality tests.
+        - Needs functionality for other index configurations.
+        """
+
         if (index_config == "uu"):
             # TODO
             # MUST TEST
@@ -1272,8 +2181,32 @@ class SpaceTime:
         else:
             print("Invalid index_config string.")
     
-    # Sets a single Ricci coefficient from class object.
     def set_einstein_coefficient(self, index_config, mu, nu, expression):
+        """
+        Description
+        ===========
+        Sets a single Ricci coefficient from class object.
+
+        Example
+        =======
+        >> newtonian = SpaceTime(Solution().weak_field_approximation(), True)
+        >> newtonian.set_einstein_coefficient("dd",0,0,0)
+
+        LaTeX Representation
+        ====================
+        G = R_{mn} - R/2 g_{mn} 
+
+        URL Reference
+        =============
+        https://en.wikipedia.org/wiki/Einstein_tensor
+
+        TODOs
+        =====
+        - Link example with test.
+        - Need higher quality tests.
+        - Needs functionality for other index configurations.
+        """
+
         if (index_config == "uu"):
             # TODO
             # MUST TEST
@@ -1283,8 +2216,32 @@ class SpaceTime:
         else:
             print("Invalid index_config string.")  
     
-    # Sets all Einstein coefficient values for reuse. Allows for the removal of redundant calculations.
     def set_all_einstein_coefficients(self, index_config):
+        """
+        Description
+        ===========
+        Sets all Einstein coefficient values for reuse. Allows for the removal of redundant calculations.
+
+        Example
+        =======
+        >> newtonian = SpaceTime(Solution().weak_field_approximation(), True)
+        >> newtonian.set_all_einstein_coefficients("dd")
+
+        LaTeX Representation
+        ====================
+        G = R_{mn} - R/2 g_{mn} 
+
+        URL Reference
+        =============
+        https://en.wikipedia.org/wiki/Einstein_tensor
+
+        TODOs
+        =====
+        - Link example with test.
+        - Need higher quality tests.
+        - Needs functionality for other index configurations.
+        """
+
         if (index_config=="uu"):
             if(self.suppress_printing == False):
                 print("")
@@ -1310,8 +2267,33 @@ class SpaceTime:
         else:
             print("Invalid index_config string.") 
                     
-    # Computes a single Einstein tensor coefficient.
     def compute_einstein_coefficient(self, index_config, mu, nu):
+        """
+        Description
+        ===========
+        Computes a single Einstein tensor coefficient.
+
+        Example
+        =======
+        >> newtonian = SpaceTime(Solution().weak_field_approximation(), True)
+        >> print(Newtonian.compute_einstein_coefficient("dd",0,0))
+        0
+
+        LaTeX Representation
+        ====================
+        G = R_{mn} - R/2 g_{mn} 
+
+        URL Reference
+        =============
+        https://en.wikipedia.org/wiki/Einstein_tensor
+
+        TODOs
+        =====
+        - Link example with test.
+        - Need higher quality tests.
+        - Needs functionality for other index configurations.
+        """
+
         einstein_coefficient = 0
         if index_config == "dd":
             einstein_coefficient = self.get_ricci_coefficient("dd", mu, nu) - Rational('1/2') * self.get_ricci_scalar() * self.metric_tensor_dd[mu,nu]
@@ -1328,8 +2310,34 @@ class SpaceTime:
             print("Invalid index_config string.")
         return einstein_coefficient
     
-    # Prints a single Einstein coefficient.
     def print_einstein_coefficient(self, index_config, mu, nu):
+        """
+        Description
+        ===========
+        Prints a single Einstein coefficient.
+
+        Example
+        =======
+        >> newtonian = SpaceTime(Solution().weak_field_approximation(), True)
+        >> print(newtonian.print_einstein_coefficient("dd",0,0))
+
+        G₀₀ = 0
+        
+        LaTeX Representation
+        ====================
+        G = R_{mn} - R/2 g_{mn} 
+
+        URL Reference
+        =============
+        https://en.wikipedia.org/wiki/Einstein_tensor
+
+        TODOs
+        =====
+        - Link example with test.
+        - Need higher quality tests.
+        - Needs functionality for other index configurations.
+        """
+
         if (index_config == "uu"):
             # TODO
             # MUST TEST
@@ -1341,8 +2349,47 @@ class SpaceTime:
         else:
             print("Invalid index_config string.")  
     
-    # Prints all Ricci coefficients.
     def print_all_einstein_coefficients(self, index_config):
+        """
+        Description
+        ===========
+        Prints all Einstein coefficients.
+
+        Example
+        =======
+        >> newtonian = SpaceTime(Solution().weak_field_approximation(), True)
+        >> pprint(newtonian.print_all_einstein_coefficients("dd"))
+
+
+        G₀₀ = 0
+
+        G₀₁ = 0
+
+        G₀₂ = 0
+
+        G₀₃ = 0
+
+        ...
+
+        G₃₂ = 0
+
+        G₃₃ = 0
+        
+        LaTeX Representation
+        ====================
+        G = R_{mn} - R/2 g_{mn} 
+
+        URL Reference
+        =============
+        https://en.wikipedia.org/wiki/Einstein_tensor
+
+        TODOs
+        =====
+        - Link example with test.
+        - Need higher quality tests.
+        - Needs functionality for other index configurations.
+        """
+
         for mu in self.dimensions:
             for nu in self.dimensions:
                 self.print_einstein_coefficient(index_config, mu, nu)
@@ -1352,9 +2399,34 @@ class SpaceTime:
     Stress-energy-momentum tensor functions
     =======================================
     """
-    
-    # Gets a single stress-energy coefficient from class object.
+
     def get_stress_energy_coefficient(self, index_config, mu, nu):
+        """
+        Description
+        ===========
+        Returns a stress-energy coefficient for a given associated index pair and index configuration.
+
+        Example
+        =======
+        >> newtonian = SpaceTime(Solution().weak_field_approximation(), True)
+        >> pprint(newtonian.get_stress_energy_coefficient("dd",0,0))
+        0
+
+        LaTeX Representation
+        ====================
+        T_{mn} = frac{c^{4}}{8 \pi G} G_{mn}
+
+        URL Reference
+        =============
+        https://en.wikipedia.org/wiki/Stress%E2%80%93energy_tensor
+
+        TODOs
+        =====
+        - Link example with test.
+        - Need higher quality tests.
+        - Needs functionality for other index configurations.
+        """
+
         if (index_config == "uu"):
             # TODO
             # MUST TEST
@@ -1364,8 +2436,32 @@ class SpaceTime:
         else:
             print("Invalid index_config string.")
     
-    # Sets a single stress-energy coefficient from class object.
     def set_stress_energy_coefficient(self, index_config, mu, nu, expression):
+        """
+        Description
+        ===========
+        Sets a single stress-energy coefficient from class object.
+
+        Example
+        =======
+        >> newtonian = SpaceTime(Solution().weak_field_approximation(), True)
+        >> newtonian.set_stress_energy_coefficient("dd",0,0,0)
+
+        LaTeX Representation
+        ====================
+        T_{mn} = frac{c^{4}}{8 \pi G} G_{mn}
+
+        URL Reference
+        =============
+        https://en.wikipedia.org/wiki/Stress%E2%80%93energy_tensor
+
+        TODOs
+        =====
+        - Link example with test.
+        - Need higher quality tests.
+        - Needs functionality for other index configurations.
+        """
+
         if (index_config == "uu"):
             # TODO
             # MUST TEST
@@ -1375,8 +2471,32 @@ class SpaceTime:
         else:
             print("Invalid index_config string.")
     
-    # Sets all stress-energy coefficient values for reuse. Allows for the removal of redundant calculations.
     def set_all_stress_energy_coefficients(self, index_config):
+        """
+        Description
+        ===========
+        Sets all stress-energy coefficient values for reuse. Allows for the removal of redundant calculations.
+
+        Example
+        =======
+        >> newtonian = SpaceTime(Solution().weak_field_approximation(), True)
+        >> newtonian.set_all_stress_energy_coefficients("dd")
+
+        LaTeX Representation
+        ====================
+        T_{mn} = frac{c^{4}}{8 \pi G} G_{mn}
+
+        URL Reference
+        =============
+        https://en.wikipedia.org/wiki/Stress%E2%80%93energy_tensor
+
+        TODOs
+        =====
+        - Link example with test.
+        - Need higher quality tests.
+        - Needs functionality for other index configurations.
+        """
+
         if (index_config=="uu"):
             if(self.suppress_printing == False):
                 print("")
@@ -1402,8 +2522,33 @@ class SpaceTime:
         else:
             print("Invalid index_config string.")
     
-    # Computes a single stress-energy tensor coefficient.
     def compute_stress_energy_coefficient(self, index_config, mu, nu):
+        """
+        Description
+        ===========
+        Sets all stress-energy coefficient values for reuse. Allows for the removal of redundant calculations.
+
+        Example
+        =======
+        >> newtonian = SpaceTime(Solution().weak_field_approximation(), True)
+        >> print(newtonian.compute_stress_energy_coefficient("dd",0,0))
+        0
+
+        LaTeX Representation
+        ====================
+        T_{mn} = frac{c^{4}}{8 \pi G} G_{mn}
+
+        URL Reference
+        =============
+        https://en.wikipedia.org/wiki/Stress%E2%80%93energy_tensor
+
+        TODOs
+        =====
+        - Link example with test.
+        - Need higher quality tests.
+        - Needs functionality for other index configurations.
+        """
+
         stress_energy_coefficient = 0
         c, G = symbols('c G')
         if index_config == "dd":
@@ -1416,8 +2561,34 @@ class SpaceTime:
             print("Invalid index_config string.")
         return simplify(stress_energy_coefficient)
 
-    # Prints a single stress-energy coefficient.
     def print_stress_energy_coefficient(self, index_config, mu, nu):
+        """
+        Description
+        ===========
+        Prints a single stress-energy coefficient.
+
+        Example
+        =======
+        >> newtonian = SpaceTime(Solution().weak_field_approximation(), True)
+        >> newtonian.print_stress_energy_coefficient("dd",0,0)
+        
+        T₀₀ = 0
+
+        LaTeX Representation
+        ====================
+        T_{mn} = frac{c^{4}}{8 \pi G} G_{mn}
+
+        URL Reference
+        =============
+        https://en.wikipedia.org/wiki/Stress%E2%80%93energy_tensor
+
+        TODOs
+        =====
+        - Link example with test.
+        - Need higher quality tests.
+        - Needs functionality for other index configurations.
+        """
+
         if (index_config == "uu"):
             print("")
             pprint(Eq(Symbol('T^%s%s' % (mu, nu)), self.get_stress_energy_coefficient(index_config, mu, nu)))
@@ -1427,8 +2598,43 @@ class SpaceTime:
         else:
             print("Invalid index_config string.")
     
-    # Prints all stress-energy coefficients.
     def print_all_stress_energy_coefficients(self, index_config):
+        """
+        Description
+        ===========
+        Prints all stress-energy coefficients.
+
+        Example
+        =======
+        >> newtonian = SpaceTime(Solution().weak_field_approximation(), True)
+        >> newtonian.print_all_stress_energy_coefficients("dd")
+
+        T₀₀ = 0
+
+        T₀₁ = 0
+
+        T₀₂ = 0
+
+        ...
+        
+        T₃₂ = 0
+
+        T₃₃ = 0
+
+        LaTeX Representation
+        ====================
+        T_{mn} = frac{c^{4}}{8 \pi G} G_{mn}
+
+        URL Reference
+        =============
+        https://en.wikipedia.org/wiki/Stress%E2%80%93energy_tensor
+
+        TODOs
+        =====
+        - Link example with test.
+        - Need higher quality tests.
+        - Needs functionality for other index configurations.
+        """
         for mu in self.dimensions:
             for nu in self.dimensions:
                 self.print_stress_energy_coefficient(index_config, mu, nu)
@@ -1438,10 +2644,67 @@ class SpaceTime:
     ===============================
     """
     def get_cosmological_constant(self):
+        """
+        Description
+        ===========
+        Prints all stress-energy coefficients.
+
+        Example
+        =======
+        >> newtonian = SpaceTime(Solution().weak_field_approximation(), True)
+        >> print(newtonian.get_cosmological_constant())
+        0
+
+        LaTeX Representation
+        ====================
+        \Lambda 
+
+        URL Reference
+        =============
+        https://en.wikipedia.org/wiki/Cosmological_constant
+        https://en.wikipedia.org/wiki/Friedmann_equations
+        https://en.wikipedia.org/wiki/Friedmann%E2%80%93Lema%C3%AEtre%E2%80%93Robertson%E2%80%93Walker_metric
+        https://en.wikipedia.org/wiki/Dark_energy
+        https://en.wikipedia.org/wiki/Accelerating_expansion_of_the_universe
+
+        TODOs
+        =====
+        - Link example with test.
+        - Need higher quality tests.
+        - Needs functionality for other index configurations.
+        """
+                
         return self.cosmological_constant  
     
-    # Sets cosmological constant from class object.
     def set_cosmological_constant(self, expression):
+        """
+        Description
+        ===========
+        Sets cosmological constant from class object.
+
+        Example
+        =======
+        >> newtonian = SpaceTime(Solution().weak_field_approximation(), True)
+        >> print(newtonian.set_cosmological_constant(0))
+    
+        LaTeX Representation
+        ====================
+        \Lambda 
+
+        URL Reference
+        =============
+        https://en.wikipedia.org/wiki/Cosmological_constant
+        https://en.wikipedia.org/wiki/Friedmann_equations
+        https://en.wikipedia.org/wiki/Friedmann%E2%80%93Lema%C3%AEtre%E2%80%93Robertson%E2%80%93Walker_metric
+        https://en.wikipedia.org/wiki/Dark_energy
+        https://en.wikipedia.org/wiki/Accelerating_expansion_of_the_universe
+
+        TODOs
+        =====
+        - Link example with test.
+        - Need higher quality tests.
+        - Needs functionality for other index configurations.
+        """
         self.cosmological_constant = expression
         if(self.suppress_printing == False):
             print("")
@@ -1450,7 +2713,236 @@ class SpaceTime:
             print("=====================")
             self.print_cosmological_constant()
             
-    # Prints cosmological constant.
     def print_cosmological_constant(self):
+        """
+        Description
+        ===========
+        Sets cosmological constant from class object.
+
+        Example
+        =======
+        >> newtonian = SpaceTime(Solution().weak_field_approximation(), True)
+        >> newtonian.print_cosmological_constant()
+    
+        LaTeX Representation
+        ====================
+        \Lambda 
+
+        URL Reference
+        =============
+        https://en.wikipedia.org/wiki/Cosmological_constant
+        https://en.wikipedia.org/wiki/Friedmann_equations
+        https://en.wikipedia.org/wiki/Friedmann%E2%80%93Lema%C3%AEtre%E2%80%93Robertson%E2%80%93Walker_metric
+        https://en.wikipedia.org/wiki/Dark_energy
+        https://en.wikipedia.org/wiki/Accelerating_expansion_of_the_universe
+
+        TODOs
+        =====
+        - Link example with test.
+        - Need higher quality tests.
+        - Needs functionality for other index configurations.
+        """
         print("")
         pprint(Eq(Symbol('Lambda'), self.get_cosmological_constant()))
+
+
+    """
+    Proper geodesic functions
+    =========================
+    """
+
+    def get_proper_time_geodesic(self):
+        """
+        Description
+        ===========
+        
+
+        Example
+        =======
+        
+    
+        LaTeX Representation
+        ====================
+        
+
+        URL Reference
+        =============
+        
+
+        TODOs
+        =====
+        
+        """
+        return True
+
+    def set_proper_time_geodesic(self):
+        return True
+
+    def set_all_proper_time_geodesics(self):
+        return True
+
+    def compute_proper_time_geodesics(self):
+        if(self.suppress_printing == False):
+            print("")
+            print("")
+            print("Proper accelleration")
+            print("====================")
+        for lam in range(len(self.coordinate_set)):
+            print("")
+            accelleration = 0
+            for mu in self.dimensions:
+                for nu in self.dimensions:
+                    accelleration = accelleration + -1*self.get_connection_coefficient("udd",lam,mu,nu)*Derivative(self.coordinate_set[mu],Symbol('tau'))*Derivative(self.coordinate_set[nu],Symbol('tau'))
+            pprint(Eq(Derivative(Derivative(self.coordinate_set[lam],Symbol('tau')),Symbol('tau')), accelleration))
+            print("")
+   
+    def print_proper_time_geodesic(self, lam):
+        return True
+
+    def print_all_proper_time_geodesics(self):
+        return True
+
+    """
+    Coordinate geodesic functions
+    =============================
+    """
+
+    def get_coordinate_time_geodesic(self):
+        return True
+
+    def set_coordinate_time_geodesic(self):
+        return True
+
+    def set_all_coordinate_time_geodesics(self):
+        return True
+
+    def compute_coordinate_time_geodesics(self):
+        if(self.suppress_printing == False):
+            print("")
+            print("")
+            print("Coordinate accelleration")
+            print("========================")
+        for lam in self.dimensions:
+            print("")
+            acc = 0
+            for mu in self.dimensions:
+                for nu in self.dimensions:
+                    acc = acc + -1*self.get_connection_coefficient("udd",lam,mu,nu)*Derivative(self.coordinate_set[mu],self.coordinate_set[0])*Derivative(self.coordinate_set[nu],self.coordinate_set[0])+self.get_connection_coefficient("udd",0,mu,nu)*Derivative(self.coordinate_set[mu],self.coordinate_set[0])*Derivative(self.coordinate_set[nu],self.coordinate_set[0])*Derivative(self.coordinate_set[lam],self.coordinate_set[0])
+            pprint(Eq(Derivative(Derivative(self.coordinate_set[lam],self.coordinate_set[0]),self.coordinate_set[0]), acc))
+            pprint(Eq(Derivative(self.coordinate_set[lam],self.coordinate_set[0]), integrate(acc,Symbol('t'))))
+
+    def print_coordinate_time_geodesic(self, lam):
+        return True
+
+    def print_all_coordinate_time_geodesics(self):
+        return True
+
+    """
+    Geodesic deviation functions
+    ============================
+    """
+
+    def get_geodesic_deviation(self, lam):
+        return True
+
+    def set_geodesic_deviations(self, lam):
+        return True
+
+    def set_all_geodesic_deviations(self, lam):
+        return True
+
+    def compute_geodesic_deviation(self):
+
+        if(self.suppress_printing == False):
+            print("")
+            print("")
+            print("Geodesic deviation equations")
+            print("=============================")
+        for mu in self.dimensions:
+            print("")
+            acc = 0
+            for nu in self.dimensions:
+                for rho in self.dimensions:
+                    for sig in self.dimensions:
+                        acc = acc + self.get_riemann_coefficient("uddd", mu, nu, rho, sig)*Derivative(self.coordinate_set[nu],Symbol('tau'))*Derivative(self.coordinate_set[rho],Symbol('tau'))*Symbol('xi_'+str(sig))
+            pprint(Eq(Derivative(Derivative(Symbol('xi_'+str(mu)),Symbol('tau')),Symbol('tau')), acc))   
+
+    def print_separation_geodesic(self, lam):
+        return True
+
+    def print_all_separation_geodesics(self):
+        return True
+
+    """
+    Cotton tensor functions
+    =======================
+    """
+
+    def get_cotton_coefficient(self):
+        return True
+
+    def set_cotton_coefficient(self):
+        return True
+
+    def set_all_cotton_coefficients(self):
+        return True
+
+    def compute_cotton_coefficient(self):
+        if(self.suppress_printing == False):
+            print("")
+            print("")
+            print("Cotton Coefficients")
+            print("===================")
+        for lam in self.dimensions:
+            print("")
+            acc = 0
+
+    def print_separation_geodesic(self, lam):
+        return True
+
+    def print_all_separation_geodesics(self):
+        return True
+
+    """
+    schouten tensor functions
+    =======================
+    """
+
+    """
+    LaTeX representation
+    ====================
+    P_{\mu\nu}=\frac{1}{n-2}\left ( R_{\mu\nu} - \frac{R}{2d-2}\: g_{\mu\nu} \right )
+    """
+
+    def get_schouten_coefficient(self):
+        return True
+
+    def set_schouten_coefficient(self):
+        return True
+
+    def set_all_schouten_coefficients(self):
+        return True
+
+    def compute_schouten_coefficient(self):
+        if(self.suppress_printing == False):
+            print("")
+            print("")
+            print("schouten Coefficients")
+            print("===================")
+        for lam in self.dimensions:
+            print("")
+            acc = 0
+            for mu in self.dimensions:
+                for nu in self.dimensions:
+                    #acc = acc + 
+                    pass
+
+                    #-1*self.get_connection_coefficient("udd",lam,mu,nu)*Derivative(self.coordinate_set[mu],self.coordinate_set[0])*Derivative(self.coordinate_set[nu],self.coordinate_set[0])+self.get_connection_coefficient("udd",0,mu,nu)*Derivative(self.coordinate_set[mu],self.coordinate_set[0])*Derivative(self.coordinate_set[nu],self.coordinate_set[0])*Derivative(self.coordinate_set[lam],self.coordinate_set[0])
+            #pprint(Eq(Derivative(Derivative(self.coordinate_set[lam],self.coordinate_set[0]),self.coordinate_set[0]), acc))
+            #pprint(Eq(Derivative(self.coordinate_set[lam],self.coordinate_set[0]), integrate(acc,Symbol('t'))))
+
+    def print_schouten_coefficient(self, lam):
+        return True
+
+    def print_all_schouten_coefficients(self):
+        return True
