@@ -210,6 +210,11 @@ In differential geometry, the Weyl curvature tensor, named after Hermann Weyl, i
                     2      
                    c      
 
+
+[Schouten Tensor](https://en.wikipedia.org/wiki/Schouten_tensor)
+=================
+[Cotton Tensor](https://en.wikipedia.org/wiki/Cotton_tensor)
+=================
 [Geodesics parametrized by proper time](https://en.wikipedia.org/wiki/Geodesics_in_general_relativity#Mathematical_expression)
 =======================================
 
