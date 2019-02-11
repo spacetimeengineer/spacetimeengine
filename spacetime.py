@@ -188,6 +188,7 @@ class SpaceTime:
                                                     ]
                                                ]    
                                            ])  
+
         # Declares Riemann curvature tensor "dddd" type class object.
         self.riemann_tensor_dddd = Matrix([    
                                                    [    
@@ -296,7 +297,6 @@ class SpaceTime:
                                                    ]    
                                                ])  
 
-        
         # Declares Weyl curvature tensor "dddd" type class object.
         self.weyl_tensor_dddd = Matrix([    
                                                    [    
@@ -695,10 +695,41 @@ class SpaceTime:
                                                      [ 0, 0, 0, 0 ], 
                                                      [ 0, 0, 0, 0 ]
                                                  ])
-        
+
+        # Declares the contravariant Schouten tensor class object.
+        self.schouten_tensor_uu = Matrix([
+                                                [ 0, 0, 0, 0 ], 
+                                                [ 0, 0, 0, 0 ], 
+                                                [ 0, 0, 0, 0 ], 
+                                                [ 0, 0, 0, 0 ]
+                                            ])
+
+        # Declares the covariant Schouten tensor class object.
+        self.schouten_tensor_dd = Matrix([
+                                                [ 0, 0, 0, 0 ], 
+                                                [ 0, 0, 0, 0 ], 
+                                                [ 0, 0, 0, 0 ], 
+                                                [ 0, 0, 0, 0 ]
+                                            ])
+
         # Declares cosmological constant class object.
         self.cosmological_constant = 0
         
+        # Acceleration vectors.
+        self.proper_acceleration = [ 0, 0, 0, 0 ]
+        self.coordinate_acceleration = [ 0, 0, 0, 0 ]
+        self.geodesic_deviation_acceleration = [ 0, 0, 0, 0 ]
+
+        # Velocity vectors.
+        self.proper_velocity = [ 0, 0, 0, 0 ]
+        self.coordinate_velocity = [ 0, 0, 0, 0 ]
+        self.geodesic_velocity= [ 0, 0, 0, 0 ]
+
+        # Position vectors.
+        self.proper_position = [ 0, 0, 0, 0 ]
+        self.coordinate_position = [ 0, 0, 0, 0 ]
+        self.geodesic_deviation_position = [ 0, 0, 0, 0 ]
+
         """
         Initializing object functions
         =============================
@@ -706,6 +737,7 @@ class SpaceTime:
 
         # TODO
         # finish all of these functions.
+
         self.set_all_metric_coefficients("dd")
         #self.set_all_metric_coefficients("uu")
         self.set_all_connection_coefficients("udd")
@@ -715,7 +747,7 @@ class SpaceTime:
         self.set_all_ricci_coefficients("dd")
         #self.set_all_weyl_coefficients("dddd")
         #self.set_all_weyl_coefficients("uddd")
-        #self.set_all_schouten_coefficients("dddd")
+        self.set_all_schouten_coefficients("dd")
         #self.set_all_cotton_coefficients("ddd")
         #self.set_all_ricci_coefficients("uu")
         #self.set_all_ricci_coefficients("ud")
@@ -727,9 +759,9 @@ class SpaceTime:
         #self.set_all_stress_energy_coefficients("uu")
         #self.set_all_stress_energy_coefficients("ud")
         #self.set_cosmological_constant(solution[3])
-        #self.set_all_proper_time_geodesics()
-        #self.set_all_coordinate_time_geodesics()
-        #self.set_all_geodesic_deviations()
+        self.set_all_proper_time_geodesic_accelerations()
+        self.set_all_coordinate_time_geodesic_accelerations()
+        self.set_all_geodesic_deviation_accelerations()
         
     """
     Metric coefficient functions
@@ -2751,198 +2783,210 @@ class SpaceTime:
     =========================
     """
 
-    def get_proper_time_geodesic(self):
-        """
-        Description
-        ===========
-        
+    def get_proper_time_geodesic_acceleration(self, lam):
+        return self.proper_acceleration[lam]
 
-        Example
-        =======
-        
-    
-        LaTeX Representation
-        ====================
-        
+    def set_proper_time_geodesic_acceleration(self, lam, expression):
+        self.proper_acceleration[lam] = expression
 
-        URL Reference
-        =============
-        
-
-        TODOs
-        =====
-        
-        """
-        return True
-
-    def set_proper_time_geodesic(self):
-        return True
-
-    def set_all_proper_time_geodesics(self):
-        return True
-
-    def compute_proper_time_geodesics(self):
+    def set_all_proper_time_geodesic_accelerations(self):
         if(self.suppress_printing == False):
             print("")
             print("")
-            print("Proper accelleration")
-            print("====================")
-        for lam in range(len(self.coordinate_set)):
-            print("")
-            accelleration = 0
-            for mu in self.dimensions:
-                for nu in self.dimensions:
-                    accelleration = accelleration + -1*self.get_connection_coefficient("udd",lam,mu,nu)*Derivative(self.coordinate_set[mu],Symbol('tau'))*Derivative(self.coordinate_set[nu],Symbol('tau'))
-            pprint(Eq(Derivative(Derivative(self.coordinate_set[lam],Symbol('tau')),Symbol('tau')), accelleration))
-            print("")
-   
-    def print_proper_time_geodesic(self, lam):
-        return True
+            print("Proper acceleration vectors")
+            print("============================")
+        for lam in self.dimensions:
+            self.set_proper_time_geodesic_acceleration(lam, self.compute_proper_time_geodesic_acceleration(lam))
+            if(self.suppress_printing == False):
+                self.print_proper_time_geodesic_acceleration(lam)
 
-    def print_all_proper_time_geodesics(self):
-        return True
+    def compute_proper_time_geodesic_acceleration(self, lam):
+        acceleration = 0
+        for mu in self.dimensions:
+            for nu in self.dimensions:
+                acceleration = acceleration + -1*self.get_connection_coefficient("udd",lam,mu,nu)*Derivative(self.coordinate_set[mu],Symbol('tau'))*Derivative(self.coordinate_set[nu],Symbol('tau'))
+        return acceleration
+
+    def print_proper_time_geodesic_acceleration(self, lam):
+        print("")
+        pprint(Eq(Derivative(Derivative(self.coordinate_set[lam],Symbol('tau')),Symbol('tau')), self.get_proper_time_geodesic_acceleration(lam)))
+
+    def print_all_proper_time_geodesic_accelerations(self):
+        for lam in self.dimensions:
+            self.print_proper_time_geodesic_acceleration(lam)
 
     """
     Coordinate geodesic functions
     =============================
     """
 
-    def get_coordinate_time_geodesic(self):
-        return True
+    def get_coordinate_time_geodesic_acceleration(self, lam):
+        return self.coordinate_acceleration[lam]
 
-    def set_coordinate_time_geodesic(self):
-        return True
+    def set_coordinate_time_geodesic_acceleration(self, lam, expression):
+        self.coordinate_acceleration[lam] = expression
 
-    def set_all_coordinate_time_geodesics(self):
-        return True
-
-    def compute_coordinate_time_geodesics(self):
+    def set_all_coordinate_time_geodesic_accelerations(self):
         if(self.suppress_printing == False):
             print("")
             print("")
-            print("Coordinate accelleration")
-            print("========================")
+            print("Coordinate acceleration vectors")
+            print("===============================")
         for lam in self.dimensions:
-            print("")
-            acc = 0
-            for mu in self.dimensions:
-                for nu in self.dimensions:
-                    acc = acc + -1*self.get_connection_coefficient("udd",lam,mu,nu)*Derivative(self.coordinate_set[mu],self.coordinate_set[0])*Derivative(self.coordinate_set[nu],self.coordinate_set[0])+self.get_connection_coefficient("udd",0,mu,nu)*Derivative(self.coordinate_set[mu],self.coordinate_set[0])*Derivative(self.coordinate_set[nu],self.coordinate_set[0])*Derivative(self.coordinate_set[lam],self.coordinate_set[0])
-            pprint(Eq(Derivative(Derivative(self.coordinate_set[lam],self.coordinate_set[0]),self.coordinate_set[0]), acc))
-            pprint(Eq(Derivative(self.coordinate_set[lam],self.coordinate_set[0]), integrate(acc,Symbol('t'))))
+            self.set_coordinate_time_geodesic_acceleration(lam, self.compute_coordinate_time_geodesic_acceleration(lam))
+            if(self.suppress_printing == False):
+                self.print_coordinate_time_geodesic_acceleration(lam)
 
-    def print_coordinate_time_geodesic(self, lam):
-        return True
+    def compute_coordinate_time_geodesic_acceleration(self, lam):
+        acceleration = 0
+        for mu in self.dimensions:
+            for nu in self.dimensions:
+                acceleration = acceleration + -1*self.get_connection_coefficient("udd",lam,mu,nu)*Derivative(self.coordinate_set[mu],self.coordinate_set[0])*Derivative(self.coordinate_set[nu],self.coordinate_set[0])+self.get_connection_coefficient("udd",0,mu,nu)*Derivative(self.coordinate_set[mu],self.coordinate_set[0])*Derivative(self.coordinate_set[nu],self.coordinate_set[0])*Derivative(self.coordinate_set[lam],self.coordinate_set[0])
+        return acceleration
+        
+            # Velocity
+            #pprint(Eq(Derivative(self.coordinate_set[lam],self.coordinate_set[0]), integrate(acc,Symbol('t'))))
 
-    def print_all_coordinate_time_geodesics(self):
-        return True
+    def print_coordinate_time_geodesic_acceleration(self, lam):
+        print("")
+        pprint(Eq(Derivative(Derivative(self.coordinate_set[lam],self.coordinate_set[0]),self.coordinate_set[0]), self.get_coordinate_time_geodesic_acceleration(lam)))
+
+    def print_all_coordinate_time_geodesic_accelerations(self):
+        for lam in self.dimensions:
+            self.print_coordinate_time_geodesic_acceleration(lam)
 
     """
     Geodesic deviation functions
     ============================
     """
 
-    def get_geodesic_deviation(self, lam):
-        return True
+    def get_geodesic_deviation_acceleration(self, lam):
+        return self.geodesic_deviation_acceleration[lam]
 
-    def set_geodesic_deviations(self, lam):
-        return True
+    def set_geodesic_deviation_acceleration(self, lam, expression):
+        self.geodesic_deviation_acceleration[lam] = expression
 
-    def set_all_geodesic_deviations(self, lam):
-        return True
-
-    def compute_geodesic_deviation(self):
-
+    def set_all_geodesic_deviation_accelerations(self):
         if(self.suppress_printing == False):
             print("")
             print("")
-            print("Geodesic deviation equations")
-            print("=============================")
+            print("Geodesic deviation vectors")
+            print("==========================")
+        for lam in self.dimensions:
+            self.set_geodesic_deviation_acceleration(lam, self.compute_geodesic_deviation_acceleration(lam))
+            if(self.suppress_printing == False):
+                self.print_separation_geodesic_acceleration(lam)
+
+    def compute_geodesic_deviation_acceleration(self, lam):
+        acceleration = 0
         for mu in self.dimensions:
-            print("")
-            acc = 0
+            acceleration = 0
             for nu in self.dimensions:
                 for rho in self.dimensions:
                     for sig in self.dimensions:
-                        acc = acc + self.get_riemann_coefficient("uddd", mu, nu, rho, sig)*Derivative(self.coordinate_set[nu],Symbol('tau'))*Derivative(self.coordinate_set[rho],Symbol('tau'))*Symbol('xi_'+str(sig))
-            pprint(Eq(Derivative(Derivative(Symbol('xi_'+str(mu)),Symbol('tau')),Symbol('tau')), acc))   
+                        acceleration = acceleration + self.get_riemann_coefficient("uddd", mu, nu, rho, sig)*Derivative(self.coordinate_set[nu],Symbol('tau'))*Derivative(self.coordinate_set[rho],Symbol('tau'))*Symbol('xi_'+str(sig))  
+        return acceleration
 
-    def print_separation_geodesic(self, lam):
-        return True
+    def print_separation_geodesic_acceleration(self, lam):
+        print("")
+        pprint(Eq(Derivative(Derivative(Symbol('xi_'+str(lam)),Symbol('tau')),Symbol('tau')), self.get_geodesic_deviation_acceleration(lam)))
 
-    def print_all_separation_geodesics(self):
-        return True
-
-    """
-    Cotton tensor functions
-    =======================
-    """
-
-    def get_cotton_coefficient(self):
-        return True
-
-    def set_cotton_coefficient(self):
-        return True
-
-    def set_all_cotton_coefficients(self):
-        return True
-
-    def compute_cotton_coefficient(self):
-        if(self.suppress_printing == False):
-            print("")
-            print("")
-            print("Cotton Coefficients")
-            print("===================")
+    def print_all_separation_geodesic_accelerations(self):
         for lam in self.dimensions:
-            print("")
-            acc = 0
-
-    def print_separation_geodesic(self, lam):
-        return True
-
-    def print_all_separation_geodesics(self):
-        return True
+            self.print_separation_geodesic_acceleration(lam)
 
     """
     schouten tensor functions
     =======================
     """
 
-    """
-    LaTeX representation
-    ====================
-    P_{\mu\nu}=\frac{1}{n-2}\left ( R_{\mu\nu} - \frac{R}{2d-2}\: g_{\mu\nu} \right )
-    """
+    def get_schouten_coefficient(self, index_config, mu, nu):
+        """
+        Description
+        ===========
+        Returns a schouten coefficient for a given associated index pair and index configuration.
 
-    def get_schouten_coefficient(self):
-        return True
+        Example
+        =======
+        >> newtonian = SpaceTime(Solution().weak_field_approximation(), True)
+        >> pprint(newtonian.get_schouten_coefficient("dd",0,0))
+        0
 
-    def set_schouten_coefficient(self):
-        return True
+        LaTeX Representation
+        ====================
+        P_{ij} = frac{1}{n-2}\left ( R_{ij} - frac{R}{2d-2}\: g_{ij} )
 
-    def set_all_schouten_coefficients(self):
-        return True
+        URL Reference
+        =============
+        https://en.wikipedia.org/wiki/Stress%E2%80%93energy_tensor
 
-    def compute_schouten_coefficient(self):
-        if(self.suppress_printing == False):
-            print("")
-            print("")
-            print("schouten Coefficients")
-            print("===================")
-        for lam in self.dimensions:
-            print("")
-            acc = 0
+        TODOs
+        =====
+        - Link example with test.
+        - Need higher quality tests.
+        - Needs functionality for other index configurations.
+        """
+
+        if (index_config == "uu"):
+            # TODO
+            # MUST TEST
+            return self.schouten_tensor_uu[mu, nu]
+        elif(index_config == "dd"):
+            return self.schouten_tensor_dd[mu, nu]
+        else:
+            print("Invalid index_config string.")
+
+    def set_schouten_coefficient(self, index_config, mu, nu, expression):
+        if (index_config == "uu"):
+            self.schouten_tensor_uu[mu, nu] = expression
+        elif(index_config == "dd"):
+            self.schouten_tensor_dd[mu, nu] = expression
+        else:
+            print("Invalid index_config string.")
+
+    def set_all_schouten_coefficients(self, index_config):
+        if (index_config=="uu"):
+            if(self.suppress_printing == False):
+                print("")
+                print("")
+                print("Schouten tensor coefficients (uu)")
+                print("=================================")
             for mu in self.dimensions:
                 for nu in self.dimensions:
-                    #acc = acc + 
-                    pass
+                    self.set_schouten_coefficient(index_config, mu, nu, self.compute_schouten_coefficient(index_config, mu, nu))
+                    if(self.suppress_printing == False):
+                        self.print_schouten_coefficient(index_config, mu, nu)
+        elif (index_config == "dd"):
+            if(self.suppress_printing == False):
+                print("")
+                print("")
+                print("Schouten tensor coefficients (dd)")
+                print("=================================")
+            for mu in self.dimensions:
+                for nu in self.dimensions:
+                    self.set_schouten_coefficient(index_config, mu, nu, self.compute_schouten_coefficient(index_config, mu, nu))   
+                    if(self.suppress_printing == False):
+                        self.print_schouten_coefficient(index_config, mu, nu)
+        else:
+            print("Invalid index_config string.")
 
-                    #-1*self.get_connection_coefficient("udd",lam,mu,nu)*Derivative(self.coordinate_set[mu],self.coordinate_set[0])*Derivative(self.coordinate_set[nu],self.coordinate_set[0])+self.get_connection_coefficient("udd",0,mu,nu)*Derivative(self.coordinate_set[mu],self.coordinate_set[0])*Derivative(self.coordinate_set[nu],self.coordinate_set[0])*Derivative(self.coordinate_set[lam],self.coordinate_set[0])
-            #pprint(Eq(Derivative(Derivative(self.coordinate_set[lam],self.coordinate_set[0]),self.coordinate_set[0]), acc))
-            #pprint(Eq(Derivative(self.coordinate_set[lam],self.coordinate_set[0]), integrate(acc,Symbol('t'))))
+    def compute_schouten_coefficient(self, index_config, mu, nu):
+        acceleration = 0
+        for lam in self.dimensions:
+            acceleration = acceleration + -1*self.get_connection_coefficient("udd",lam,mu,nu)*Derivative(self.coordinate_set[mu],self.coordinate_set[0])*Derivative(self.coordinate_set[nu],self.coordinate_set[0])+self.get_connection_coefficient("udd",0,mu,nu)*Derivative(self.coordinate_set[mu],self.coordinate_set[0])*Derivative(self.coordinate_set[nu],self.coordinate_set[0])*Derivative(self.coordinate_set[lam],self.coordinate_set[0])
+        return simplify(acceleration)
 
-    def print_schouten_coefficient(self, lam):
-        return True
+    def print_schouten_coefficient(self, index_config, mu, nu):
+        if (index_config == "uu"):
+            print("")
+            pprint(Eq(Symbol('P^%s%s' % (mu, nu)), self.get_schouten_coefficient(index_config, mu, nu)))
+        elif(index_config == "dd"):
+            print("")
+            pprint(Eq(Symbol('P_%s%s' % (mu, nu)), self.get_schouten_coefficient(index_config, mu, nu)))
+        else:
+            print("Invalid index_config string.")
 
-    def print_all_schouten_coefficients(self):
-        return True
+    def print_all_schouten_coefficients(self, index_config):
+        for mu in self.dimensions:
+            for nu in self.dimensions:
+                self.print_schouten_coefficient(index_config, mu, nu)
