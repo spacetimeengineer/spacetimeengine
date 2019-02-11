@@ -5,16 +5,24 @@ A Python utility built on Sympy (A symbolic mathematics library) which will anal
 
 ![equation](https://latex.codecogs.com/png.latex?%5Cdpi%7B100%7D%20%5Chuge%20G_%7B%5Cmu%5Cnu%7D%20&plus;%20%5CLambda%20g_%7B%5Cmu%5Cnu%7D%20%3D%20%5Cfrac%7B8%5Cpi%20G%7D%7Bc%5E4%7DT_%7B%5Cmu%5Cnu%7D)
 
-Installation
-============
-1.) Install Python
+Prerequisites
+=============
+1.) Install Python3
 
     $ sudo apt install python3-pip
-    
-2.) Install Sympy (Symbolic mathematics library written in python)
 
-    $ pip install sympy
+2.) Install pip3
+
+    $ sudo apt install python3-pip
+
+Installation with pip
+=====================
+
+    $ pip3 install sympy spacetimeengine    
     
+Installation with git
+=====================
+
 3.) Clone repository
 
     $ git clone https://github.com/spacetimeengineer/spacetimeengine
