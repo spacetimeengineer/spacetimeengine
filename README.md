@@ -46,7 +46,7 @@ Example.py is a good choice for someone new to the project becasue it demonstrat
 
 Generally speaking, any metric solution to the Einstein field equations will be packaged into a geometric object known as the metric tensor. The metric tensor is often represented in matrix form and SpacetimeEngine adopts this representation.
 
-![equation](https://latex.codecogs.com/png.latex?%5Cdpi%7B100%7D%20%5Chuge%20%5C%3A%5C%3A%20g_%7B%5Cmu%5Cnu%7D%3D%5Cleft%20%5B%20%5Cbegin%7Barray%7D%7Bccccc%7D%20g_%7B00%7D%20%26%20g_%7B01%7D%20%26%20g_%7B02%7D%20%26%20g_%7B03%7D%5C%5C%20g_%7B10%7D%20%26%20g_%7B11%7D%20%26%20g_%7B12%7D%20%26%20g_%7B13%7D%5C%5C%20g_%7B20%7D%20%26%20g_%7B21%7D%20%26%20g_%7B22%7D%20%26%20g_%7B23%7D%5C%5C%20g_%7B30%7D%20%26%20g_%7B31%7D%20%26%20g_%7B32%7D%20%26%20g_%7B33%7D%20%5Cend%7Barray%7D%20%5Cright%20%5D)
+![equation](https://latex.codecogs.com/png.latex?%5Cdpi%7B100%7D%20%5Chuge%20%5Cbegin%7Bpmatrix%7D%20%5Cleft%20%28%201-%20%5Cfrac%7B2GM%7D%7Brc%5E2%7D%20%5Cright%20%29%20%26%200%20%26%200%26%200%5C%5C%200%26%20%5Cleft%20%28%201-%20%5Cfrac%7B2GM%7D%7Brc%5E2%7D%20%5Cright%20%29%5E%7B-1%7D%26%200%26%200%5C%5C%200%26%200%26%20r%5E%7B2%7D%20%26%200%5C%5C%200%26%200%26%200%26%20r%5E%7B2%7D%5Csin%5E%7B2%7D%5Ctheta%20%5Cend%7Bpmatrix%7D)
 
 SpacetimeEngine employs the Sympy 'Matrix' object for packaging the metric tensor and it serves as the essential parameter for constructing a 'SpaceTime' object. The Solutions module currently stores some well known metrics for study but these can be used for understanding how to construct a new solution for study.
 
