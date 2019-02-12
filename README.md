@@ -210,7 +210,7 @@ In differential geometry, the Weyl curvature tensor, named after Hermann Weyl, i
                     2      
                    c      
 
-[Schouten Tensor](https://en.wikipedia.org/wiki/Schouten_tensor) (In development)
+[Schouten Tensor](https://en.wikipedia.org/wiki/Schouten_tensor) (Experimental)
 =================
 
 ![equation](https://latex.codecogs.com/png.latex?%5Cdpi%7B100%7D%20%5Chuge%20P_%7Bij%7D%20%3D%20%5Cfrac%7B1%7D%7Bn-2%7D%5Cleft%20%28%20R_%7Bij%7D%20-%20%5Cfrac%7BR%7D%7B2d-2%7D%5C%3A%20g_%7Bij%7D%20%5Cright%20%29)
@@ -226,21 +226,21 @@ In differential geometry, the Weyl curvature tensor, named after Hermann Weyl, i
                      c ⋅r         
 
 
-[Geodesics parametrized by proper time](https://en.wikipedia.org/wiki/Geodesics_in_general_relativity#Mathematical_expression) (In development)
+[Geodesics parametrized by proper time](https://en.wikipedia.org/wiki/Geodesics_in_general_relativity#Mathematical_expression) (Experimental)
 =======================================
 
 ![equation](https://latex.codecogs.com/png.latex?%5Cdpi%7B100%7D%20%5Chuge%20%5Cfrac%7Bd%5E%7B2%7Dx%5E%7B%5Clambda%7D%7D%7Bd%5Ctau%5E%7B2%7D%7D&plus;%5CGamma%5E%7B%5Clambda%7D_%7B%5Cmu%5Cnu%7D%5Cfrac%7Bdx%5E%7B%5Cmu%7D%7D%7Bd%5Ctau%7D%5Cfrac%7Bdx%5E%7B%5Cnu%7D%7D%7Bd%5Ctau%7D%3D0)
 
     >>> spacetime.print_proper_acceleration(0)
 
-[Geodesics parametrized by coordinate time](https://en.wikipedia.org/wiki/Geodesics_in_general_relativity#Equivalent_mathematical_expression_using_coordinate_time_as_parameter) (In development)
+[Geodesics parametrized by coordinate time](https://en.wikipedia.org/wiki/Geodesics_in_general_relativity#Equivalent_mathematical_expression_using_coordinate_time_as_parameter) (Experimental)
 ===========================================
 
 ![equation](https://latex.codecogs.com/png.latex?%5Cdpi%7B100%7D%20%5Chuge%20%5Cfrac%7Bd%5E%7B2%7Dx%5E%7B%5Clambda%7D%7D%7Bdt%5E%7B2%7D%7D%3D%5CGamma%5E%7B0%7D_%7B%5Cmu%5Cnu%7D%5Cfrac%7Bdx%5E%7B%5Cmu%7D%7D%7Bdt%7D%5Cfrac%7Bdx%5E%7B%5Cnu%7D%7D%7Bdt%7D%5Cfrac%7Bdx%5E%7B%5Clambda%7D%7D%7Bdt%7D%5C%3B-%5C%3B%5CGamma%5E%7B%5Clambda%7D_%7B%5Cmu%5Cnu%7D%5Cfrac%7Bdx%5E%7B%5Cmu%7D%7D%7Bdt%7D%5Cfrac%7Bdx%5E%7B%5Cnu%7D%7D%7Bdt%7D)
 
     >>> spacetime.print_coordinate_acceleration(0)
 
-[Geodesic deviation equation](https://en.wikipedia.org/wiki/Geodesic_deviation#Mathematical_definition) (In development)
+[Geodesic deviation equation](https://en.wikipedia.org/wiki/Geodesic_deviation#Mathematical_definition) (Experimental)
 =============================
 ![equation](https://latex.codecogs.com/png.latex?%5Cdpi%7B100%7D%20%5Chuge%20%5Cfrac%7Bd%5E%7B2%7D%5Cxi%5E%7B%5Clambda%7D%7D%7Bdt%5E%7B2%7D%7D%3D-%5C%3BR%5E%7B%5Clambda%7D_%7B%5Cmu%5Cnu%5Cell%7D%5Cfrac%7Bdx%5E%7B%5Cmu%7D%7D%7Bdt%7D%5Cfrac%7Bdx%5E%7B%5Cnu%7D%7D%7Bdt%7D%5Cxi%5E%7B%5Cell%7D)
 
