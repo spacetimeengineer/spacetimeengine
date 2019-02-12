@@ -5,11 +5,11 @@ A Python utility built on Sympy (A symbolic mathematics library) which will anal
 
 ![equation](https://latex.codecogs.com/png.latex?%5Cdpi%7B100%7D%20%5Chuge%20G_%7B%5Cmu%5Cnu%7D%20&plus;%20%5CLambda%20g_%7B%5Cmu%5Cnu%7D%20%3D%20%5Cfrac%7B8%5Cpi%20G%7D%7Bc%5E4%7DT_%7B%5Cmu%5Cnu%7D)
 
-Prerequisites (In development)
+Prerequisites
 =============
 1.) Install Python3
 
-    $ sudo apt install python3-pip
+    $ sudo apt install python3
 
 2.) Install pip3
 
@@ -37,38 +37,36 @@ If you are a student or researcher and find yourself reading a publication based
 
 Running example.py
 ==================
-Example.py is a good choice for someone new to the project becasue it demonstrates the functionality suite. Depending on the metric you use for input, the compute time may vary exponentially. There are other metric solutions available for study! To change the metric just swap it out for another one or build your own. There are many metric examples to help you understand how to build input parameters.
+Example.py is a good choice for someone new to the project becasue it demonstrates the functionality suite. Depending on the metric you use for input, the compute time may vary exponentially. There are other metric solutions available for study in the Solutions module. To change the metric just swap it out for another one or build your own. There are many metric examples to help you understand how to build input parameters.
 
     $ python example.py
+    
+[Metric Tensor](https://en.wikipedia.org/wiki/Metric_tensor)
+===============
+
+Generally speaking, any metric solution to the Einstein field equations will be packaged into a geometric object known as the metric tensor. The metric tensor is often represented in matrix form and SpacetimeEngine adopts this representation.
+
+![equation](https://latex.codecogs.com/png.latex?%5Cdpi%7B100%7D%20%5Chuge%20%5C%3A%5C%3A%20g_%7B%5Cmu%5Cnu%7D%3D%5Cleft%20%5B%20%5Cbegin%7Barray%7D%7Bccccc%7D%20g_%7B00%7D%20%26%20g_%7B01%7D%20%26%20g_%7B02%7D%20%26%20g_%7B03%7D%5C%5C%20g_%7B10%7D%20%26%20g_%7B11%7D%20%26%20g_%7B12%7D%20%26%20g_%7B13%7D%5C%5C%20g_%7B20%7D%20%26%20g_%7B21%7D%20%26%20g_%7B22%7D%20%26%20g_%7B23%7D%5C%5C%20g_%7B30%7D%20%26%20g_%7B31%7D%20%26%20g_%7B32%7D%20%26%20g_%7B33%7D%20%5Cend%7Barray%7D%20%5Cright%20%5D)
+
+SpacetimeEngine employs the Sympy 'Matrix' object for packaging the metric tensor and it serves as the essential parameter for constructing a 'SpaceTime' object. The Solutions module currently stores some well known metrics for study but these can be used for understanding how to construct a new solution for study.
 
 Constructing a solution (In development)
 =======================
-Currently, metric solutions are packaged in the following way:
+Currently, metric solutions are packaged by specifying four key parameters and storing them in an array. These paramaters include the index configuration for the given metric solution, the coordinates to define the metric in terms of, the metric and the cosmological constant. Below represents a valid definition of the Schwarzschild stationary black hole solution.
 
     def schwarzschild(self):    
-        """
-        Description
-        ===========
-        Returns the classic black hole solution. Uncharged and rotationally stationary.
-        Examples
-        ========
-        >>> print(Solution().schwarzschild())
-        >>> 
-        LaTeX representation
-        ====================
-        """
-        
-        # Index configuration for the metric
-        index_config = "dd"
-        # Physical constants.
-        G, M, c = symbols('G M c')
+
         # Assigns meaning to the coordinates.
         x0, x1, x2, x3 = symbols('t r theta phi')
-        # Reference to the coordiante system.
+        # Groups the coordinates in an array.
         coordinate_set = [x0, x1, x2, x3]
-        # Cosmological constant.
-        cosmological_constant = 0
-        # Metric solution.
+        
+        
+        # Constants required to describe the metric.
+        G, M, c = symbols('G M c')
+        
+        
+        # Metric.
         metric = Matrix([    
                             [ (1-(2*G*M)/(x1*c**2)), 0, 0, 0 ], 
                             [ 0, - (1-(2*G*M)/(x1*c**2))**(-1), 0, 0 ], 
@@ -76,32 +74,25 @@ Currently, metric solutions are packaged in the following way:
                             [ 0, 0, 0, - x1**2*sin(x2)**2 ]
                         ])
         
+        # Describes the index configuration which which the metric represents.
+        index_config = "dd"
+        
+        
+        # Cosmological constant.
+        cosmological_constant = 0
+        
+        
         # An array detailing the solution.
         solution_array = [ metric, coordinate_set, index_config, cosmological_constant ]
+        
+        # Returns solution
         return solution_array
-
-
-[Metric Tensor](https://en.wikipedia.org/wiki/Metric_tensor)
-===============
-
-Generally any metric solution to the Einstein field equations will be packaged into a geometric object known as the Metric Tensor. The metric tensor is often represented in matrix form and the spacetime-toolkit prefers this representation.
-
-![equation](https://latex.codecogs.com/png.latex?%5Cdpi%7B100%7D%20%5Chuge%20%5C%3A%5C%3A%20g_%7B%5Cmu%5Cnu%7D%3D%5Cleft%20%5B%20%5Cbegin%7Barray%7D%7Bccccc%7D%20g_%7B00%7D%20%26%20g_%7B01%7D%20%26%20g_%7B02%7D%20%26%20g_%7B03%7D%5C%5C%20g_%7B10%7D%20%26%20g_%7B11%7D%20%26%20g_%7B12%7D%20%26%20g_%7B13%7D%5C%5C%20g_%7B20%7D%20%26%20g_%7B21%7D%20%26%20g_%7B22%7D%20%26%20g_%7B23%7D%5C%5C%20g_%7B30%7D%20%26%20g_%7B31%7D%20%26%20g_%7B32%7D%20%26%20g_%7B33%7D%20%5Cend%7Barray%7D%20%5Cright%20%5D)
-
-The spacetime-toolkit employs the Sympy 'Matrix' object for packaging the metric tensor and it serves as one of two input parameters for constructing a 'SpaceTime' object.
-
-    >>> metric = Matrix([    
-                            [ (1-(2*G*M)/(r*c**2)), 0, 0, 0 ], 
-                            [ 0, - (1-(2*G*M)/(r*c**2))**(-1), 0, 0 ], 
-                            [ 0, 0, - r**2, 0 ], 
-                            [ 0, 0, 0, - r**2*sin(th)**2 ]
-                        ])
                                         
 To construct a 'SpaceTime' object just execute the below command and consider the solution given since high complexity solutions can take exponentially longer to process.
 
     >>> spacetime = SpaceTime(Solution().schwarzschild())
 
-After a few moments (if you are using the Schwarzschild solution) you will be able to call various coefficients which associate with the given spacetime.
+The index configuration in this case is "dd" which represents down-down which represents a double covariant index configuration. These can be "uu", "dd", "ud", "du" but this library currently only supports  
 
 [Stress-Energy-Momentum Tensor](https://en.wikipedia.org/wiki/Stress%E2%80%93energy_tensor)
 =============================
