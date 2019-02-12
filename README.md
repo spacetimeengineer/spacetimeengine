@@ -85,6 +85,7 @@ Currently, metric solutions are packaged by specifying four key parameters and s
         # An array detailing the solution.
         solution_array = [ metric, coordinate_set, index_config, cosmological_constant ]
         
+        
         # Returns solution
         return solution_array
                                         
@@ -209,11 +210,20 @@ In differential geometry, the Weyl curvature tensor, named after Hermann Weyl, i
                     2      
                    c      
 
-
 [Schouten Tensor](https://en.wikipedia.org/wiki/Schouten_tensor) (In development)
 =================
 
 ![equation](https://latex.codecogs.com/png.latex?%5Cdpi%7B100%7D%20%5Chuge%20P_%7Bij%7D%20%3D%20%5Cfrac%7B1%7D%7Bn-2%7D%5Cleft%20%28%20R_%7Bij%7D%20-%20%5Cfrac%7BR%7D%7B2d-2%7D%5C%3A%20g_%7Bij%7D%20%5Cright%20%29)
+
+    >>> spacetime.print_all_separation_geodesic_accelerations()
+
+                       2   
+            2⋅G⋅M⋅r⋅sin (θ)
+    C₃₂₂₃ = ───────────────
+                    2      
+                   c      
+
+
 
 [Geodesics parametrized by proper time](https://en.wikipedia.org/wiki/Geodesics_in_general_relativity#Mathematical_expression) (In development)
 =======================================
@@ -229,3 +239,36 @@ In differential geometry, the Weyl curvature tensor, named after Hermann Weyl, i
 [Geodesic deviation equation](https://en.wikipedia.org/wiki/Geodesic_deviation#Mathematical_definition) (In development)
 =============================
 ![equation](https://latex.codecogs.com/png.latex?%5Cdpi%7B100%7D%20%5Chuge%20%5Cfrac%7Bd%5E%7B2%7D%5Cxi%5E%7B%5Clambda%7D%7D%7Bdt%5E%7B2%7D%7D%3D-%5C%3BR%5E%7B%5Clambda%7D_%7B%5Cmu%5Cnu%5Cell%7D%5Cfrac%7Bdx%5E%7B%5Cmu%7D%7D%7Bdt%7D%5Cfrac%7Bdx%5E%7B%5Cnu%7D%7D%7Bdt%7D%5Cxi%5E%7B%5Cell%7D)
+
+
+              ⎛                                                                                                       2                              ⎞
+              ⎜ 4  2 ⎛   d          d    ⎞ d          2  3 ⎛         2  ⎞ ⎛   d          d    ⎞ d       ⎛         2  ⎞  ⎛     d          d    ⎞ d    ⎟
+  2       G⋅M⋅⎜c ⋅r ⋅⎜ξ₁⋅──(φ) - ξ₃⋅──(r)⎟⋅──(r) + 2⋅c ⋅r ⋅⎝2⋅G⋅M - c ⋅r⎠⋅⎜ξ₂⋅──(φ) - ξ₃⋅──(θ)⎟⋅──(θ) + ⎝2⋅G⋅M - c ⋅r⎠ ⋅⎜- ξ₀⋅──(φ) + ξ₃⋅──(t)⎟⋅──(t)⎟
+ d            ⎝      ⎝   dτ         dτ   ⎠ dτ                             ⎝   dτ         dτ   ⎠ dτ                      ⎝     dτ         dτ   ⎠ dτ   ⎠
+───(ξ₀) = ────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+  2                                                                    4  4 ⎛         2  ⎞                                                            
+dτ                                                                    c ⋅r ⋅⎝2⋅G⋅M - c ⋅r⎠                                                            
+
+              ⎛                                                                                                       2                              ⎞
+              ⎜ 4  2 ⎛   d          d    ⎞ d          2  3 ⎛         2  ⎞ ⎛   d          d    ⎞ d       ⎛         2  ⎞  ⎛     d          d    ⎞ d    ⎟
+  2       G⋅M⋅⎜c ⋅r ⋅⎜ξ₁⋅──(φ) - ξ₃⋅──(r)⎟⋅──(r) + 2⋅c ⋅r ⋅⎝2⋅G⋅M - c ⋅r⎠⋅⎜ξ₂⋅──(φ) - ξ₃⋅──(θ)⎟⋅──(θ) + ⎝2⋅G⋅M - c ⋅r⎠ ⋅⎜- ξ₀⋅──(φ) + ξ₃⋅──(t)⎟⋅──(t)⎟
+ d            ⎝      ⎝   dτ         dτ   ⎠ dτ                             ⎝   dτ         dτ   ⎠ dτ                      ⎝     dτ         dτ   ⎠ dτ   ⎠
+───(ξ₁) = ────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+  2                                                                    4  4 ⎛         2  ⎞                                                            
+dτ                                                                    c ⋅r ⋅⎝2⋅G⋅M - c ⋅r⎠                                                            
+
+              ⎛                                                                                                       2                              ⎞
+              ⎜ 4  2 ⎛   d          d    ⎞ d          2  3 ⎛         2  ⎞ ⎛   d          d    ⎞ d       ⎛         2  ⎞  ⎛     d          d    ⎞ d    ⎟
+  2       G⋅M⋅⎜c ⋅r ⋅⎜ξ₁⋅──(φ) - ξ₃⋅──(r)⎟⋅──(r) + 2⋅c ⋅r ⋅⎝2⋅G⋅M - c ⋅r⎠⋅⎜ξ₂⋅──(φ) - ξ₃⋅──(θ)⎟⋅──(θ) + ⎝2⋅G⋅M - c ⋅r⎠ ⋅⎜- ξ₀⋅──(φ) + ξ₃⋅──(t)⎟⋅──(t)⎟
+ d            ⎝      ⎝   dτ         dτ   ⎠ dτ                             ⎝   dτ         dτ   ⎠ dτ                      ⎝     dτ         dτ   ⎠ dτ   ⎠
+───(ξ₂) = ────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+  2                                                                    4  4 ⎛         2  ⎞                                                            
+dτ                                                                    c ⋅r ⋅⎝2⋅G⋅M - c ⋅r⎠                                                            
+
+              ⎛                                                                                                       2                              ⎞
+              ⎜ 4  2 ⎛   d          d    ⎞ d          2  3 ⎛         2  ⎞ ⎛   d          d    ⎞ d       ⎛         2  ⎞  ⎛     d          d    ⎞ d    ⎟
+  2       G⋅M⋅⎜c ⋅r ⋅⎜ξ₁⋅──(φ) - ξ₃⋅──(r)⎟⋅──(r) + 2⋅c ⋅r ⋅⎝2⋅G⋅M - c ⋅r⎠⋅⎜ξ₂⋅──(φ) - ξ₃⋅──(θ)⎟⋅──(θ) + ⎝2⋅G⋅M - c ⋅r⎠ ⋅⎜- ξ₀⋅──(φ) + ξ₃⋅──(t)⎟⋅──(t)⎟
+ d            ⎝      ⎝   dτ         dτ   ⎠ dτ                             ⎝   dτ         dτ   ⎠ dτ                      ⎝     dτ         dτ   ⎠ dτ   ⎠
+───(ξ₃) = ────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+  2                                                                    4  4 ⎛         2  ⎞                                                            
+dτ                                                                    c ⋅r ⋅⎝2⋅G⋅M - c ⋅r⎠ 
