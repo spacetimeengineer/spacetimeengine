@@ -236,3 +236,4 @@ In differential geometry, the Weyl curvature tensor, named after Hermann Weyl, i
 
 [Geodesic deviation equation](https://en.wikipedia.org/wiki/Geodesic_deviation#Mathematical_definition) (In development)
 =============================
+![equation](https://latex.codecogs.com/png.latex?%5Cdpi%7B100%7D%20%5Chuge%20%5Cfrac%7Bd%5E%7B2%7D%5Cxi%5E%7B%5Clambda%7D%7D%7Bdt%5E%7B2%7D%7D%3D-%5C%3BR%5E%7B%5Clambda%7D_%7B%5Cmu%5Cnu%5Cell%7D%5Cfrac%7Bdx%5E%7B%5Cmu%7D%7D%7Bdt%7D%5Cfrac%7Bdx%5E%7B%5Cnu%7D%7D%7Bdt%7D%5Cxi%5E%7B%5Cell%7D)
