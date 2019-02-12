@@ -5,7 +5,7 @@ A Python utility built on Sympy (A symbolic mathematics library) which will anal
 
 ![equation](https://latex.codecogs.com/png.latex?%5Cdpi%7B100%7D%20%5Chuge%20G_%7B%5Cmu%5Cnu%7D%20&plus;%20%5CLambda%20g_%7B%5Cmu%5Cnu%7D%20%3D%20%5Cfrac%7B8%5Cpi%20G%7D%7Bc%5E4%7DT_%7B%5Cmu%5Cnu%7D)
 
-Prerequisites
+Prerequisites (In development)
 =============
 1.) Install Python3
 
@@ -15,7 +15,7 @@ Prerequisites
 
     $ sudo apt install python3-pip
 
-Installation with pip
+Installation with pip (In development)
 =====================
 
     $ pip3 install sympy spacetimeengine    
@@ -41,7 +41,7 @@ Example.py is a good choice for someone new to the project becasue it demonstrat
 
     $ python example.py
 
-Constructing a solution
+Constructing a solution (In development)
 =======================
 Currently, metric solutions are packaged in the following way:
 
@@ -219,17 +219,17 @@ In differential geometry, the Weyl curvature tensor, named after Hermann Weyl, i
                    c      
 
 
-[Schouten Tensor](https://en.wikipedia.org/wiki/Schouten_tensor)
+[Schouten Tensor](https://en.wikipedia.org/wiki/Schouten_tensor) (In development)
 =================
-[Cotton Tensor](https://en.wikipedia.org/wiki/Cotton_tensor)
+[Cotton Tensor](https://en.wikipedia.org/wiki/Cotton_tensor) (In development)
 =================
-[Geodesics parametrized by proper time](https://en.wikipedia.org/wiki/Geodesics_in_general_relativity#Mathematical_expression)
+[Geodesics parametrized by proper time](https://en.wikipedia.org/wiki/Geodesics_in_general_relativity#Mathematical_expression) (In development)
 =======================================
 
 
-[Geodesics parametrized by coordinate time](https://en.wikipedia.org/wiki/Geodesics_in_general_relativity#Equivalent_mathematical_expression_using_coordinate_time_as_parameter)
+[Geodesics parametrized by coordinate time](https://en.wikipedia.org/wiki/Geodesics_in_general_relativity#Equivalent_mathematical_expression_using_coordinate_time_as_parameter) (In development)
 ===========================================
 
 
-[Geodesic deviation equation](https://en.wikipedia.org/wiki/Geodesic_deviation#Mathematical_definition)
+[Geodesic deviation equation](https://en.wikipedia.org/wiki/Geodesic_deviation#Mathematical_definition) (In development)
 =============================
