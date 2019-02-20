@@ -4,6 +4,7 @@ develop-eggs
 downloads
 eggs
 parts
+spacetimeengine.egg-info
 .egg-info
 src/*.egg-info
 lib
