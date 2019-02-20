@@ -1,4 +1,4 @@
-![alt text](https://github.com/spacetimeengineer/spacetime-engine/blob/master/spacetimeengine_logo.png)
+![alt text](https://github.com/spacetimeengineer/spacetimeengine/blob/master/resources/spacetimeengine_logo.png)
 Beta
 
 A Python utility built on Sympy (A symbolic mathematics library) which will analyze any given metric solution to the Einstein field equations. 
