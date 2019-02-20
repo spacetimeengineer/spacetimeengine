@@ -2,10 +2,14 @@ README.md
 setup.py
 spacetimeengine/__init__.py
 spacetimeengine/example.py
+spacetimeengine/utilities.py
 spacetimeengine.egg-info/PKG-INFO
 spacetimeengine.egg-info/SOURCES.txt
 spacetimeengine.egg-info/dependency_links.txt
 spacetimeengine.egg-info/requires.txt
 spacetimeengine.egg-info/top_level.txt
+spacetimeengine/src/__init__.py
+spacetimeengine/src/solutions.py
+spacetimeengine/src/spacetime.py
 spacetimeengine/tests/__init__.py
 spacetimeengine/tests/test_spacetime.py

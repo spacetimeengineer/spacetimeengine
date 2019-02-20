@@ -2,18 +2,23 @@ import setuptools
 from setuptools import setup, find_packages
 import unittest
 
-setup(name="spacetimeengine", packages=find_packages())
 with open("README.md", "r") as fh:
     long_description = fh.read()
 
 requirements = ['sympy']
 
+modules = [
+    'spacetimeengine.src.solutions',
+    'spacetimeengine.src.spacetime',
+]
+
 setuptools.setup(
     name="spacetimeengine",
-    version="0.1.5",
+    version="0.1.10",
+    packages=find_packages(),
     author="Michael.C Ryan",
     author_email="spacetime.engineer@gmail.com",
-    description="A python physics utility which will analyze any given metric solution to the Einstein field equations.",
+    description="A python physics utility which can analyze any given metric solution to the Einstein field equations.",
     test_suite='nose.collector',
     tests_require=['nose'],
     long_description=long_description,
