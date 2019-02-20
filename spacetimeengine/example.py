@@ -1,6 +1,5 @@
 #!/usr/bin/env python
-from spacetimeengine.solutions import *
-from spacetimeengine.spacetime import *
+
 
 
 def main():
