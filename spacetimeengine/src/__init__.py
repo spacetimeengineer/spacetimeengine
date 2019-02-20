@@ -1,2 +1,1 @@
-from spacetimeengine.src.solutions import *
-from spacetimeengine.src.spacetime import *
+from spacetimeengine.src import *
