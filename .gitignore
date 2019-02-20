@@ -1,1 +1,10 @@
-
+.installed.cfg
+bin
+develop-eggs
+downloads
+eggs
+parts
+.egg-info
+src/*.egg-info
+lib
+lib64
