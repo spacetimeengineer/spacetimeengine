@@ -9,3 +9,4 @@ spacetimeengine.egg-info
 src/*.egg-info
 lib
 lib64
+.DS_Store
