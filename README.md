@@ -7,6 +7,7 @@ A Python utility built on Sympy (A symbolic mathematics library) which will anal
 
 Prerequisites
 =============
+
 1.) Install Python3
 
     $ sudo apt install python3
@@ -15,40 +16,54 @@ Prerequisites
 
     $ sudo apt install python3-pip
 
-Installation with pip (In development)
+Installation with pip
 =====================
 
-    $ pip3 install sympy spacetimeengine    
+1.) Install with pip
+
+    $ pip3 install spacetimeengine    
     
+2.) Enter python shell
+
+    $ python3
+    
+3.) Import spacetimeengine
+
+    >> from spacetimeengine import *
+    
+4.) Create a SpaceTime object which describes the Schwarzschild spacetime
+
+    >> schwarzschild_spacetime = SpaceTime(Solution().schwarzschild())
+    
+5.) Enjoy watching the coefficients get computed.
+
 Installation with git
 =====================
 
-3.) Clone repository
+1.) Clone repository
 
     $ git clone https://github.com/spacetimeengineer/spacetimeengine
 
-4.) Enter directory
+2.) Enter directory
 
-    $ cd spacetimeengine
+    $ cd spacetimeengine/spacetimeengine/samples
+    
+3.) Run example.py
+
+    $ python3 example.py
 
 Suggested Use
 =============
-If you are a student or researcher and find yourself reading a publication based in General Relativity which provides metric values then this utility can be used for working out the curvature coefficients that associate with the metric. This can be helpful as you read through the publication since you will be able to cross reference the information provided by the toolkit and the publication for richer analysis (This is why I developed it originally).
-
-Running example.py
-==================
-Example.py is a good choice for someone new to the project becasue it demonstrates the functionality suite. Depending on the metric you use for input, the compute time may vary exponentially. There are other metric solutions available for study in the Solutions module. To change the metric just swap it out for another one or build your own. There are many metric examples to help you understand how to build input parameters.
-
-    $ python example.py
+If you are a student or researcher and find yourself reading a publication based in General Relativity which provides metric solutions then this utility can be used for working out the curvature coefficients which associate with the solution. This can be a helpful utility as you read through the literature since you will be able to cross reference the information provided by the literature with the values the spacetimeengine provides (This is why I developed it originally). Also this utility can be used for error checking.
     
 [Metric Tensor](https://en.wikipedia.org/wiki/Metric_tensor)
 ===============
 
-Generally speaking, any metric solution to the Einstein field equations will be packaged into a geometric object known as the metric tensor. The metric tensor is often represented in matrix form and SpacetimeEngine adopts this representation.
+Generally speaking, any metric solution to the Einstein field equations will be packaged into a geometric object known as the metric tensor. The metric tensor is often represented in matrix form and the spacetimeengine package adopts this representation.
 
 ![equation](https://latex.codecogs.com/png.latex?%5Cdpi%7B100%7D%20%5Chuge%20%5Cbegin%7Bpmatrix%7D%20%5Cleft%20%28%201-%20%5Cfrac%7B2GM%7D%7Brc%5E2%7D%20%5Cright%20%29%20%26%200%20%26%200%26%200%5C%5C%200%26%20-%5Cleft%20%28%201-%20%5Cfrac%7B2GM%7D%7Brc%5E2%7D%20%5Cright%20%29%5E%7B-1%7D%26%200%26%200%5C%5C%200%26%200%26%20-r%5E%7B2%7D%20%26%200%5C%5C%200%26%200%26%200%26%20-r%5E%7B2%7D%5Csin%5E%7B2%7D%5Ctheta%20%5Cend%7Bpmatrix%7D)
 
-SpacetimeEngine employs the Sympy 'Matrix' object for packaging the metric tensor and it serves as the essential parameter for constructing a 'SpaceTime' object. The Solutions module currently stores some well known metrics for study but these can be used for understanding how to construct a new solution for study.
+The spacetimeengine package employs the Sympy 'Matrix' object for packaging the metric tensor and it serves as the essential parameter for constructing a 'SpaceTime' object. The Solutions module currently stores some well known metrics for study but these can be used for understanding how to construct a new solutions.
 
 Constructing a solution (In development)
 =======================
@@ -93,11 +108,11 @@ To construct a 'SpaceTime' object just execute the below command and consider th
 
     >>> spacetime = SpaceTime(Solution().schwarzschild())
 
-The index configuration in this case is "dd" which represents down-down which represents a double covariant index configuration. These can be "uu", "dd", "ud", "du" but this library currently only supports  
+The index configuration in this case is "dd" which represents a down-down configuration which reflects a double covariant index configuration. These can be "uu", "dd", "ud", "du" but this library currently only supports certain index configurations depending on the quantity in question.
 
 [Stress-Energy-Momentum Tensor](https://en.wikipedia.org/wiki/Stress%E2%80%93energy_tensor)
 =============================
-The Einstein field equations describe the equivilence of space-time curvature and mass-energy. The mass-energy is represented by the coefficents encompassed within the stress-energy-momentum tensor denoted by T_{\mu\nu}. The cosmological constant denoted by Lambda is treated as an input parameter and represents the dark energy thought to be responsble for the accellerated expansion of the cosmos.
+The Einstein field equations describe the equivilence of space-time curvature to mass-energy. The mass-energy is described by the coefficents encompassed within the stress-energy-momentum tensor denoted by T_{\mu\nu}. The cosmological constant denoted by Lambda is treated as an input parameter (since it is independent of the metric in most cases) and represents the dark energy thought to be responsble for the accellerated expansion of the cosmos.
 
 ![equation](https://latex.codecogs.com/png.latex?%5Cdpi%7B100%7D%20%5Chuge%20T_%7B%5Cmu%20%5Cnu%20%7D%3D%7B%5Cfrac%20%7Bc%5E%7B4%7D%7D%7B8%5Cpi%20G%7D%7D%5Cleft%20%28%20G_%7B%5Cmu%20%5Cnu%20%7D&plus;%5CLambda%20g_%7B%5Cmu%20%5Cnu%20%7D%20%5Cright%20%29)
 
