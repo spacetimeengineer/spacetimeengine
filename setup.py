@@ -7,14 +7,9 @@ with open("README.md", "r") as fh:
 
 requirements = ['sympy']
 
-modules = [
-    'spacetimeengine.src.solutions',
-    'spacetimeengine.src.spacetime',
-]
-
 setuptools.setup(
     name="spacetimeengine",
-    version="0.1.10",
+    version="0.1.11",
     packages=find_packages(),
     author="Michael.C Ryan",
     author_email="spacetime.engineer@gmail.com",

@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 from sympy import *
-from spacetimeengine.spacetime import *
-from spacetimeengine.solutions import *
+from src.spacetime import *
+from src.solutions import *
 import unittest
 
 class Test(unittest.TestCase):

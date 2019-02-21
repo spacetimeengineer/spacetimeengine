@@ -1,5 +1,5 @@
 #!/usr/bin/env python
-
+from spacetimeengine import *
 
 
 def main():
@@ -22,7 +22,7 @@ def main():
     # Gravity as we know it, without the high order effects.
     newtonian_gravity = Solution().weak_field_approximation()
     
-    newtonian = SpaceTime(Solution().hypersphere_II())
+    newtonian = SpaceTime(Solution().hypersphere())
 
 if __name__ == "__main__":
     main()
