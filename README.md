@@ -8,14 +8,27 @@ A Python utility built on Sympy (A symbolic mathematics library) which will anal
 Prerequisites
 =============
 
-1.) Install Python3
+1.) Install Python3 (Linux, MacOS)
 
     $ sudo apt install python3
 
-2.) Install pip3
+2.) Install pip3 (Linux, MacOs)
 
     $ sudo apt install python3-pip
 
+3a.) Install git (Linux)
+
+    $ sudo apt-get install git
+    
+3b.) Install git (Mac)
+    
+    $ ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)" brew doctor
+    $ brew install git
+    
+3b.) Install git (Windows)
+
+    Navigate to https://gitforwindows.org/
+    
 Installation with pip
 =====================
 
