@@ -105,7 +105,7 @@ The spacetimeengine package employs the Sympy 'Matrix' object for packaging the 
 
 Constructing a solution (In development)
 =======================
-Currently, metric solutions are packaged by specifying four key parameters and storing them in an array. These paramaters include the index configuration for the given metric solution, the coordinates to define the metric in terms of, the metric itself and the cosmological constant. Below represents a valid definition of the Schwarzschild stationary black hole solution.
+Currently, all metric solutions are packaged by specifying four key parameters and storing them in an array. These paramaters include an index configuration for the given metric solution, the coordinates to define the metric in terms of, the metric itself and the cosmological constant. It is important to note that a zero-valued cosmological constant indicates the employment of a classical formulation to the Einstein filed equations. Below represents a valid definition of the Schwarzschild stationary black hole solution.
 
     def schwarzschild(self):    
 
@@ -142,7 +142,7 @@ Currently, metric solutions are packaged by specifying four key parameters and s
         # Returns solution
         return solution_array
                                         
-To construct a 'SpaceTime' object just execute the below command and consider the solution given since high complexity solutions can take exponentially longer to process.
+It may be helpful to store the solutions in a separate module. I prefer to keep my solutions in a 'Solution()' class which can be found in the 'solutions' module. To construct a 'SpaceTime' object just execute the command below but first consider the given solution since high complexity solutions can take exponentially longer to process.
 
     >>> spacetime = SpaceTime(Solution().schwarzschild())
 
@@ -150,7 +150,7 @@ The index configuration in this case is "dd" which represents a down-down config
 
 [Stress-Energy-Momentum Tensor](https://en.wikipedia.org/wiki/Stress%E2%80%93energy_tensor)
 =============================
-The Einstein field equations describe the equivilence of space-time curvature to mass-energy. The mass-energy is described by the coefficents encompassed within the stress-energy-momentum tensor denoted by T_{\mu\nu}. The cosmological constant denoted by Lambda is treated as an input parameter (since it is independent of the metric in most cases) and represents the dark energy thought to be responsble for the accellerated expansion of the cosmos.
+The Einstein field equations describe the equivilence of space-time curvature to mass-energy. The mass-energy is described by the coefficents encompassed within the stress-energy-momentum tensor denoted by T_{\mu\nu}. The cosmological constant denoted by Lambda is treated as an input parameter (since it is independent of the metric in most cases) and represents the dark energy thought to be responsble for the accellerated expansion of the cosmos. 
 
 ![equation](https://latex.codecogs.com/png.latex?%5Cdpi%7B100%7D%20%5Chuge%20T_%7B%5Cmu%20%5Cnu%20%7D%3D%7B%5Cfrac%20%7Bc%5E%7B4%7D%7D%7B8%5Cpi%20G%7D%7D%5Cleft%20%28%20G_%7B%5Cmu%20%5Cnu%20%7D&plus;%5CLambda%20g_%7B%5Cmu%20%5Cnu%20%7D%20%5Cright%20%29)
 
