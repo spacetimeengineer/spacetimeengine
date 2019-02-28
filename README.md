@@ -5,34 +5,59 @@ A Python utility built on Sympy (A symbolic mathematics library) which will anal
 
 ![equation](https://latex.codecogs.com/png.latex?%5Cdpi%7B100%7D%20%5Chuge%20G_%7B%5Cmu%5Cnu%7D%20&plus;%20%5CLambda%20g_%7B%5Cmu%5Cnu%7D%20%3D%20%5Cfrac%7B8%5Cpi%20G%7D%7Bc%5E4%7DT_%7B%5Cmu%5Cnu%7D)
 
-Prerequisites
-=============
+Prerequisites (Linux)
+=====================
 
-1.) Install Python3 (Linux, MacOS)
+1.) Install Python3
 
     $ sudo apt install python3
 
-2.) Install pip3 (Linux, MacOs)
+2.) Install pip3
 
     $ sudo apt install python3-pip
 
-3a.) Install git (Linux)
+3.) Install git
 
     $ sudo apt-get install git
     
-3b.) Install git (Mac)
+Prerequisites (MacOS)
+=====================
+  
+1.) Install homebrew  
     
     $ ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)" brew doctor
+    
+2.) Set python as an enviornmental varible. 
+
+    $ export PATH="/usr/local/opt/python/libexec/bin:$PATH"
+    
+2.) Install git
+
     $ brew install git
     
-3b.) Install git (Windows)
+3.) Install python3 and pip3 (https://docs.python-guide.org/starting/install3/osx/)
+
+    $ brew install python3
+    $ brew postinstall python3
+    
+Prerequisites (Windows)
+=======================
+1.) Install Python3
+
+    
+
+2.) Install pip3
+
+    
+    
+3.) Install git
 
     Navigate to https://gitforwindows.org/
     
-Installation with pip
-=====================
+Installation with pip3
+======================
 
-1.) Install with pip
+1.) Install with pip3
 
     $ pip3 install spacetimeengine    
     
