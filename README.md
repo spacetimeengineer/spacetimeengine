@@ -80,7 +80,7 @@ The spacetimeengine package employs the Sympy 'Matrix' object for packaging the 
 
 Constructing a solution (In development)
 =======================
-Currently, metric solutions are packaged by specifying four key parameters and storing them in an array. These paramaters include the index configuration for the given metric solution, the coordinates to define the metric in terms of, the metric and the cosmological constant. Below represents a valid definition of the Schwarzschild stationary black hole solution.
+Currently, metric solutions are packaged by specifying four key parameters and storing them in an array. These paramaters include the index configuration for the given metric solution, the coordinates to define the metric in terms of, the metric itself and the cosmological constant. Below represents a valid definition of the Schwarzschild stationary black hole solution.
 
     def schwarzschild(self):    
 
