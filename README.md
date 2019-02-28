@@ -74,7 +74,7 @@ If you are a student or researcher and find yourself reading a publication based
 
 Generally speaking, any metric solution to the Einstein field equations will be packaged into a geometric object known as the metric tensor. The metric tensor is often represented in matrix form and the spacetimeengine package adopts this representation.
 
-![equation](https://latex.codecogs.com/png.latex?%5Cdpi%7B100%7D%20%5Chuge%20%5Cbegin%7Bpmatrix%7D%20%5Cleft%20%28%201-%20%5Cfrac%7B2GM%7D%7Brc%5E2%7D%20%5Cright%20%29%20%26%200%20%26%200%26%200%5C%5C%200%26%20-%5Cleft%20%28%201-%20%5Cfrac%7B2GM%7D%7Brc%5E2%7D%20%5Cright%20%29%5E%7B-1%7D%26%200%26%200%5C%5C%200%26%200%26%20-r%5E%7B2%7D%20%26%200%5C%5C%200%26%200%26%200%26%20-r%5E%7B2%7D%5Csin%5E%7B2%7D%5Ctheta%20%5Cend%7Bpmatrix%7D)
+![equation](https://latex.codecogs.com/png.latex?%5Cdpi%7B100%7D%20%5Chuge%20g_%7B%5Cmu%5Cnu%7D%3D%5Cbegin%7Bbmatrix%7D%20%5Cleft%20%28%201-%5Cfrac%7B2GM%7D%7Brc%5E%7B2%7D%7D%20%5Cright%20%29%20%26%200%20%26%200%20%26%200%20%5C%5C%200%20%26%20-%5Cleft%20%28%201-%5Cfrac%7B2GM%7D%7Brc%5E%7B2%7D%7D%20%5Cright%20%29%5E%7B-1%7D%20%26%200%20%26%200%20%5C%5C%200%20%26%200%20%26%20-r%5E%7B2%7D%20%26%200%20%5C%5C%200%20%26%200%20%26%200%20%26%20-r%5E%7B2%7D%5Csin%5E%7B2%7D%5Ctheta%20%5Cend%7Bbmatrix%7D)
 
 The spacetimeengine package employs the Sympy 'Matrix' object for packaging the metric tensor and it serves as the essential parameter for constructing a 'SpaceTime' object. The Solutions module currently stores some well known metrics for study but these can be used for understanding how to construct a new solutions.
 
