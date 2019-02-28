@@ -305,5 +305,4 @@ This is a measure of how much two initial paralell geodesic paths will deviate o
 
 Buy me a beer
 =============
-# Donate button in github
 [![Donate](https://img.shields.io/badge/Donate-PayPal-green.svg)]()
