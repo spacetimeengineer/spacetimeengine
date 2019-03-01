@@ -92,7 +92,7 @@ Installation with git
 
 Suggested Use
 =============
-If you are a student or researcher and find yourself reading a publication based in General Relativity which provides metric solutions then this utility can be used for working out the curvature coefficients which associate with the solution. This can be a helpful utility as you read through the literature since you will be able to cross reference the information provided by the literature with the values the spacetimeengine provides (This is why I developed it originally). Also this utility can be used for error checking.
+If you are a student or researcher, and you find yourself reading a publication based in General Relativity which provides metric solutions, then this utility can be used for working out the curvature coefficients which associate with the solution provided by the user. This can be a helpful utility as you read through the literature because you will be able to cross-reference the information provided by the literature with the values the spacetimeengine provides (this is why I developed it originally). More commonly, this utility can be used for error checking.
     
 [Metric Tensor](https://en.wikipedia.org/wiki/Metric_tensor)
 ===============
@@ -101,11 +101,11 @@ Generally speaking, any metric solution to the Einstein field equations will be 
 
 ![equation](https://latex.codecogs.com/png.latex?%5Cdpi%7B100%7D%20%5Chuge%20g_%7B%5Cmu%5Cnu%7D%3D%5Cbegin%7Bbmatrix%7D%20%5Cleft%20%28%201-%5Cfrac%7B2GM%7D%7Brc%5E%7B2%7D%7D%20%5Cright%20%29%20%26%200%20%26%200%20%26%200%20%5C%5C%200%20%26%20-%5Cleft%20%28%201-%5Cfrac%7B2GM%7D%7Brc%5E%7B2%7D%7D%20%5Cright%20%29%5E%7B-1%7D%20%26%200%20%26%200%20%5C%5C%200%20%26%200%20%26%20-r%5E%7B2%7D%20%26%200%20%5C%5C%200%20%26%200%20%26%200%20%26%20-r%5E%7B2%7D%5Csin%5E%7B2%7D%5Ctheta%20%5Cend%7Bbmatrix%7D)
 
-The spacetimeengine package employs the Sympy 'Matrix' object for packaging the metric tensor and it serves as the essential parameter for constructing a 'SpaceTime' object. The Solutions module currently stores some well known metrics for study but these can be used for understanding how to construct a new solutions.
+The spacetimeengine package employs the Sympy 'Matrix' object for packaging the metric tensor and it serves as the essential parameter for constructing a 'SpaceTime' object. The Solutions module currently stores some well-known metrics for study, but these can be used for understanding how to construct new solutions.
 
 Constructing a solution (In development)
 =======================
-Currently, all metric solutions are packaged by specifying four key parameters and storing them in an array. These paramaters include an index configuration for the given metric solution, the coordinates to define the metric in terms of, the metric itself and the cosmological constant. It is important to note that a zero-valued cosmological constant indicates the employment of a classical formulation to the Einstein filed equations. Below represents a valid definition of the Schwarzschild stationary black hole solution.
+Currently, all metric solutions are packaged by specifying four key parameters and storing them in an array. These parameters include an index configuration for the given metric solution, the coordinates to define the metric in terms of, the metric itself, and the cosmological constant. It is important to note that a zero-valued cosmological constant indicates the employment of a classical formulation to the Einstein field equations. Below represents a valid definition of the Schwarzschild stationary black hole solution.
 
     def schwarzschild(self):    
 
@@ -142,11 +142,11 @@ Currently, all metric solutions are packaged by specifying four key parameters a
         # Returns solution
         return solution_array
                                         
-It may be helpful to store the solutions in a separate module. I prefer to keep my solutions in a 'Solution()' class which can be found in the 'solutions' module. To construct a 'SpaceTime' object just execute the command below but first consider the given solution since high complexity solutions can take exponentially longer to process.
+It may be helpful to store the solutions in a separate module. I prefer to keep my solutions in a 'Solution()' class, which can be found in the 'solutions' module. To construct a 'SpaceTime' object just execute the command below, but first consider the given solution since high complexity solutions can take exponentially longer to process.
 
     >>> spacetime = SpaceTime(Solution().schwarzschild())
 
-The index configuration in this case is "dd" which represents a down-down configuration which reflects a double covariant index configuration. These can be "uu", "dd", "ud", "du" but this library currently only supports certain index configurations depending on the quantity in question.
+The index configuration in this case is "dd" which represents a down-down configuration, which reflects a double covariant index configuration. These can be "uu", "dd", "ud", "du", but this library currently only supports certain index configurations depending on the quantity in question.
 
 [Stress-Energy-Momentum Tensor](https://en.wikipedia.org/wiki/Stress%E2%80%93energy_tensor)
 =============================
