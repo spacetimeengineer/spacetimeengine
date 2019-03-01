@@ -303,6 +303,6 @@ This is a measure of how much two initial paralell geodesic paths will deviate o
 
     >>> spacetime.print_separation_geodesic_acceleration(0)
 
-Buy Me A Cold Brew
+Buy me a cold brew
 ==================
 [![Donate](https://img.shields.io/badge/Donate-PayPal-green.svg)](https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=NL2XB2BMMGT6G&currency_code=USD&source=url)
