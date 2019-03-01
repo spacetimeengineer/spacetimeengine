@@ -42,13 +42,9 @@ Prerequisites (MacOS)
     
 Prerequisites (Windows)
 =======================
-1.) Install Python3
+1.) Install Python3 & pip3
 
-    
-
-2.) Install pip3
-
-    
+    Navigate to https://www.python.org/downloads/
     
 3.) Install git
 
