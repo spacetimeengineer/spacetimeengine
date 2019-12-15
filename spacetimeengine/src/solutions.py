@@ -3,6 +3,45 @@ from sympy import *
 
 class Solution:
     
+        def inverse_schwarzschild(self):    
+        """
+        Description
+        ===========
+        Returns the classic black hole solution. Uncharged and rotationally stationary.
+        Examples
+        ========
+        >>> print(Solution().schwarzschild())
+        >>> 
+        LaTeX representation
+        ====================
+        """
+        
+        # Index configuration for the metric
+        index_config = "dd"
+        # Physical constants.
+        G, M, c = symbols('G M c')
+        # Assigns meaning to the coordinates.
+        tau = symbols('tau')
+        x0 = Symbol('t')
+        x1 = Symbol('r')
+        x2 = Symbol('theta')
+        x3 = Symbol('phi')
+        # Reference to the coordiante system.
+        coordinate_set = [x0, x1, x2, x3]
+        # Cosmological constant.
+        cosmological_constant = 0
+        # Metric solution.
+        metric = Matrix([    
+                            [ (1-(2*G*M)/(x1*c**2))**(-1), 0, 0, 0 ], 
+                            [ 0, - (1-(2*G*M)/(x1*c**2)), 0, 0 ], 
+                            [ 0, 0, - x1**2, 0 ], 
+                            [ 0, 0, 0, - x1**2*sin(x2)**2 ]
+                        ])
+        
+        # An array detailing the solution.
+        solution_array = [ metric, coordinate_set, index_config, cosmological_constant ]
+        return solution_array
+    
     def minkowski(self, version = "euclidian"):
         """
         Description
