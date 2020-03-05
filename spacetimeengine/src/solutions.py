@@ -3,7 +3,7 @@ from sympy import *
 
 class Solution:
     
-        def inverse_schwarzschild(self):    
+    def inverse_schwarzschild(self):    
         """
         Description
         ===========
