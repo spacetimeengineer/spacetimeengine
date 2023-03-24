@@ -601,7 +601,39 @@ class Solution:
         
         return gravitomagnetic_metric
     
-    
+        def dark_energy(self):
+        """
+        Description
+        ===========
+        Returns a metric which describes a spacetime where the dark energy is present.
+        ========
+        >>> print(Solution().dark_energy())
+        >>> 
+        LaTeX representation
+        ====================
+        """
+        
+        # Index configuration for the metric
+        index_config = "dd"
+        # Required symbols and constants.
+        c = symbols('c')
+        # Assigns meaning to the coordinates.
+        x0, x1, x2, x3 = symbols('t r psi theta')
+        # Reference to the coordiante system.
+        coordinate_set = [x0, x1, x2, x3]
+        # Cosmological constant.
+        cosmological_constant = 0
+        # Metric solution.
+        metric = Matrix([
+                            [ 1, 0, 0, 0 ],
+                            [ 0, -x0**2*c**2/(x0**2*c**2 - x1**2), 0, 0 ],
+                            [ 0, 0, -x0**2*c**2, 0 ],
+                            [ 0, 0, 0, -x0**2*c**2*sin(x2)**2 ]
+                        ])
+        
+        # An array detailing the solution.
+        solution_array = [ metric, coordinate_set, index_config, cosmological_constant ]
+        return solution_array
     
     def hypersphere(self):
         """
