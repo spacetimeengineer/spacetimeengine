@@ -601,7 +601,7 @@ class Solution:
         
         return gravitomagnetic_metric
     
-        def dark_energy(self):
+    def dark_energy(self):
         """
         Description
         ===========
@@ -625,10 +625,10 @@ class Solution:
         cosmological_constant = 0
         # Metric solution.
         metric = Matrix([
-                            [ 1, 0, 0, 0 ],
+                            [ c**2, 0, 0, 0 ],
                             [ 0, -x0**2*c**2/(x0**2*c**2 - x1**2), 0, 0 ],
-                            [ 0, 0, -x0**2*c**2, 0 ],
-                            [ 0, 0, 0, -x0**2*c**2*sin(x2)**2 ]
+                            [ 0, 0, -x1**2, 0 ],
+                            [ 0, 0, 0, -x1**2*sin(x2)**2 ]
                         ])
         
         # An array detailing the solution.
